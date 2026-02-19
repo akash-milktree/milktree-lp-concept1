@@ -1,4 +1,46 @@
 /* ================================================================
+   Local Font Faces
+   Gelasio  → headings, titles, CTAs   (serif display)
+   Satoshi  → body text, UI elements   (geometric sans)
+   ================================================================ */
+
+/* ── Gelasio (variable font) ─────────────────────────────────── */
+@font-face {
+  font-family: 'Gelasio';
+  src: url('/fonts/Gelasio/Gelasio-VariableFont_wght.ttf') format('truetype');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Gelasio';
+  src: url('/fonts/Gelasio/Gelasio-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 400 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ── Satoshi (variable font — full weight range 300–900) ─────── */
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi/WEB/fonts/Satoshi-Variable.woff2') format('woff2'),
+       url('/fonts/Satoshi/WEB/fonts/Satoshi-Variable.woff') format('woff'),
+       url('/fonts/Satoshi/WEB/fonts/Satoshi-Variable.ttf') format('truetype');
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi/WEB/fonts/Satoshi-VariableItalic.woff2') format('woff2'),
+       url('/fonts/Satoshi/WEB/fonts/Satoshi-VariableItalic.woff') format('woff'),
+       url('/fonts/Satoshi/WEB/fonts/Satoshi-VariableItalic.ttf') format('truetype');
+  font-weight: 300 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ================================================================
    Milktree Agency - Design Token System & Global Styles
    Visual reference: withsupafast.com (dark, bold, high-contrast)
    ================================================================ */
@@ -25,7 +67,8 @@
   --color-nav-bg: rgba(0, 0, 0, 0.8);
 
   /* Typography */
-  --font-primary: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-primary: 'Satoshi', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Gelasio', Georgia, 'Times New Roman', serif;
   --font-size-hero: clamp(44px, 5vw, 72px);
   --font-size-h2: clamp(32px, 4vw, 48px);
   --font-size-h3: clamp(24px, 3vw, 36px);
@@ -149,6 +192,7 @@ ul, ol {
    ================================================================ */
 
 .heading-hero {
+  font-family: var(--font-heading);
   font-size: var(--font-size-hero);
   font-weight: 900;
   letter-spacing: var(--letter-spacing-tight);
@@ -157,6 +201,7 @@ ul, ol {
 }
 
 .heading-2 {
+  font-family: var(--font-heading);
   font-size: var(--font-size-h2);
   font-weight: 700;
   letter-spacing: var(--letter-spacing-tight);
@@ -165,6 +210,7 @@ ul, ol {
 }
 
 .heading-3 {
+  font-family: var(--font-heading);
   font-size: var(--font-size-h3);
   font-weight: 700;
   letter-spacing: var(--letter-spacing-normal);
@@ -173,6 +219,7 @@ ul, ol {
 }
 
 .heading-4 {
+  font-family: var(--font-heading);
   font-size: var(--font-size-h4);
   font-weight: 700;
   letter-spacing: var(--letter-spacing-normal);
@@ -557,6 +604,7 @@ ul, ol {
 
 /* Heading */
 .hero__headline {
+  font-family: var(--font-heading);
   font-size: clamp(44px, 6vw, 80px);
   font-weight: 700;
   letter-spacing: -3.2px;
@@ -748,6 +796,7 @@ ul, ol {
 }
 
 .prob-card__heading {
+  font-family: var(--font-heading);
   font-size: clamp(32px, 3.5vw, 48px);
   font-weight: 700;
   color: #fff;
@@ -860,6 +909,7 @@ ul, ol {
 }
 
 .whatwedo__heading {
+  font-family: var(--font-heading);
   font-size: clamp(40px, 5vw, 64px);
   font-weight: 700;
   letter-spacing: -2.56px;
@@ -920,6 +970,7 @@ ul, ol {
   position: absolute;
   bottom: 24px;
   left: 24px;
+  font-family: var(--font-heading);
   font-size: 24px;
   font-weight: 700;
   color: #fff;
@@ -956,6 +1007,7 @@ ul, ol {
 }
 
 .results__heading {
+  font-family: var(--font-heading);
   font-size: clamp(40px, 5vw, 64px);
   font-weight: 700;
   letter-spacing: -2.56px;
@@ -1030,6 +1082,7 @@ ul, ol {
 }
 
 .results__card-title {
+  font-family: var(--font-heading);
   font-size: 32px;
   font-weight: 700;
   letter-spacing: -1.28px;
@@ -1109,6 +1162,7 @@ ul, ol {
 }
 
 .compare__heading {
+  font-family: var(--font-heading);
   font-size: clamp(40px, 5vw, 64px);
   font-weight: 700;
   letter-spacing: -2.56px;
@@ -1244,6 +1298,7 @@ ul, ol {
 }
 
 .results__stat-number {
+  font-family: var(--font-heading);
   font-size: clamp(48px, 6vw, 72px);
   font-weight: 900;
   color: var(--color-accent);
@@ -1290,6 +1345,7 @@ ul, ol {
 }
 
 .tSection__heading {
+  font-family: var(--font-heading);
   font-size: clamp(40px, 5vw, 64px);
   font-weight: 700;
   letter-spacing: -2.56px;
@@ -1382,6 +1438,7 @@ ul, ol {
 }
 
 .tcard__quote {
+  font-family: var(--font-heading);
   font-size: 20px;
   font-weight: 700;
   color: #fff;
@@ -1431,6 +1488,7 @@ ul, ol {
 }
 
 .finalcta__heading {
+  font-family: var(--font-heading);
   font-size: clamp(44px, 6.5vw, 80px);
   font-weight: 700;
   letter-spacing: -3.2px;
@@ -1459,7 +1517,7 @@ ul, ol {
   border: none;
   border-radius: 60px;
   padding: 8px 48px 8px 8px;
-  font-family: var(--font-primary);
+  font-family: var(--font-heading);
   font-size: clamp(22px, 2.5vw, 32px);
   font-weight: 700;
   letter-spacing: -1.28px;
@@ -1488,6 +1546,7 @@ ul, ol {
 }
 
 .finalcta__note {
+  font-family: var(--font-heading);
   font-size: 32px;
   font-weight: 600;
   color: #fff;
@@ -1519,6 +1578,7 @@ ul, ol {
 }
 
 .pricing__heading {
+  font-family: var(--font-heading);
   font-size: clamp(36px, 4.5vw, 64px);
   font-weight: 700;
   letter-spacing: -2.56px;
@@ -1576,6 +1636,7 @@ ul, ol {
 }
 
 .pricing__card-name {
+  font-family: var(--font-heading);
   font-size: 48px;
   font-weight: 700;
   letter-spacing: -1.92px;
@@ -1674,7 +1735,7 @@ ul, ol {
   height: 56px;
   border-radius: 44px;
   border: none;
-  font-family: var(--font-primary);
+  font-family: var(--font-heading);
   font-size: 17px;
   font-weight: 700;
   letter-spacing: -0.3px;
@@ -1737,6 +1798,7 @@ ul, ol {
 }
 
 .tby__heading {
+  font-family: var(--font-heading);
   font-size: clamp(40px, 5vw, 64px);
   font-weight: 700;
   letter-spacing: -2.56px;
@@ -1875,6 +1937,7 @@ ul, ol {
 }
 
 .faq__heading {
+  font-family: var(--font-heading);
   font-size: clamp(36px, 5vw, 64px);
   font-weight: 700;
   letter-spacing: -2.56px;
@@ -1941,6 +2004,7 @@ ul, ol {
 }
 
 .faq__question {
+  font-family: var(--font-heading);
   font-size: clamp(18px, 2.2vw, 32px);
   font-weight: 700;
   color: #fff;
@@ -2004,6 +2068,7 @@ ul, ol {
 
 .footer__wordmark {
   display: block;
+  font-family: var(--font-heading);
   font-size: clamp(80px, 14vw, 220px);
   font-weight: 900;
   letter-spacing: -0.06em;
