@@ -1,24 +1,7 @@
 /* ================================================================
    Local Font Faces
-   Gelasio  → headings, titles, CTAs   (serif display)
-   Satoshi  → body text, UI elements   (geometric sans)
+   Satoshi  → all text (geometric sans, 300–900)
    ================================================================ */
-
-/* ── Gelasio (variable font) ─────────────────────────────────── */
-@font-face {
-  font-family: 'Gelasio';
-  src: url('/fonts/Gelasio/Gelasio-VariableFont_wght.ttf') format('truetype');
-  font-weight: 400 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Gelasio';
-  src: url('/fonts/Gelasio/Gelasio-Italic-VariableFont_wght.ttf') format('truetype');
-  font-weight: 400 700;
-  font-style: italic;
-  font-display: swap;
-}
 
 /* ── Satoshi (variable font — full weight range 300–900) ─────── */
 @font-face {
@@ -68,7 +51,7 @@
 
   /* Typography */
   --font-primary: 'Satoshi', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-heading: 'Gelasio', Georgia, 'Times New Roman', serif;
+  --font-heading: 'Satoshi', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-size-hero: clamp(44px, 5vw, 72px);
   --font-size-h2: clamp(32px, 4vw, 48px);
   --font-size-h3: clamp(24px, 3vw, 36px);
