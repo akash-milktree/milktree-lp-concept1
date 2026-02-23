@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Reveal } from '../components/animations/Reveal';
 import { Button } from '../components/ui/Button';
-import { ArrowRight, Sparkles, TrendingUp, Zap } from 'lucide-react';
+import { ArrowRight, Sparkles, TrendingUp, Zap, Globe } from 'lucide-react';
 import { heroContent } from '../data/content';
 
 // Brand showcase cards – real project photos
@@ -69,6 +69,10 @@ export const Hero: React.FC = () => {
           <div className="hero__badge">
             <span className="hero__badge-icon"><Sparkles size={14} /></span>
             <span className="hero__badge-text">200+ brands built</span>
+            <span className="hero__badge-sep" />
+            <span className="hero__badge-icon"><Globe size={14} /></span>
+            <span className="hero__badge-text">Trusted across 15+ industries</span>
+            <span className="hero__badge-sep" />
             <span className="hero__badge-icon"><TrendingUp size={14} /></span>
             <span className="hero__badge-text">250% avg. enquiry increase</span>
           </div>

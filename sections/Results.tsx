@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { useInView, motion, useSpring, useMotionValue } from 'framer-motion';
 import { Reveal } from '../components/animations/Reveal';
-import { SectionLabel } from '../components/ui/SectionLabel';
 import { resultsContent } from '../data/content';
 
 interface CountUpProps {
@@ -42,12 +41,6 @@ export const Results: React.FC = () => {
   return (
     <section className="section results" id="results" ref={ref}>
       <div className="container">
-        <div style={{ textAlign: 'center', marginBottom: 'var(--space-64)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-20)' }}>
-          <Reveal>
-            <SectionLabel>{resultsContent.label}</SectionLabel>
-          </Reveal>
-        </div>
-
         <div className="results__stats">
           {resultsContent.stats.map((stat, i) => (
             <React.Fragment key={stat.label}>

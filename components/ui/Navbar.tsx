@@ -7,8 +7,8 @@ import { Button } from './Button';
 const navLinks = [
   { label: "Services", target: "services" },
   { label: "Pricing", target: "pricing" },
+  { label: "Reviews", target: "testimonials" },
   { label: "FAQs", target: "faq" },
-  { label: "Case Studies", target: "process" },
 ];
 
 const scrollToSection = (id: string) => {
@@ -85,12 +85,13 @@ export const Navbar: React.FC = () => {
           <div className="navbar__divider" />
 
           <div className="navbar__desktop-cta">
-            <button
-              className="navbar__cta-btn"
+            <Button
+              variant="primary"
+              size="lg"
               onClick={() => scrollToSection('audit')}
             >
               Free Audit
-            </button>
+            </Button>
           </div>
 
           <button

@@ -30,10 +30,6 @@ export const Pricing: React.FC = () => {
     <section className="pricing-section" id="pricing">
       <div className="pricing-container">
 
-        <Reveal>
-          <p className="pricing__label">Pricing</p>
-        </Reveal>
-
         <Reveal delay={0.05}>
           <h2 className="pricing__heading">
             One partner. Two ways to work together. No hiring headaches.

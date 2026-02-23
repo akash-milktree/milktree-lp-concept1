@@ -23,10 +23,6 @@ export const TrustedBy: React.FC = () => {
     <section className="tby-section" id="testimonials">
       <div className="tby-container">
 
-        <Reveal>
-          <p className="tby__label">Trusted by</p>
-        </Reveal>
-
         <Reveal delay={0.05}>
           <h2 className="tby__heading">
             Founders who made the switch
