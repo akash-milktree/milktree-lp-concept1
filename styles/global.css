@@ -513,29 +513,9 @@ ul, ol {
   /* no padding – sections handle their own internal spacing */
 }
 
-/* Ambient decorative orbs */
+/* Ambient decorative orbs — hidden */
 .hero__orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(140px);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.hero__orb--yellow {
-  width: 700px;
-  height: 700px;
-  background: rgba(255, 220, 4, 0.045);
-  top: -250px;
-  left: -200px;
-}
-
-.hero__orb--purple {
-  width: 600px;
-  height: 600px;
-  background: rgba(125, 93, 255, 0.03);
-  top: -100px;
-  right: -200px;
+  display: none;
 }
 
 /* ── Text block ── */
@@ -694,8 +674,20 @@ ul, ol {
   opacity: 0.7;
 }
 
+/* Full-cover photo inside card */
+.hero__card-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 /* Bottom text overlay */
 .hero__card-body {
+  position: relative;
+  z-index: 1;
   padding: 20px 22px;
   background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
   display: flex;
@@ -2124,6 +2116,7 @@ ul, ol {
    Responsive
    ================================================================ */
 
+/* ── Tablet: 810px – 1199px ─────────────────────────────────── */
 @media (max-width: 1199px) {
   .grid-4 {
     grid-template-columns: repeat(2, 1fr);
@@ -2132,9 +2125,78 @@ ul, ol {
   .tby__grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  /* Results cards: slightly narrower */
+  .results__card {
+    flex: 0 0 420px;
+  }
+  .results__card-img-wrap {
+    width: 420px;
+    height: 315px;
+  }
+  .results__card-body {
+    width: 420px;
+  }
+
+  /* Testimonials card: slightly narrower */
+  .tcard {
+    flex: 0 0 620px;
+  }
+
+  /* Compare table: hide less-important columns on tablet */
+  .compare__header-row,
+  .compare__row {
+    grid-template-columns: 180px repeat(5, 1fr);
+  }
+
+  /* Section containers: reduce side padding */
+  .results-container,
+  .compare-container,
+  .pricing-container,
+  .tby-container,
+  .faq-container,
+  .tSection__container {
+    padding-left: var(--space-32);
+    padding-right: var(--space-32);
+  }
 }
 
+/* ── Mobile: ≤ 809px ─────────────────────────────────────────── */
 @media (max-width: 809px) {
+
+  /* ── Global container padding → 16px on mobile ── */
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .results-container,
+  .compare-container,
+  .pricing-container,
+  .tby-container,
+  .faq-container,
+  .finalcta__container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  /* ── Section vertical padding → 80px on mobile ── */
+  .prob-section,
+  .whatwedo-section,
+  .results-section,
+  .compare-section,
+  .pricing-section,
+  .tby-section,
+  .faq-section {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  .finalcta-section {
+    padding: 64px 0;
+  }
+
+  /* ── Navbar ── */
   .navbar__links {
     display: none;
   }
@@ -2158,15 +2220,16 @@ ul, ol {
     border-radius: 52px;
   }
 
+  /* ── Hero ── */
   .hero__top {
-    padding-top: 100px;
-    padding-bottom: 40px;
+    padding: 96px 16px 48px;
+    gap: 20px;
   }
 
   .hero__headline {
-    font-size: 36px;
-    letter-spacing: -1.5px;
-    line-height: 1.12;
+    font-size: 44px;
+    letter-spacing: -1.76px;
+    line-height: 1.1;
   }
 
   .hero__subheadline {
@@ -2175,9 +2238,9 @@ ul, ol {
   }
 
   .hero__badge {
-    font-size: 11px;
-    padding: 4px 10px;
-    height: 32px;
+    font-size: 12px;
+    padding: 4px 12px;
+    height: 34px;
     gap: 8px;
   }
 
@@ -2202,17 +2265,177 @@ ul, ol {
     height: 280px !important;
   }
 
-  .grid-2,
-  .grid-3,
-  .grid-4,
-  .whatwedo__grid {
+  /* ── Problem section ── */
+  .prob-cards {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 
-  .whatwedo__grid .card:last-child {
-    grid-column: auto;
+  .prob-card__inner {
+    padding: 28px;
+    border-radius: 28px;
   }
 
+  .prob-card {
+    border-radius: 32px;
+  }
+
+  .prob-card__heading {
+    font-size: 28px;
+  }
+
+  .prob-card__subheading {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .prob-list-item {
+    font-size: 16px;
+    line-height: 26px;
+    gap: 12px;
+    padding: 16px 0;
+  }
+
+  .prob-list-item__badge {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* ── What We Do ── */
+  .whatwedo__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .whatwedo__heading {
+    font-size: 40px;
+    letter-spacing: -1.6px;
+  }
+
+  .whatwedo__subtext {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .whatwedo__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .whatwedo__card {
+    height: 260px;
+    border-radius: 20px;
+  }
+
+  .whatwedo__card-label {
+    font-size: 18px;
+    bottom: 16px;
+    left: 16px;
+  }
+
+  /* ── Results / Case Studies carousel ── */
+  .results-section {
+    padding: 80px 0;
+  }
+
+  .results__heading {
+    font-size: 40px;
+    letter-spacing: -1.6px;
+    margin-bottom: 40px;
+  }
+
+  .results__track-wrap {
+    padding-left: 16px;
+  }
+
+  .results__card {
+    flex: 0 0 300px;
+  }
+
+  .results__card-img-wrap {
+    width: 300px;
+    height: 224px;
+    border-radius: 16px;
+  }
+
+  .results__card-body {
+    width: 300px;
+    gap: 10px;
+  }
+
+  .results__card-title {
+    font-size: 22px;
+    letter-spacing: -0.6px;
+  }
+
+  .results__card-services {
+    font-size: 14px;
+  }
+
+  .results__card-tag {
+    font-size: 13px;
+    padding: 3px 10px;
+  }
+
+  .results-container {
+    padding: 0 16px;
+  }
+
+  /* ── Compare / Why Milktree table ── */
+  .compare__heading {
+    font-size: 40px;
+    letter-spacing: -1.6px;
+    margin-bottom: 40px;
+  }
+
+  /* On mobile, collapse compare table to vertical cards */
+  .compare__table {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .compare__header-row {
+    display: none; /* hide column headers on mobile */
+  }
+
+  .compare__row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .compare__row--highlight {
+    padding: 16px;
+    border-radius: 12px;
+    margin: 4px 0;
+  }
+
+  .compare__row-label {
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+
+  .compare__cell {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 8px;
+    text-align: left;
+    padding: 0;
+  }
+
+  .compare__cell-desc {
+    font-size: 14px;
+  }
+
+  .compare__col-header {
+    font-size: 14px;
+  }
+
+  /* ── Results Stats ── */
   .results__stats {
     flex-direction: column;
     gap: var(--space-32);
@@ -2223,23 +2446,26 @@ ul, ol {
     height: 1px;
   }
 
-  .testimonial-card {
-    width: 300px;
+  .results__stat-number {
+    font-size: 56px;
   }
 
-  /* Footer */
-  .footer__bottom {
-    padding: 32px 24px;
-    gap: 20px;
+  /* ── Pricing ── */
+  .pricing__heading {
+    font-size: 36px;
+    letter-spacing: -1.2px;
+    margin-bottom: 40px;
   }
 
-  .footer__wordmark {
-    font-size: clamp(56px, 14vw, 140px);
-  }
-
-  /* Pricing */
   .pricing__cards {
     grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .pricing__card {
+    padding: 32px 24px;
+    border-radius: 32px;
+    gap: 20px;
   }
 
   .pricing__card-name {
@@ -2247,56 +2473,118 @@ ul, ol {
     letter-spacing: -1.2px;
   }
 
-  /* TrustedBy */
-  .tby__grid {
-    grid-template-columns: 1fr;
+  /* ── Trusted By / Testimonials grid ── */
+  .tby__heading {
+    font-size: 40px;
+    letter-spacing: -1.6px;
+    margin-bottom: 40px;
   }
 
-  /* FAQ */
+  .tby__grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .tby__card {
+    padding: 24px;
+  }
+
+  /* ── FAQ ── */
+  .faq__heading {
+    font-size: 40px;
+    letter-spacing: -1.6px;
+    margin-bottom: 32px;
+  }
+
+  .faq__row {
+    gap: 10px;
+  }
+
   .faq__number {
     width: 48px;
     height: 48px;
     font-size: 20px;
+    border-radius: 48px;
   }
 
   .faq__toggle {
     width: 48px;
     height: 48px;
-  }
-
-  .faq__question {
-    font-size: 18px;
-    letter-spacing: -0.5px;
-  }
-
-  .faq__answer {
-    font-size: 16px;
-    line-height: 1.6;
+    border-radius: 24px;
   }
 
   .faq__pill-inner {
     padding: 14px 20px;
+    border-radius: 24px;
   }
 
-  /* FinalCTA */
+  .faq__pill-outer {
+    border-radius: 28px;
+  }
+
+  .faq__question {
+    font-size: 16px;
+    letter-spacing: -0.3px;
+    line-height: 1.3;
+  }
+
+  .faq__answer {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .faq__list {
+    gap: 12px;
+  }
+
+  /* ── Final CTA ── */
+  .finalcta__heading {
+    font-size: 44px;
+    letter-spacing: -1.76px;
+    line-height: 1.1;
+  }
+
+  .finalcta__subtext {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
   .finalcta__btn {
-    font-size: 22px;
-    padding: 8px 36px 8px 8px;
+    font-size: 20px;
+    padding: 8px 28px 8px 8px;
     min-height: 80px;
-    gap: 20px;
+    gap: 16px;
+    white-space: normal;
+    text-align: left;
   }
 
   .finalcta__btn-icon {
     width: 64px;
     height: 64px;
+    flex-shrink: 0;
   }
 
   .finalcta__note {
-    font-size: 22px;
+    font-size: 20px;
   }
 
-  .finalcta__heading {
-    line-height: 1.1;
+  /* ── Footer ── */
+  .footer__bottom {
+    padding: 32px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .footer__wordmark {
+    font-size: clamp(56px, 16vw, 140px);
+  }
+
+  /* ── Generic grids ── */
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
   }
 }
 

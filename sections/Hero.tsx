@@ -5,14 +5,24 @@ import { Button } from '../components/ui/Button';
 import { ArrowRight, Sparkles, TrendingUp, Zap } from 'lucide-react';
 import { heroContent } from '../data/content';
 
-// Brand showcase cards – varied widths like Supafast portfolio row
+// Brand showcase cards – real project photos
 const showcaseCards = [
-  { width: 400, bg: 'linear-gradient(140deg, #111827 0%, #1e1b4b 100%)', accent: '#6366f1', title: 'Luminary', sub: 'Brand Identity' },
-  { width: 640, bg: 'linear-gradient(140deg, #0c1a2e 0%, #1e3a5f 100%)', accent: '#38bdf8', title: 'Oakfield Group', sub: 'Positioning' },
-  { width: 400, bg: 'linear-gradient(140deg, #1a0a0a 0%, #3b0f0f 100%)', accent: '#f87171', title: 'Prism', sub: 'Visual Identity' },
-  { width: 640, bg: 'linear-gradient(140deg, #0d1a0d 0%, #14532d 100%)', accent: '#4ade80', title: 'Northway', sub: 'Guidelines' },
-  { width: 400, bg: 'linear-gradient(140deg, #1c1027 0%, #3b1f5e 100%)', accent: '#c084fc', title: 'Clearpath', sub: 'Messaging' },
-  { width: 640, bg: 'linear-gradient(140deg, #1a1200 0%, #422006 100%)', accent: '#fb923c', title: 'Baseline', sub: 'Creative Direction' },
+  { width: 400, img: '/photos/hero carousel/1.png',    title: 'Luminary',      sub: 'Brand Identity' },
+  { width: 640, img: '/photos/hero carousel/2.png',    title: 'Oakfield Group', sub: 'Positioning' },
+  { width: 400, img: '/photos/hero carousel/3.png',    title: 'Prism',          sub: 'Visual Identity' },
+  { width: 640, img: '/photos/hero carousel/4.png',    title: 'Northway',       sub: 'Guidelines' },
+  { width: 400, img: '/photos/hero carousel/5.png',    title: 'Clearpath',      sub: 'Messaging' },
+  { width: 640, img: '/photos/hero carousel/6.png',    title: 'Baseline',       sub: 'Creative Direction' },
+  { width: 400, img: '/photos/hero carousel/7.png',    title: 'Meridian',       sub: 'Brand Strategy' },
+  { width: 640, img: '/photos/hero carousel/8.png',    title: 'Atlas',          sub: 'Visual System' },
+  { width: 400, img: '/photos/hero carousel/9.png',    title: 'Crest',          sub: 'Identity' },
+  { width: 640, img: '/photos/hero carousel/10.png',   title: 'Summit',         sub: 'Rebranding' },
+  { width: 400, img: '/photos/hero carousel/10-1.png', title: 'Vantage',        sub: 'Brand Identity' },
+  { width: 640, img: '/photos/hero carousel/11.png',   title: 'Harbour',        sub: 'Guidelines' },
+  { width: 400, img: '/photos/hero carousel/12.png',   title: 'Finch',          sub: 'Messaging' },
+  { width: 640, img: '/photos/hero carousel/13.png',   title: 'Solaris',        sub: 'Visual Identity' },
+  { width: 400, img: '/photos/hero carousel/14.png',   title: 'Ember',          sub: 'Creative Direction' },
+  { width: 640, img: '/photos/hero carousel/14-1.png', title: 'Grove',          sub: 'Brand Strategy' },
 ];
 
 // Client/brand names for the logo marquee
@@ -34,7 +44,7 @@ export const Hero: React.FC = () => {
   const scrollToProcess = () => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
   const scrollToAudit = () => document.getElementById('audit')?.scrollIntoView({ behavior: 'smooth' });
 
-  const allCards = [...showcaseCards, ...showcaseCards];
+  const allCards = [...showcaseCards, ...showcaseCards, ...showcaseCards];
   const allClients = [...clientNames, ...clientNames, ...clientNames];
 
   return (
@@ -90,18 +100,22 @@ export const Hero: React.FC = () => {
       >
         <motion.div
           className="hero__showcase-track"
-          animate={{ x: ['-3336px', '0px'] }}
-          transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 50, ease: 'linear' } }}
+          animate={{ x: ['-9088px', '0px'] }}
+          transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 80, ease: 'linear' } }}
         >
           {allCards.map((card, i) => (
             <div
               key={i}
               className="hero__showcase-card"
-              style={{ width: card.width, background: card.bg }}
+              style={{ width: card.width }}
             >
-              {/* Accent line */}
-              <div className="hero__card-accent" style={{ background: card.accent }} />
-              {/* Content */}
+              {/* Photo */}
+              <img
+                src={card.img}
+                alt={card.title}
+                className="hero__card-img"
+              />
+              {/* Overlay + label */}
               <div className="hero__card-body">
                 <span className="hero__card-title">{card.title}</span>
                 <span className="hero__card-sub">{card.sub}</span>
