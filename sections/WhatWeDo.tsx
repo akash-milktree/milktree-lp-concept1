@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Reveal } from '../components/animations/Reveal';
 import {
   Target, Layers, Compass, ClipboardList,
-  Map, Search, Feather, Share2,
+  Map, Search, PenTool, Feather, Share2,
   Sparkles, FileText, Image,
 } from 'lucide-react';
 
@@ -14,6 +14,7 @@ const services = [
   { title: 'Project management',          Icon: ClipboardList },
   { title: 'Long-term roadmaps',          Icon: Map          },
   { title: 'SEO & content strategy',      Icon: Search       },
+  { title: 'Design',                      Icon: PenTool      },
   { title: 'Branding',                    Icon: Feather      },
   { title: 'Social media design',         Icon: Share2       },
   { title: 'Generative AI for visuals',   Icon: Sparkles     },
