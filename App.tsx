@@ -20,7 +20,7 @@ const App: React.FC = () => {
         <Hero />
         <Problem />
         <WhatWeDo />
-        <HowItWorks />
+        {/* <HowItWorks /> */}
         <WhyMilktree />
         <Results />
         <Pricing />

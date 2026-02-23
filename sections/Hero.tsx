@@ -25,11 +25,21 @@ const showcaseCards = [
   { width: 640, img: '/photos/hero carousel/14-1.png', title: 'Grove',          sub: 'Brand Strategy' },
 ];
 
-// Client/brand names for the logo marquee
-const clientNames = [
-  'Luminary Studios', 'Oakfield Group', 'Prism Consulting',
-  'Northway Digital', 'Clearpath Advisory', 'Baseline Studio',
-  'Meridian Co.', 'Atlas Partners', 'Crest Advisory', 'Summit Brand',
+// Client logos for the marquee
+const clientLogos = [
+  '/logos/logo-1.png',
+  '/logos/logo-2.png',
+  '/logos/logo-3.png',
+  '/logos/logo-4.png',
+  '/logos/logo-5.png',
+  '/logos/logo-6.png',
+  '/logos/logo-7.png',
+  '/logos/logo-8.png',
+  '/logos/logo-9.png',
+  '/logos/logo-10.png',
+  '/logos/logo-11.png',
+  '/logos/logo-12.png',
+  '/logos/logo-13.png',
 ];
 
 const itemVariants = {
@@ -45,7 +55,7 @@ export const Hero: React.FC = () => {
   const scrollToAudit = () => document.getElementById('audit')?.scrollIntoView({ behavior: 'smooth' });
 
   const allCards = [...showcaseCards, ...showcaseCards, ...showcaseCards];
-  const allClients = [...clientNames, ...clientNames, ...clientNames];
+  const allLogos = [...clientLogos, ...clientLogos, ...clientLogos];
 
   return (
     <section className="hero" id="hero">
@@ -115,11 +125,6 @@ export const Hero: React.FC = () => {
                 alt={card.title}
                 className="hero__card-img"
               />
-              {/* Overlay + label */}
-              <div className="hero__card-body">
-                <span className="hero__card-title">{card.title}</span>
-                <span className="hero__card-sub">{card.sub}</span>
-              </div>
             </div>
           ))}
         </motion.div>
@@ -134,13 +139,12 @@ export const Hero: React.FC = () => {
       >
         <motion.div
           className="hero__marquee-track"
-          animate={{ x: ['-50%', '0%'] }}
+          animate={{ x: ['0%', '-50%'] }}
           transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 28, ease: 'linear' } }}
         >
-          {allClients.map((name, i) => (
+          {allLogos.map((src, i) => (
             <div key={i} className="hero__marquee-item">
-              <span className="hero__marquee-dot" />
-              <span className="hero__marquee-name">{name}</span>
+              <img src={src} alt="client logo" className="hero__marquee-logo" />
             </div>
           ))}
         </motion.div>
