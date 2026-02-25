@@ -17,7 +17,7 @@ const StarRating: React.FC = () => (
 export const Testimonials: React.FC = () => {
   const trackRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const cardWidth = 762 + 24; // card + gap
+  const cardWidth = 680 + 24; // card + gap
 
   const scrollTo = (index: number) => {
     const clamped = Math.max(0, Math.min(index, testimonials.length - 1));
@@ -47,11 +47,6 @@ export const Testimonials: React.FC = () => {
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.55, ease: [0.21, 0.47, 0.32, 0.98], delay: i * 0.05 }}
               >
-                {/* Portrait photo */}
-                <div className="tcard__photo-wrap">
-                  <img src={t.img} alt={t.name} className="tcard__photo" />
-                </div>
-
                 {/* Text content */}
                 <div className="tcard__content">
                   <StarRating />

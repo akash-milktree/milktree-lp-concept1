@@ -1345,10 +1345,9 @@ ul, ol {
 
 /* Testimonial card */
 .tcard {
-  flex: 0 0 762px;
+  flex: 0 0 680px;
   display: flex;
-  flex-direction: row;
-  gap: 24px;
+  flex-direction: column;
   border-radius: 48px;
   padding: 48px;
   background: rgba(255, 255, 255, 0.04);
@@ -1363,23 +1362,6 @@ ul, ol {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 48px;
   pointer-events: none;
-}
-
-/* Portrait photo */
-.tcard__photo-wrap {
-  flex: 0 0 224px;
-  height: 399px;
-  border-radius: 24px;
-  overflow: hidden;
-  align-self: flex-start;
-}
-
-.tcard__photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  display: block;
 }
 
 /* Text area */
@@ -1517,19 +1499,33 @@ ul, ol {
 /* Cal.com embed wrapper */
 .finalcta__cal-wrap {
   width: 100%;
-  max-width: 760px;
+  max-width: 1024px;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
+  border-radius: 16px;
+  /* 570px clips the iframe's native horizontal scrollbar (iframe renders at ~588px) */
+  height: 570px;
+  overflow: hidden;
 }
 
 .finalcta__cal {
-  width: 100%;
-  min-height: 600px;
-  border-radius: 16px;
-  overflow: hidden;
+  /* Extend 20px beyond the wrapper so the iframe's right-edge scrollbar
+     (typically 15-17px wide) falls fully outside the overflow:hidden
+     clip boundary and becomes invisible */
+  width: calc(100% + 20px);
+  height: 100%;
+}
+
+/* Force no scrollbars on the Cal.com iframe */
+.finalcta__cal iframe {
+  display: block;
+  overflow: hidden !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+.finalcta__cal iframe::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
 }
 
 .finalcta__cal-attr {
@@ -1839,30 +1835,6 @@ ul, ol {
   margin-top: 4px;
 }
 
-.tby__avatar {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  overflow: hidden;
-  flex-shrink: 0;
-  background: rgba(255, 255, 255, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.tby__avatar-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-}
-
-.tby__avatar-initials {
-  font-size: 14px;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.7);
-}
 
 .tby__person {
   display: flex;

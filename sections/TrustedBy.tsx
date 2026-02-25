@@ -44,13 +44,6 @@ export const TrustedBy: React.FC = () => {
                 <StarRow />
                 <p className="tby__quote">"{t.quote}"</p>
                 <div className="tby__attribution">
-                  <div className="tby__avatar">
-                    {t.img ? (
-                      <img src={t.img} alt={t.name} className="tby__avatar-img" />
-                    ) : (
-                      <span className="tby__avatar-initials">{t.initials}</span>
-                    )}
-                  </div>
                   <div className="tby__person">
                     <span className="tby__name">{t.name}</span>
                     <span className="tby__role">{t.role}</span>

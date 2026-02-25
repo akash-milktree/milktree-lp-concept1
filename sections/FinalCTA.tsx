@@ -3,8 +3,7 @@ import { motion } from 'framer-motion';
 import { Reveal } from '../components/animations/Reveal';
 import { Zap } from 'lucide-react';
 
-// ← UPDATE this to your actual Cal.com link (e.g. "akash-milktree/intro")
-const CAL_LINK = 'milktree/intro';
+const CAL_LINK = 'milktree-agency/free-brand-digital-presence-audit-30-minutes';
 
 export const FinalCTA: React.FC = () => {
   useEffect(() => {
@@ -50,6 +49,22 @@ export const FinalCTA: React.FC = () => {
       });
     `;
     document.body.appendChild(script);
+
+    // Suppress iframe scrollbars the moment Cal.com injects the iframe
+    const calEmbed = document.getElementById('cal-embed');
+    const observer = new MutationObserver(() => {
+      const iframe = calEmbed?.querySelector('iframe') as HTMLIFrameElement | null;
+      if (iframe) {
+        iframe.setAttribute('scrolling', 'no');
+        iframe.style.overflow = 'hidden';
+        // Keep watching in case Cal.com recreates the iframe
+      }
+    });
+    if (calEmbed) {
+      observer.observe(calEmbed, { childList: true, subtree: true, attributes: true });
+    }
+
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -74,7 +89,7 @@ export const FinalCTA: React.FC = () => {
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             transition={{ duration: 0.2, ease: [0.44, 0, 0.56, 1] }}
-            onClick={() => document.getElementById('cal-embed')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => window.open(`https://cal.com/${CAL_LINK}`, '_blank', 'noopener,noreferrer')}
           >
             <motion.span
               className="finalcta__btn-icon"
@@ -95,7 +110,6 @@ export const FinalCTA: React.FC = () => {
         <Reveal delay={0.32}>
           <div className="finalcta__cal-wrap">
             <div id="cal-embed" className="finalcta__cal" />
-            <p className="finalcta__cal-attr">Cal.com</p>
           </div>
         </Reveal>
 
