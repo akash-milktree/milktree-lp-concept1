@@ -69,9 +69,9 @@ const HomePage: React.FC = () => (
       <Suspense fallback={null}>
         <Problem />
         <WhatWeDo />
+        <CaseStudies />
         <WhyMilktree />
         <Results />
-        <CaseStudies />
         <Pricing />
         <TrustedBy />
         <FAQ />
