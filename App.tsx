@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 
 declare global {
@@ -46,31 +46,35 @@ const GATracker: React.FC = () => {
 };
 import { Navbar } from './components/ui/Navbar';
 import { Hero } from './sections/Hero';
-import { Problem } from './sections/Problem';
-import { WhatWeDo } from './sections/WhatWeDo';
-import { WhyMilktree } from './sections/WhyMilktree';
-import { Results } from './sections/Results';
-import { Pricing } from './sections/Pricing';
-import { TrustedBy } from './sections/TrustedBy';
-import { FAQ } from './sections/FAQ';
-import { FinalCTA } from './sections/FinalCTA';
 import { Footer } from './sections/Footer';
-import { CaseStudiesPage } from './pages/CaseStudiesPage';
-import { CaseStudyDetailPage } from './pages/CaseStudyDetailPage';
+
+// Below-fold sections — code-split so they don't block initial render
+const Problem    = lazy(() => import('./sections/Problem').then(m => ({ default: m.Problem })));
+const WhatWeDo   = lazy(() => import('./sections/WhatWeDo').then(m => ({ default: m.WhatWeDo })));
+const WhyMilktree = lazy(() => import('./sections/WhyMilktree').then(m => ({ default: m.WhyMilktree })));
+const Results    = lazy(() => import('./sections/Results').then(m => ({ default: m.Results })));
+const Pricing    = lazy(() => import('./sections/Pricing').then(m => ({ default: m.Pricing })));
+const TrustedBy  = lazy(() => import('./sections/TrustedBy').then(m => ({ default: m.TrustedBy })));
+const FAQ        = lazy(() => import('./sections/FAQ').then(m => ({ default: m.FAQ })));
+const FinalCTA   = lazy(() => import('./sections/FinalCTA').then(m => ({ default: m.FinalCTA })));
+const CaseStudiesPage    = lazy(() => import('./pages/CaseStudiesPage').then(m => ({ default: m.CaseStudiesPage })));
+const CaseStudyDetailPage = lazy(() => import('./pages/CaseStudyDetailPage').then(m => ({ default: m.CaseStudyDetailPage })));
 
 const HomePage: React.FC = () => (
   <>
     <Navbar />
     <main>
       <Hero />
-      <Problem />
-      <WhatWeDo />
-      <WhyMilktree />
-      <Results />
-      <Pricing />
-      <TrustedBy />
-      <FAQ />
-      <FinalCTA />
+      <Suspense fallback={null}>
+        <Problem />
+        <WhatWeDo />
+        <WhyMilktree />
+        <Results />
+        <Pricing />
+        <TrustedBy />
+        <FAQ />
+        <FinalCTA />
+      </Suspense>
     </main>
     <Footer />
   </>
@@ -82,8 +86,8 @@ const App: React.FC = () => {
       <GATracker />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/work" element={<CaseStudiesPage />} />
-        <Route path="/work/:slug" element={<CaseStudyDetailPage />} />
+        <Route path="/work" element={<Suspense fallback={null}><CaseStudiesPage /></Suspense>} />
+        <Route path="/work/:slug" element={<Suspense fallback={null}><CaseStudyDetailPage /></Suspense>} />
       </Routes>
     </BrowserRouter>
   );
