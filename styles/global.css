@@ -1554,7 +1554,7 @@ ul, ol {
 }
 
 .cs-container {
-  max-width: var(--content-max-width);
+  max-width: 1600px;
   margin: 0 auto;
   padding: 0 var(--site-margin);
 }
@@ -1562,10 +1562,10 @@ ul, ol {
 /* Header row — heading left, "View all" right */
 .cs-header {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 56px;
+  gap: 24px;
+  margin-bottom: 48px;
 }
 
 .cs-heading {
@@ -1603,7 +1603,7 @@ ul, ol {
   left: 50%;
   margin-left: -50vw;
   overflow: hidden;
-  padding-left: var(--site-margin);
+  padding-left: clamp(20px, 4vw, 48px);
 }
 
 .cs-track {
@@ -1613,7 +1613,7 @@ ul, ol {
   scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  padding-right: var(--site-margin);
+  padding-right: clamp(20px, 4vw, 48px);
   padding-bottom: 8px;
 }
 
