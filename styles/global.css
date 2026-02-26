@@ -2070,7 +2070,7 @@ ul, ol {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255, 255, 255, 0.64);
+  color: #fff;
   text-decoration: none;
   transition: color 0.2s ease, transform 0.2s ease;
 }

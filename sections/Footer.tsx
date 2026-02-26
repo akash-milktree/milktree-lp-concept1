@@ -54,17 +54,15 @@ export const Footer: React.FC = () => {
 
       {/* Bottom row */}
       <div className="footer__bottom">
+        <p className="footer__copyright">
+          &copy; {new Date().getFullYear()} Milktree Agency. All rights reserved.
+        </p>
+
         <div className="footer__socials">
           <a href="https://www.instagram.com/milktreeagency/" target="_blank" rel="noopener noreferrer" className="footer__social-link" aria-label="Instagram"><Instagram /></a>
           <a href="https://www.linkedin.com/company/milktreeagency/posts/?feedView=all" target="_blank" rel="noopener noreferrer" className="footer__social-link" aria-label="LinkedIn"><LinkedIn /></a>
           <a href="mailto:levi@milktreeagency.com" className="footer__social-link" aria-label="Email"><EmailIcon /></a>
         </div>
-
-        <p className="footer__copyright">
-          &copy; {new Date().getFullYear()} Milktree Agency. All rights reserved.
-        </p>
-
-        <span className="footer__right">Brand Identity Agency</span>
       </div>
     </footer>
   );
