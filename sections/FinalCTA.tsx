@@ -18,13 +18,13 @@ export const FinalCTA: React.FC = () => {
       script.type = 'text/javascript';
       script.innerHTML = `
         (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-        Cal("init", "30min", {origin:"https://app.cal.com"});
-        Cal.ns["30min"]("inline", {
-          elementOrSelector: "#my-cal-inline-30min",
-          config: {"layout":"week_view","useSlotsViewOnSmallScreen":"true"},
-          calLink: "akash-mtd/30min",
+        Cal("init", "free-brand-digital-presence-audit-30-minutes", {origin:"https://app.cal.com"});
+        Cal.ns["free-brand-digital-presence-audit-30-minutes"]("inline", {
+          elementOrSelector: "#my-cal-inline-free-brand-digital-presence-audit-30-minutes",
+          config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true"},
+          calLink: "milktree-agency/free-brand-digital-presence-audit-30-minutes",
         });
-        Cal.ns["30min"]("ui", {"hideEventTypeDetails":false,"layout":"week_view"});
+        Cal.ns["free-brand-digital-presence-audit-30-minutes"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
       `;
       document.body.appendChild(script);
     };
@@ -77,7 +77,7 @@ export const FinalCTA: React.FC = () => {
               if (typeof window.gtag === 'function') {
                 window.gtag('event', 'cta_click', { event_category: 'Final CTA', event_label: 'Book Your Free Brand Audit', send_to: 'G-9GHX9JVN9S' });
               }
-              window.open('https://cal.com/akash-mtd/30min', '_blank', 'noopener,noreferrer');
+              window.open('https://cal.com/milktree-agency/free-brand-digital-presence-audit-30-minutes', '_blank', 'noopener,noreferrer');
             }}
           >
             <motion.span
@@ -98,7 +98,7 @@ export const FinalCTA: React.FC = () => {
         {/* Cal.com inline embed */}
         <Reveal delay={0.32}>
           <div className="finalcta__cal-wrap">
-            <div id="my-cal-inline-30min" className="finalcta__cal" style={{ width: '100%', height: '100%', overflow: 'scroll' }} />
+            <div id="my-cal-inline-free-brand-digital-presence-audit-30-minutes" className="finalcta__cal" style={{ width: '100%', height: '100%', overflow: 'scroll' }} />
           </div>
         </Reveal>
 
