@@ -1,78 +1,50 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Reveal } from '../components/animations/Reveal';
 import { Zap } from 'lucide-react';
 
-const CAL_LINK = 'milktree-agency/free-brand-digital-presence-audit-30-minutes';
 
 export const FinalCTA: React.FC = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+
   useEffect(() => {
-    const section = document.getElementById('audit');
+    const section = sectionRef.current;
     if (!section) return;
 
-    // Only load the heavy cal.com embed when this section enters the viewport
+    const initCal = () => {
+      if ((window as any).Cal?.loaded) return; // already loaded
+
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.innerHTML = `
+        (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+        Cal("init", "30min", {origin:"https://app.cal.com"});
+        Cal.ns["30min"]("inline", {
+          elementOrSelector: "#my-cal-inline-30min",
+          config: {"layout":"week_view","useSlotsViewOnSmallScreen":"true"},
+          calLink: "akash-mtd/30min",
+        });
+        Cal.ns["30min"]("ui", {"hideEventTypeDetails":false,"layout":"week_view"});
+      `;
+      document.body.appendChild(script);
+    };
+
+    // If the section is already in or near the viewport when mounted, init immediately.
+    // This handles the case where the lazy-loaded component mounts while already visible.
+    const rect = section.getBoundingClientRect();
+    if (rect.top < window.innerHeight + 300) {
+      initCal();
+      return;
+    }
+
+    // Otherwise wait until it scrolls into range
     const io = new IntersectionObserver(
       (entries) => {
         if (!entries[0].isIntersecting) return;
-        io.disconnect(); // fire once only
-
-        if ((window as any).Cal) return; // already loaded
-
-        const script = document.createElement('script');
-        script.type = 'text/javascript';
-        script.innerHTML = `
-          (function (C, A, L) {
-            let p = function (a, ar) { a.q.push(ar); };
-            let d = C.document;
-            C.Cal = C.Cal || function () {
-              let cal = C.Cal; let ar = arguments;
-              if (!cal.loaded) {
-                cal.ns = {}; cal.q = cal.q || [];
-                d.head.appendChild(d.createElement("script")).src = A;
-                cal.loaded = true;
-              }
-              if (ar[0] === L) {
-                const api = function () { p(api, arguments); };
-                const namespace = ar[1];
-                api.q = api.q || [];
-                if (typeof namespace === "string") {
-                  cal.ns[namespace] = cal.ns[namespace] || api;
-                  p(cal.ns[namespace], ar);
-                  p(cal, ["-al", namespace, api]);
-                } else p(cal, ar);
-                return;
-              }
-              p(cal, ar);
-            };
-          })(window, "https://app.cal.com/embed/embed.js", "init");
-          Cal("init", { origin: "https://cal.com" });
-          Cal("inline", {
-            elementOrSelector: "#cal-embed",
-            calLink: "${CAL_LINK}",
-            layout: "month_view"
-          });
-          Cal("ui", {
-            "styles": { "branding": { "brandColor": "#FFDC04" } },
-            "hideEventTypeDetails": false,
-            "layout": "month_view"
-          });
-        `;
-        document.body.appendChild(script);
-
-        // Suppress iframe scrollbars once Cal.com injects the iframe
-        const calEmbed = document.getElementById('cal-embed');
-        const mutObs = new MutationObserver(() => {
-          const iframe = calEmbed?.querySelector('iframe') as HTMLIFrameElement | null;
-          if (iframe) {
-            iframe.setAttribute('scrolling', 'no');
-            iframe.style.overflow = 'hidden';
-          }
-        });
-        if (calEmbed) {
-          mutObs.observe(calEmbed, { childList: true, subtree: true, attributes: true });
-        }
+        io.disconnect();
+        initCal();
       },
-      { rootMargin: '200px' } // start loading 200px before it enters view
+      { rootMargin: '200px' }
     );
 
     io.observe(section);
@@ -80,7 +52,7 @@ export const FinalCTA: React.FC = () => {
   }, []);
 
   return (
-    <section className="finalcta-section" id="audit">
+    <section className="finalcta-section" id="audit" ref={sectionRef}>
       <div className="finalcta__container">
 
         <Reveal>
@@ -105,7 +77,7 @@ export const FinalCTA: React.FC = () => {
               if (typeof window.gtag === 'function') {
                 window.gtag('event', 'cta_click', { event_category: 'Final CTA', event_label: 'Book Your Free Brand Audit', send_to: 'G-9GHX9JVN9S' });
               }
-              window.open(`https://cal.com/${CAL_LINK}`, '_blank', 'noopener,noreferrer');
+              window.open('https://cal.com/akash-mtd/30min', '_blank', 'noopener,noreferrer');
             }}
           >
             <motion.span
@@ -126,7 +98,7 @@ export const FinalCTA: React.FC = () => {
         {/* Cal.com inline embed */}
         <Reveal delay={0.32}>
           <div className="finalcta__cal-wrap">
-            <div id="cal-embed" className="finalcta__cal" />
+            <div id="my-cal-inline-30min" className="finalcta__cal" style={{ width: '100%', height: '100%', overflow: 'scroll' }} />
           </div>
         </Reveal>
 
