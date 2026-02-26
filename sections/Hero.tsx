@@ -127,6 +127,8 @@ export const Hero: React.FC = () => {
                 src={card.img}
                 alt={card.title}
                 className="hero__card-img"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           ))}

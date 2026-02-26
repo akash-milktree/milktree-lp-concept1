@@ -7,6 +7,14 @@
     <meta name="description" content="We build brand identities that make businesses clear, trusted, and chosen. 200+ brands built. Book your free brand audit." />
     <!-- Fonts served locally from public/fonts/ -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Unregister any old Framer/legacy service workers immediately -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          for (var r of registrations) { r.unregister(); }
+        });
+      }
+    </script>
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-9GHX9JVN9S"></script>
     <script>
