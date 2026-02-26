@@ -53,6 +53,7 @@ const Problem    = lazy(() => import('./sections/Problem').then(m => ({ default:
 const WhatWeDo   = lazy(() => import('./sections/WhatWeDo').then(m => ({ default: m.WhatWeDo })));
 const WhyMilktree = lazy(() => import('./sections/WhyMilktree').then(m => ({ default: m.WhyMilktree })));
 const Results    = lazy(() => import('./sections/Results').then(m => ({ default: m.Results })));
+const CaseStudies = lazy(() => import('./sections/CaseStudies').then(m => ({ default: m.CaseStudies })));
 const Pricing    = lazy(() => import('./sections/Pricing').then(m => ({ default: m.Pricing })));
 const TrustedBy  = lazy(() => import('./sections/TrustedBy').then(m => ({ default: m.TrustedBy })));
 const FAQ        = lazy(() => import('./sections/FAQ').then(m => ({ default: m.FAQ })));
@@ -70,6 +71,7 @@ const HomePage: React.FC = () => (
         <WhatWeDo />
         <WhyMilktree />
         <Results />
+        <CaseStudies />
         <Pricing />
         <TrustedBy />
         <FAQ />
