@@ -112,11 +112,7 @@ export const Hero: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
       >
-        <motion.div
-          className="hero__showcase-track"
-          animate={{ x: ['-9088px', '0px'] }}
-          transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 114, ease: 'linear' } }}
-        >
+        <div className="hero__showcase-track">
           {allCards.map((card, i) => (
             <div
               key={i}
@@ -127,12 +123,12 @@ export const Hero: React.FC = () => {
                 src={card.img}
                 alt={card.title}
                 className="hero__card-img"
-                loading="lazy"
+                loading={i < 6 ? 'eager' : 'lazy'}
                 decoding="async"
               />
             </div>
           ))}
-        </motion.div>
+        </div>
       </motion.div>
 
       {/* ── Client name marquee (below showcase, like Supafast) ── */}
@@ -142,17 +138,13 @@ export const Hero: React.FC = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6, duration: 0.8 }}
       >
-        <motion.div
-          className="hero__marquee-track"
-          animate={{ x: ['0%', '-50%'] }}
-          transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 40, ease: 'linear' } }}
-        >
+        <div className="hero__marquee-track">
           {allLogos.map((src, i) => (
             <div key={i} className="hero__marquee-item">
               <img src={src} alt="client logo" className="hero__marquee-logo" />
             </div>
           ))}
-        </motion.div>
+        </div>
       </motion.div>
     </section>
   );

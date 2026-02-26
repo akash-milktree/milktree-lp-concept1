@@ -619,10 +619,23 @@ ul, ol {
   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
 }
 
+/* ── CSS carousel keyframes (GPU compositor thread — no JS overhead) ── */
+@keyframes marquee-scroll {
+  from { transform: translateX(0%); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes showcase-scroll {
+  from { transform: translateX(-9088px); }
+  to   { transform: translateX(0px); }
+}
+
 .hero__marquee-track {
   display: flex;
   gap: 0;
   width: max-content;
+  animation: marquee-scroll 40s linear infinite;
+  will-change: transform;
 }
 
 .hero__marquee-item {
@@ -661,6 +674,8 @@ ul, ol {
   width: max-content;
   /* Slight left pad so first card is slightly inset */
   padding-left: 24px;
+  animation: showcase-scroll 114s linear infinite;
+  will-change: transform;
 }
 
 .hero__showcase-card {
