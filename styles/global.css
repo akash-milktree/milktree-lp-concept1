@@ -1518,11 +1518,11 @@ ul, ol {
 }
 
 .finalcta__cal {
-  /* Extend 20px beyond the wrapper so the iframe's right-edge scrollbar
-     (typically 15-17px wide) falls fully outside the overflow:hidden
-     clip boundary and becomes invisible */
+  /* Extend beyond the wrapper so the iframe's right-edge scrollbar
+     falls outside the overflow:hidden clip boundary */
   width: calc(100% + 20px);
-  height: 100%;
+  height: calc(100% + 20px);
+  overflow: hidden;
 }
 
 /* Force no scrollbars on the Cal.com iframe */

@@ -98,7 +98,7 @@ export const FinalCTA: React.FC = () => {
         {/* Cal.com inline embed */}
         <Reveal delay={0.32}>
           <div className="finalcta__cal-wrap">
-            <div id="my-cal-inline-free-brand-digital-presence-audit-30-minutes" className="finalcta__cal" style={{ width: '100%', height: '100%', overflow: 'scroll' }} />
+            <div id="my-cal-inline-free-brand-digital-presence-audit-30-minutes" className="finalcta__cal" />
           </div>
         </Reveal>
 
