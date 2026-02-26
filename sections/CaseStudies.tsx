@@ -38,13 +38,12 @@ export const CaseStudies: React.FC = () => {
           {caseStudies.map((study, i) => (
             <motion.div
               key={study.slug}
-              className="cs-card"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.55, ease: [0.21, 0.47, 0.32, 0.98], delay: i * 0.06 }}
             >
-              <Link to={`/work/${study.slug}`} className="cs-card__link">
+              <Link to={`/work/${study.slug}`} className="cs-card">
                 <div className="cs-card__img-wrap">
                   <img
                     src={study.coverImage}
@@ -53,12 +52,11 @@ export const CaseStudies: React.FC = () => {
                     loading="lazy"
                     decoding="async"
                   />
+                  <div className="cs-card__arrow"><ArrowRight size={18} /></div>
                 </div>
                 <div className="cs-card__body">
-                  <div className="cs-card__tags">
-                    {study.tags.map((tag) => (
-                      <span key={tag} className="cs-card__tag">{tag}</span>
-                    ))}
+                  <div className="cs-card__meta">
+                    <span className="cs-card__industry">{study.tags[0]}</span>
                   </div>
                   <h4 className="cs-card__title">{study.title}</h4>
                   <p className="cs-card__services">{study.services}</p>

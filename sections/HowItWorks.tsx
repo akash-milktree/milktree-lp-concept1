@@ -41,7 +41,7 @@ export const HowItWorks: React.FC = () => {
               {/* Image */}
               <div className="results__card-img-wrap">
                 <img
-                  src={study.img}
+                  src={study.coverImage}
                   alt={study.title}
                   className="results__card-img"
                 />

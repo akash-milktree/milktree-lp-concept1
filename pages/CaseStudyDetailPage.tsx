@@ -1,199 +1,183 @@
-import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useParams, Link, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { caseStudies } from '../data/content';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Navbar } from '../components/ui/Navbar';
 import { Footer } from '../sections/Footer';
-import { Button } from '../components/ui/Button';
+import { Reveal } from '../components/animations/Reveal';
+import { caseStudies } from '../data/content';
 
-const CAL_LINK = 'milktreeagency/brand-audit';
+const CAL_LINK = 'https://cal.com/milktree-agency/free-brand-digital-presence-audit-30-minutes';
 
 export const CaseStudyDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
-  const cs = caseStudies.find(c => c.slug === slug);
+  const study = caseStudies.find((s) => s.slug === slug);
 
-  if (!cs) {
-    return (
-      <>
-        <Navbar />
-        <main className="cs-notfound">
-          <p>Case study not found.</p>
-          <Link to="/work">← Back to work</Link>
-        </main>
-        <Footer />
-      </>
-    );
-  }
+  useEffect(() => { window.scrollTo(0, 0); }, [slug]);
 
-  const gallery = cs.galleryImages || [];
-  const [img0, img1, img2, img3] = gallery;
-  const others = caseStudies.filter(c => c.slug !== cs.slug).slice(0, 2);
+  if (!study) return <Navigate to="/work" replace />;
+
+  const currentIdx = caseStudies.indexOf(study);
+  const prevStudy = currentIdx > 0 ? caseStudies[currentIdx - 1] : null;
+  const nextStudy = currentIdx < caseStudies.length - 1 ? caseStudies[currentIdx + 1] : null;
+  const moreStudies = caseStudies.filter((s) => s.slug !== study.slug).slice(0, 2);
 
   return (
     <>
       <Navbar />
-      <main className="cs-detail">
+      <main>
 
-        {/* ── 1. HERO: full-viewport, starts at y=0, navbar floats over ── */}
+        {/* ── Hero image ── */}
         <section className="cs-detail__hero">
-          {/* Background image with gradient overlay */}
-          <div className="cs-detail__hero-bg">
-            <img src={cs.coverImage} alt="" className="cs-detail__hero-bg-img" />
+          <motion.div
+            className="cs-detail__hero-img-wrap"
+            initial={{ opacity: 0, scale: 1.04 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
+          >
+            <img src={study.coverImage} alt={study.title} className="cs-detail__hero-img" />
             <div className="cs-detail__hero-overlay" />
-          </div>
+          </motion.div>
 
-          {/* Content sits above the bg */}
-          <div className="cs-detail__hero-content">
-
-            {/* Upper: tags + client name */}
-            <motion.div
-              className="cs-detail__hero-brand"
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98], delay: 0.1 }}
-            >
-              <div className="cs-detail__hero-tags">
-                {cs.tags.map(tag => (
+          {/* Back link + title overlay */}
+          <div className="container cs-detail__hero-content">
+            <Reveal>
+              <Link to="/work" className="cs-detail__back">
+                <ArrowLeft size={16} /> All work
+              </Link>
+              <div className="cs-detail__tags">
+                {study.tags.map((tag) => (
                   <span key={tag} className="cs-card__tag">{tag}</span>
                 ))}
               </div>
-              <h1 className="cs-detail__client-name">{cs.title}</h1>
-            </motion.div>
-
-            {/* Lower: headline + description + scope */}
-            <motion.div
-              className="cs-detail__hero-info"
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98], delay: 0.2 }}
-            >
-              <h2 className="cs-detail__headline">{cs.headline}</h2>
-              <p className="cs-detail__description">{cs.description}</p>
-              <div className="cs-detail__scope">
-                <span className="cs-detail__scope-label">Scope of work</span>
-                <strong className="cs-detail__scope-text">{cs.scopeOfWork}</strong>
-              </div>
-            </motion.div>
-
+              <h1 className="cs-detail__heading">{study.title}</h1>
+              <p className="cs-detail__subtitle">{study.headline}</p>
+            </Reveal>
           </div>
         </section>
 
-        {/* ── 2. GALLERY ── */}
-        {gallery.length > 0 && (
-          <div className="cs-detail__gallery">
+        {/* ── Scope of work bar ── */}
+        <Reveal>
+          <section className="cs-detail__scope-bar">
+            <div className="container cs-detail__scope-inner">
+              <span className="cs-detail__scope-label">Scope of work</span>
+              <span className="cs-detail__scope-text">{study.scopeOfWork}</span>
+            </div>
+          </section>
+        </Reveal>
 
-            {/* Full-width tile */}
-            {img0 && (
-              <motion.div
-                className="cs-gallery-tile"
-                initial={{ opacity: 0, y: 32 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
-              >
-                <img src={img0} alt={`${cs.title} — 1`} />
-              </motion.div>
+        {/* ── Body content ── */}
+        <article className="cs-detail__body">
+          <div className="container cs-detail__body-inner">
+
+            {/* Overview */}
+            <Reveal>
+              <section className="cs-detail__section">
+                <h2 className="cs-detail__section-heading">Overview</h2>
+                <p className="cs-detail__text">{study.description}</p>
+              </section>
+            </Reveal>
+
+            {/* Gallery images */}
+            {study.galleryImages && study.galleryImages.length > 0 && (
+              <Reveal>
+                <div className="cs-detail__gallery">
+                  {study.galleryImages.map((img, i) => (
+                    <div key={i} className="cs-detail__gallery-img-wrap">
+                      <img
+                        src={img}
+                        alt={`${study.title} ${i + 1}`}
+                        className="cs-detail__gallery-img"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </Reveal>
             )}
 
-            {/* 2-col pair */}
-            {(img1 || img2) && (
-              <motion.div
-                className="cs-gallery-pair"
-                initial={{ opacity: 0, y: 32 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
-              >
-                {img1 && (
-                  <div className="cs-gallery-tile">
-                    <img src={img1} alt={`${cs.title} — 2`} />
-                  </div>
-                )}
-                {img2 && (
-                  <div className="cs-gallery-tile">
-                    <img src={img2} alt={`${cs.title} — 3`} />
-                  </div>
-                )}
-              </motion.div>
-            )}
-
-            {/* Full-width tile */}
-            {img3 && (
-              <motion.div
-                className="cs-gallery-tile"
-                initial={{ opacity: 0, y: 32 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98], delay: 0.05 }}
-              >
-                <img src={img3} alt={`${cs.title} — 4`} />
-              </motion.div>
-            )}
+            {/* CTA block */}
+            <Reveal>
+              <div className="cs-detail__cta-block">
+                <p className="cs-detail__cta-heading">Ready for results like these?</p>
+                <p className="cs-detail__cta-sub">
+                  Book a free brand audit — we'll give you an honest view of where you stand.
+                </p>
+                <a
+                  href={CAL_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cs-detail__cta-btn"
+                  onClick={() => {
+                    if (typeof window.gtag === 'function') {
+                      window.gtag('event', 'cta_click', { event_category: 'Case Study CTA', event_label: 'Book Free Brand Audit', send_to: 'G-9GHX9JVN9S' });
+                    }
+                  }}
+                >
+                  Book Your Free Brand Audit
+                </a>
+              </div>
+            </Reveal>
 
           </div>
-        )}
+        </article>
 
-        {/* ── 3. MORE PROJECTS ── */}
-        {others.length > 0 && (
-          <div className="cs-detail__more">
-            <div className="cs-detail__more-inner">
-              <h2 className="cs-detail__more-heading">More Projects</h2>
-              <div className="cs-detail__more-grid">
-                {others.map((other, i) => (
+        {/* ── More Projects ── */}
+        {moreStudies.length > 0 && (
+          <section className="cs-more">
+            <div className="container">
+              <Reveal>
+                <h2 className="cs-more__heading">More Projects</h2>
+              </Reveal>
+              <div className="cs-more__grid">
+                {moreStudies.map((s, i) => (
                   <motion.div
-                    key={other.slug}
+                    key={s.slug}
                     initial={{ opacity: 0, y: 24 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-40px' }}
-                    transition={{ duration: 0.55, ease: [0.21, 0.47, 0.32, 0.98], delay: i * 0.07 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: i * 0.1 }}
                   >
-                    <Link to={`/work/${other.slug}`} className="cs-more-card">
-                      <div className="cs-more-card__img">
-                        <img src={other.coverImage} alt={other.title} />
+                    <Link to={`/work/${s.slug}`} className="cs-card">
+                      <div className="cs-card__img-wrap">
+                        <img src={s.coverImage} alt={s.title} className="cs-card__img" loading="lazy" decoding="async" />
+                        <div className="cs-card__arrow"><ArrowRight size={20} /></div>
                       </div>
-                      <div className="cs-more-card__body">
-                        <div className="cs-more-card__tags">
-                          {other.tags.map(t => (
-                            <span key={t} className="cs-card__tag">{t}</span>
-                          ))}
+                      <div className="cs-card__body">
+                        <div className="cs-card__meta">
+                          <span className="cs-card__industry">{s.tags[0]}</span>
                         </div>
-                        <span className="cs-more-card__title">{other.title}</span>
+                        <h3 className="cs-card__title">{s.title}</h3>
+                        <p className="cs-card__subtitle">{s.services}</p>
                       </div>
                     </Link>
                   </motion.div>
                 ))}
               </div>
             </div>
-          </div>
+          </section>
         )}
 
-        {/* ── 4. CTA ── */}
-        <motion.div
-          className="cs-detail__cta"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.55, ease: [0.21, 0.47, 0.32, 0.98] }}
-        >
-          <div className="cs-detail__cta-inner">
-            <h2 className="cs-detail__cta-heading">
-              Ready to move faster<br />and convert more?
-            </h2>
-            <p className="cs-detail__cta-sub">Let's build a brand that does the heavy lifting.</p>
-            <Button
-              variant="primary"
-              size="lg"
-              onClick={() => {
-                if (typeof window.gtag === 'function') {
-                  window.gtag('event', 'cta_click', { event_category: 'Case Study CTA', event_label: 'Book Your Free Brand Audit', send_to: 'G-9GHX9JVN9S' });
-                }
-                window.open(`https://cal.com/${CAL_LINK}`, '_blank', 'noopener,noreferrer');
-              }}
-            >
-              Book Your Free Brand Audit
-            </Button>
-          </div>
-        </motion.div>
+        {/* ── Prev / Next ── */}
+        {(prevStudy || nextStudy) && (
+          <nav className="cs-detail__nav">
+            <div className="container cs-detail__nav-inner">
+              {prevStudy ? (
+                <Link to={`/work/${prevStudy.slug}`} className="cs-detail__nav-item cs-detail__nav-item--prev">
+                  <span className="cs-detail__nav-label">← Previous</span>
+                  <span className="cs-detail__nav-title">{prevStudy.title}</span>
+                </Link>
+              ) : <div />}
+              {nextStudy ? (
+                <Link to={`/work/${nextStudy.slug}`} className="cs-detail__nav-item cs-detail__nav-item--next">
+                  <span className="cs-detail__nav-label">Next →</span>
+                  <span className="cs-detail__nav-title">{nextStudy.title}</span>
+                </Link>
+              ) : <div />}
+            </div>
+          </nav>
+        )}
 
       </main>
       <Footer />

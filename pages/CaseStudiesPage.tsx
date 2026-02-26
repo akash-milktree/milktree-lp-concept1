@@ -1,64 +1,96 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { caseStudies } from '../data/content';
+import { ArrowRight } from 'lucide-react';
 import { Navbar } from '../components/ui/Navbar';
 import { Footer } from '../sections/Footer';
-import { ArrowUpRight } from 'lucide-react';
+import { Reveal } from '../components/animations/Reveal';
+import { caseStudies } from '../data/content';
 
 export const CaseStudiesPage: React.FC = () => {
+  useEffect(() => { window.scrollTo(0, 0); }, []);
+
   return (
     <>
       <Navbar />
-      <main className="cs-archive">
-        <div className="cs-archive__container">
+      <main>
 
-          <motion.div
-            className="cs-archive__header"
-            initial={{ opacity: 0, y: 32 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, ease: [0.21, 0.47, 0.32, 0.98] }}
-          >
-            <span className="cs-archive__label">Our work</span>
-            <h1 className="cs-archive__heading">Built for real results.</h1>
-            <p className="cs-archive__subheading">
-              A selection of brands and digital experiences we've built for founders who wanted more than a pretty website.
-            </p>
-          </motion.div>
-
-          <div className="cs-archive__grid">
-            {caseStudies.map((cs, i) => (
-              <motion.div
-                key={cs.slug}
-                initial={{ opacity: 0, y: 32 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.55, ease: [0.21, 0.47, 0.32, 0.98], delay: i * 0.07 }}
-              >
-                <Link to={`/work/${cs.slug}`} className="cs-card">
-                  <div className="cs-card__img-wrap">
-                    <img src={cs.coverImage} alt={cs.title} className="cs-card__img" />
-                    <div className="cs-card__overlay">
-                      <span className="cs-card__view">
-                        View project <ArrowUpRight size={16} />
-                      </span>
-                    </div>
-                  </div>
-                  <div className="cs-card__body">
-                    <div className="cs-card__tags">
-                      {cs.tags.map(tag => (
-                        <span key={tag} className="cs-card__tag">{tag}</span>
-                      ))}
-                    </div>
-                    <h2 className="cs-card__title">{cs.title}</h2>
-                    <p className="cs-card__services">{cs.services}</p>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
+        {/* ── Hero header ── */}
+        <section className="cs-page__hero">
+          <div className="cs-page__hero-inner container">
+            <Reveal>
+              <p className="cs-page__label">Our Work</p>
+              <h1 className="cs-page__heading">Real brands.<br />Real results.</h1>
+              <p className="cs-page__subtext">
+                Every client below came to us wanting more than a pretty logo. Here's what we built — and what happened next.
+              </p>
+            </Reveal>
           </div>
+        </section>
 
-        </div>
+        {/* ── Case study grid ── */}
+        <section className="cs-page__grid-section">
+          <div className="container cs-page__grid-container">
+            <div className="cs-page__grid">
+              {caseStudies.map((study, i) => (
+                <motion.div
+                  key={study.slug}
+                  initial={{ opacity: 0, y: 32 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ duration: 0.55, ease: [0.21, 0.47, 0.32, 0.98], delay: i * 0.08 }}
+                >
+                  <Link to={`/work/${study.slug}`} className="cs-card">
+                    <div className="cs-card__img-wrap">
+                      <img
+                        src={study.coverImage}
+                        alt={study.title}
+                        className="cs-card__img"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <div className="cs-card__arrow">
+                        <ArrowRight size={20} />
+                      </div>
+                    </div>
+                    <div className="cs-card__body">
+                      <div className="cs-card__meta">
+                        <span className="cs-card__industry">{study.tags[0]}</span>
+                        {study.tags[1] && (
+                          <span className="cs-card__location">{study.tags[1]}</span>
+                        )}
+                      </div>
+                      <h2 className="cs-card__title">{study.title}</h2>
+                      <p className="cs-card__subtitle">{study.services}</p>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Bottom CTA */}
+            <Reveal>
+              <div className="cs-page__cta">
+                <p className="cs-page__cta-text">Want results like these?</p>
+                <a
+                  href="https://cal.com/milktree-agency/free-brand-digital-presence-audit-30-minutes"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cs-page__cta-btn"
+                  onClick={() => {
+                    if (typeof window.gtag === 'function') {
+                      window.gtag('event', 'cta_click', { event_category: 'Work Archive CTA', event_label: 'Book Free Brand Audit', send_to: 'G-9GHX9JVN9S' });
+                    }
+                  }}
+                >
+                  Book Your Free Brand Audit
+                </a>
+                <p className="cs-page__cta-note">Spots are limited — we work with select clients each month.</p>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
       </main>
       <Footer />
     </>
