@@ -89,7 +89,12 @@ export const FinalCTA: React.FC = () => {
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             transition={{ duration: 0.2, ease: [0.44, 0, 0.56, 1] }}
-            onClick={() => window.open(`https://cal.com/${CAL_LINK}`, '_blank', 'noopener,noreferrer')}
+            onClick={() => {
+              if (typeof window.gtag === 'function') {
+                window.gtag('event', 'cta_click', { event_category: 'Final CTA', event_label: 'Book Your Free Brand Audit', send_to: 'G-9GHX9JVN9S' });
+              }
+              window.open(`https://cal.com/${CAL_LINK}`, '_blank', 'noopener,noreferrer');
+            }}
           >
             <motion.span
               className="finalcta__btn-icon"

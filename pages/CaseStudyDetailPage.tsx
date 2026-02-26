@@ -183,7 +183,12 @@ export const CaseStudyDetailPage: React.FC = () => {
             <Button
               variant="primary"
               size="lg"
-              onClick={() => window.open(`https://cal.com/${CAL_LINK}`, '_blank', 'noopener,noreferrer')}
+              onClick={() => {
+                if (typeof window.gtag === 'function') {
+                  window.gtag('event', 'cta_click', { event_category: 'Case Study CTA', event_label: 'Book Your Free Brand Audit', send_to: 'G-9GHX9JVN9S' });
+                }
+                window.open(`https://cal.com/${CAL_LINK}`, '_blank', 'noopener,noreferrer');
+              }}
             >
               Book Your Free Brand Audit
             </Button>

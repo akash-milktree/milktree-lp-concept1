@@ -115,13 +115,12 @@ export const Hero: React.FC = () => {
         <motion.div
           className="hero__showcase-track"
           animate={{ x: ['-9088px', '0px'] }}
-          transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 80, ease: 'linear' } }}
+          transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 114, ease: 'linear' } }}
         >
           {allCards.map((card, i) => (
             <div
               key={i}
               className="hero__showcase-card"
-              style={{ width: card.width }}
             >
               {/* Photo */}
               <img
@@ -144,7 +143,7 @@ export const Hero: React.FC = () => {
         <motion.div
           className="hero__marquee-track"
           animate={{ x: ['0%', '-50%'] }}
-          transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 28, ease: 'linear' } }}
+          transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 40, ease: 'linear' } }}
         >
           {allLogos.map((src, i) => (
             <div key={i} className="hero__marquee-item">

@@ -114,6 +114,9 @@ export const Navbar: React.FC = () => {
               size="lg"
               onClick={() => {
                 setIsMobileMenuOpen(false);
+                if (typeof window.gtag === 'function') {
+                  window.gtag('event', 'cta_click', { event_category: 'Navbar', event_label: 'Free Audit', send_to: 'G-9GHX9JVN9S' });
+                }
                 if (isHome) {
                   scrollToSection('audit');
                 } else {
@@ -170,6 +173,9 @@ export const Navbar: React.FC = () => {
                 variant="primary"
                 onClick={() => {
                   setIsMobileMenuOpen(false);
+                  if (typeof window.gtag === 'function') {
+                    window.gtag('event', 'cta_click', { event_category: 'Navbar Mobile', event_label: 'Book Your Free Brand Audit', send_to: 'G-9GHX9JVN9S' });
+                  }
                   if (isHome) {
                     scrollToSection('audit');
                   } else {
