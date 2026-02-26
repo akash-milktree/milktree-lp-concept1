@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { MilktreeLogo } from './MilktreeLogo';
 import { Button } from './Button';
 
-const navLinks = [
+const sectionLinks = [
   { label: "Services", target: "services" },
   { label: "Pricing", target: "pricing" },
   { label: "Reviews", target: "testimonials" },
@@ -21,6 +22,9 @@ export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHome = location.pathname === '/';
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious() || 0;
@@ -37,9 +41,29 @@ export const Navbar: React.FC = () => {
     return () => { document.body.style.overflow = 'unset'; };
   }, [isMobileMenuOpen]);
 
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
+
   const handleNavClick = (target: string) => {
     setIsMobileMenuOpen(false);
-    scrollToSection(target);
+    if (isHome) {
+      scrollToSection(target);
+    } else {
+      navigate('/');
+      // After navigation, scroll to the section
+      setTimeout(() => scrollToSection(target), 300);
+    }
+  };
+
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (isHome) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      navigate('/');
+    }
   };
 
   return (
@@ -55,12 +79,9 @@ export const Navbar: React.FC = () => {
       >
         <div className={`navbar__pill ${scrolled ? 'navbar__pill--scrolled' : ''}`}>
           <a
-            href="#"
+            href="/"
             className="navbar__logo"
-            onClick={(e) => {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
+            onClick={handleLogoClick}
           >
             <MilktreeLogo variant="full" color="light" />
           </a>
@@ -68,10 +89,10 @@ export const Navbar: React.FC = () => {
           <div className="navbar__divider" />
 
           <div className="navbar__links">
-            {navLinks.map((link) => (
+            {sectionLinks.map((link) => (
               <a
                 key={link.target}
-                href={`#${link.target}`}
+                href={`/#${link.target}`}
                 onClick={(e) => {
                   e.preventDefault();
                   handleNavClick(link.target);
@@ -80,6 +101,9 @@ export const Navbar: React.FC = () => {
                 {link.label}
               </a>
             ))}
+            <Link to="/work" className={location.pathname.startsWith('/work') ? 'navbar__link--active' : ''}>
+              Case Studies
+            </Link>
           </div>
 
           <div className="navbar__divider" />
@@ -88,7 +112,14 @@ export const Navbar: React.FC = () => {
             <Button
               variant="primary"
               size="lg"
-              onClick={() => scrollToSection('audit')}
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                if (isHome) {
+                  scrollToSection('audit');
+                } else {
+                  window.open('https://cal.com/milktreeagency/brand-audit', '_blank', 'noopener,noreferrer');
+                }
+              }}
             >
               Free Audit
             </Button>
@@ -114,10 +145,10 @@ export const Navbar: React.FC = () => {
             className="navbar__mobile-overlay"
           >
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              {navLinks.map((link) => (
+              {sectionLinks.map((link) => (
                 <a
                   key={link.target}
-                  href={`#${link.target}`}
+                  href={`/#${link.target}`}
                   onClick={(e) => {
                     e.preventDefault();
                     handleNavClick(link.target);
@@ -126,6 +157,12 @@ export const Navbar: React.FC = () => {
                   {link.label}
                 </a>
               ))}
+              <Link
+                to="/work"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Case Studies
+              </Link>
             </div>
             <div style={{ marginTop: 'auto' }}>
               <Button
@@ -133,7 +170,11 @@ export const Navbar: React.FC = () => {
                 variant="primary"
                 onClick={() => {
                   setIsMobileMenuOpen(false);
-                  scrollToSection('audit');
+                  if (isHome) {
+                    scrollToSection('audit');
+                  } else {
+                    window.open('https://cal.com/milktreeagency/brand-audit', '_blank', 'noopener,noreferrer');
+                  }
                 }}
               >
                 Book Your Free Brand Audit
