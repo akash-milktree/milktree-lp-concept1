@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Reveal } from '../components/animations/Reveal';
 import { Zap } from 'lucide-react';
+import { trackContact, trackCustom } from '../utils/meta-tracking';
 
 
 const LinkedIn = () => (
@@ -141,8 +142,9 @@ const FooterCTA: React.FC = () => {
             transition={{ duration: 0.2, ease: [0.44, 0, 0.56, 1] }}
             onClick={() => {
               if (typeof window.gtag === 'function') {
-                window.gtag('event', 'cta_click', { event_category: 'Final CTA', event_label: 'Book Your Free Brand Audit', send_to: 'G-9GHX9JVN9S' });
+                window.gtag('event', 'cta_click', { event_category: 'Footer CTA', event_label: 'Book Your Free Brand Audit', send_to: 'G-9GHX9JVN9S' });
               }
+              trackContact({ eventSource: 'Footer CTA' });
               window.open('https://cal.com/milktree-agency/free-brand-digital-presence-audit-30-minutes', '_blank', 'noopener,noreferrer');
             }}
           >
@@ -191,9 +193,31 @@ export const Footer: React.FC = () => {
           </p>
 
           <div className="footer__socials">
-            <a href="https://www.instagram.com/milktreeagency/" target="_blank" rel="noopener noreferrer" className="footer__social-link" aria-label="Instagram"><Instagram /></a>
-            <a href="https://www.linkedin.com/company/milktreeagency/posts/?feedView=all" target="_blank" rel="noopener noreferrer" className="footer__social-link" aria-label="LinkedIn"><LinkedIn /></a>
-            <a href="mailto:levi@milktreeagency.com" className="footer__social-link" aria-label="Email"><EmailIcon /></a>
+            <a
+              href="https://www.instagram.com/milktreeagency/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer__social-link"
+              aria-label="Instagram"
+              onClick={() => trackCustom('SocialClick', { customData: { platform: 'Instagram' } })}
+            ><Instagram /></a>
+            <a
+              href="https://www.linkedin.com/company/milktreeagency/posts/?feedView=all"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer__social-link"
+              aria-label="LinkedIn"
+              onClick={() => trackCustom('SocialClick', { customData: { platform: 'LinkedIn' } })}
+            ><LinkedIn /></a>
+            <a
+              href="mailto:levi@milktreeagency.com"
+              className="footer__social-link"
+              aria-label="Email"
+              onClick={() => {
+                trackContact({ eventSource: 'Footer Email Link' });
+                trackCustom('SocialClick', { customData: { platform: 'Email' } });
+              }}
+            ><EmailIcon /></a>
           </div>
         </div>
       </footer>

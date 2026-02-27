@@ -4,6 +4,7 @@ import { Menu, X } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { MilktreeLogo } from './MilktreeLogo';
 import { Button } from './Button';
+import { trackContact } from '../../utils/meta-tracking';
 
 const sectionLinks = [
   { label: "Services", target: "services" },
@@ -117,10 +118,11 @@ export const Navbar: React.FC = () => {
                 if (typeof window.gtag === 'function') {
                   window.gtag('event', 'cta_click', { event_category: 'Navbar', event_label: 'Free Audit', send_to: 'G-9GHX9JVN9S' });
                 }
+                trackContact({ eventSource: 'Navbar Desktop CTA' });
                 if (isHome) {
                   scrollToSection('audit');
                 } else {
-                  window.open('https://cal.com/milktreeagency/brand-audit', '_blank', 'noopener,noreferrer');
+                  window.open('https://cal.com/milktree-agency/free-brand-digital-presence-audit-30-minutes', '_blank', 'noopener,noreferrer');
                 }
               }}
             >
@@ -138,10 +140,11 @@ export const Navbar: React.FC = () => {
                 if (typeof window.gtag === 'function') {
                   window.gtag('event', 'cta_click', { event_category: 'Navbar Mobile Pill', event_label: 'Free Audit', send_to: 'G-9GHX9JVN9S' });
                 }
+                trackContact({ eventSource: 'Navbar Mobile Pill CTA' });
                 if (isHome) {
                   scrollToSection('audit');
                 } else {
-                  window.open('https://cal.com/milktreeagency/brand-audit', '_blank', 'noopener,noreferrer');
+                  window.open('https://cal.com/milktree-agency/free-brand-digital-presence-audit-30-minutes', '_blank', 'noopener,noreferrer');
                 }
               }}
             >
@@ -197,10 +200,11 @@ export const Navbar: React.FC = () => {
                   if (typeof window.gtag === 'function') {
                     window.gtag('event', 'cta_click', { event_category: 'Navbar Mobile', event_label: 'Book Your Free Brand Audit', send_to: 'G-9GHX9JVN9S' });
                   }
+                  trackContact({ eventSource: 'Navbar Mobile Menu CTA' });
                   if (isHome) {
                     scrollToSection('audit');
                   } else {
-                    window.open('https://cal.com/milktreeagency/brand-audit', '_blank', 'noopener,noreferrer');
+                    window.open('https://cal.com/milktree-agency/free-brand-digital-presence-audit-30-minutes', '_blank', 'noopener,noreferrer');
                   }
                 }}
               >

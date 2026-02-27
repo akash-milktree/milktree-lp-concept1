@@ -6,6 +6,7 @@ import { Navbar } from '../components/ui/Navbar';
 import { Footer } from '../sections/Footer';
 import { Reveal } from '../components/animations/Reveal';
 import { caseStudies } from '../data/content';
+import { trackViewContent } from '../utils/meta-tracking';
 
 
 export const CaseStudyDetailPage: React.FC = () => {
@@ -13,6 +14,17 @@ export const CaseStudyDetailPage: React.FC = () => {
   const study = caseStudies.find((s) => s.slug === slug);
 
   useEffect(() => { window.scrollTo(0, 0); }, [slug]);
+
+  // Track ViewContent for Meta Pixel + CAPI
+  useEffect(() => {
+    if (study) {
+      trackViewContent({
+        contentName: study.title,
+        contentCategory: study.tags?.[0] || 'Case Study',
+        contentIds: [study.slug],
+      });
+    }
+  }, [slug, study?.title]);
 
   if (!study) return <Navigate to="/work" replace />;
 

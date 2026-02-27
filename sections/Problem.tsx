@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Reveal } from '../components/animations/Reveal';
 import { Button } from '../components/ui/Button';
 import { AlertTriangle, Zap, ArrowRight } from 'lucide-react';
+import { trackContact } from '../utils/meta-tracking';
 
 const painPoints = [
   'Your brand looks different depending on where someone finds you.',
@@ -27,7 +28,10 @@ const cardVariants = {
 };
 
 export const Problem: React.FC = () => {
-  const scrollToAudit = () => document.getElementById('audit')?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToAudit = () => {
+    trackContact({ eventSource: 'Problem Section CTA' });
+    document.getElementById('audit')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <section className="prob-section" id="problem">

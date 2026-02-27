@@ -1,5 +1,6 @@
-import React, { useEffect, lazy, Suspense } from 'react';
+import React, { useEffect, useRef, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { trackPageView, trackLead, trackSchedule } from './utils/meta-tracking';
 
 declare global {
   interface Window {
@@ -8,13 +9,20 @@ declare global {
   }
 }
 
-// ── Google Analytics tracker ──────────────────────────────────────────────────
-// Fires a page_view on every route change and listens for cal.com booking events
-const GATracker: React.FC = () => {
+// ── Analytics tracker (GA4 + Meta Pixel + CAPI) ─────────────────────────────
+// Fires page_view on every route change and listens for Cal.com booking events
+const AnalyticsTracker: React.FC = () => {
   const location = useLocation();
+  const isFirstRender = useRef(true);
 
-  // Page view on route change
+  // Page view on route change (skip first render — Pixel base code handles initial PageView)
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
+    // GA4
     if (typeof window.gtag === 'function') {
       window.gtag('event', 'page_view', {
         page_path: location.pathname + location.search,
@@ -22,12 +30,16 @@ const GATracker: React.FC = () => {
         send_to: 'G-9GHX9JVN9S',
       });
     }
+
+    // Meta Pixel + CAPI (SPA route change)
+    trackPageView();
   }, [location]);
 
-  // Cal.com booking success → generate_lead conversion
+  // Cal.com booking success → Lead conversion (GA4 + Meta)
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
       if (e.data?.action === 'bookingSuccessful') {
+        // GA4 generate_lead
         if (typeof window.gtag === 'function') {
           window.gtag('event', 'generate_lead', {
             event_category: 'Cal.com',
@@ -36,6 +48,10 @@ const GATracker: React.FC = () => {
             send_to: 'G-9GHX9JVN9S',
           });
         }
+
+        // Meta Lead + Schedule (Pixel + CAPI)
+        trackLead({ eventSource: 'Cal.com Booking' });
+        trackSchedule({ eventSource: 'Cal.com Booking' });
       }
     };
     window.addEventListener('message', handleMessage);
@@ -83,7 +99,7 @@ const HomePage: React.FC = () => (
 const App: React.FC = () => {
   return (
     <BrowserRouter>
-      <GATracker />
+      <AnalyticsTracker />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/work" element={<Suspense fallback={null}><CaseStudiesPage /></Suspense>} />

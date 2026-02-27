@@ -6,9 +6,18 @@ import { Navbar } from '../components/ui/Navbar';
 import { Footer } from '../sections/Footer';
 import { Reveal } from '../components/animations/Reveal';
 import { caseStudies } from '../data/content';
+import { trackViewContent } from '../utils/meta-tracking';
 
 export const CaseStudiesPage: React.FC = () => {
   useEffect(() => { window.scrollTo(0, 0); }, []);
+
+  // Track ViewContent for the portfolio page
+  useEffect(() => {
+    trackViewContent({
+      contentName: 'Case Studies Portfolio',
+      contentCategory: 'Portfolio',
+    });
+  }, []);
 
   return (
     <>

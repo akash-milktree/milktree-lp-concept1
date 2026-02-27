@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Reveal } from '../components/animations/Reveal';
 import { Plus, Minus } from 'lucide-react';
+import { trackCustom } from '../utils/meta-tracking';
 
 const faqs = [
   {
@@ -37,6 +38,16 @@ const faqs = [
 export const FAQ: React.FC = () => {
   const [open, setOpen] = useState<number | null>(null);
 
+  const handleFaqToggle = (index: number) => {
+    const isOpening = open !== index;
+    setOpen(isOpening ? index : null);
+    if (isOpening) {
+      trackCustom('FAQInteraction', {
+        customData: { question: faqs[index].q, question_index: index + 1 },
+      });
+    }
+  };
+
   return (
     <section className="faq-section" id="faq">
       <div className="faq-container">
@@ -62,7 +73,7 @@ export const FAQ: React.FC = () => {
               <div className="faq__pill-outer">
                 <button
                   className="faq__pill-inner"
-                  onClick={() => setOpen(open === i ? null : i)}
+                  onClick={() => handleFaqToggle(i)}
                   aria-expanded={open === i}
                 >
                   <span className="faq__question">{item.q}</span>
@@ -88,7 +99,7 @@ export const FAQ: React.FC = () => {
                 className="faq__toggle"
                 animate={{ rotate: open === i ? 45 : 0 }}
                 transition={{ duration: 0.25, ease: [0.44, 0, 0.56, 1] }}
-                onClick={() => setOpen(open === i ? null : i)}
+                onClick={() => handleFaqToggle(i)}
               >
                 {open === i ? <Minus size={24} strokeWidth={2} /> : <Plus size={24} strokeWidth={2} />}
               </motion.div>

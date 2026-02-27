@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Reveal } from '../components/animations/Reveal';
 import { Check } from 'lucide-react';
+import { trackContact } from '../utils/meta-tracking';
 
 const oneOffIncludes = [
   'Brand positioning strategy',
@@ -24,7 +25,10 @@ const retainerIncludes = [
 ];
 
 export const Pricing: React.FC = () => {
-  const scrollToAudit = () => document.getElementById('audit')?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToAudit = (source: string) => {
+    trackContact({ eventSource: source });
+    document.getElementById('audit')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <section className="pricing-section" id="pricing">
@@ -68,7 +72,7 @@ export const Pricing: React.FC = () => {
             </ul>
 
             <div className="pricing__card-footer">
-              <button className="pricing__cta pricing__cta--dark" onClick={scrollToAudit}>
+              <button className="pricing__cta pricing__cta--dark" onClick={() => scrollToAudit('Pricing Brand Build CTA')}>
                 Book a free audit
               </button>
               <p className="pricing__footnote">Fixed scope. Fixed price. No surprises.</p>
@@ -100,7 +104,7 @@ export const Pricing: React.FC = () => {
             </ul>
 
             <div className="pricing__card-footer">
-              <button className="pricing__cta pricing__cta--yellow" onClick={scrollToAudit}>
+              <button className="pricing__cta pricing__cta--yellow" onClick={() => scrollToAudit('Pricing Brand Partner CTA')}>
                 Book a free audit
               </button>
               <p className="pricing__footnote pricing__footnote--muted">Minimum 3-month engagement.</p>

@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Reveal } from '../components/animations/Reveal';
 import { Zap } from 'lucide-react';
+import { trackContact } from '../utils/meta-tracking';
 
 
 export const FinalCTA: React.FC = () => {
@@ -77,6 +78,7 @@ export const FinalCTA: React.FC = () => {
               if (typeof window.gtag === 'function') {
                 window.gtag('event', 'cta_click', { event_category: 'Final CTA', event_label: 'Book Your Free Brand Audit', send_to: 'G-9GHX9JVN9S' });
               }
+              trackContact({ eventSource: 'Final CTA' });
               window.open('https://cal.com/milktree-agency/free-brand-digital-presence-audit-30-minutes', '_blank', 'noopener,noreferrer');
             }}
           >

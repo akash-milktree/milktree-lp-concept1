@@ -4,6 +4,7 @@ import { Reveal } from '../components/animations/Reveal';
 import { Button } from '../components/ui/Button';
 import { ArrowRight, Sparkles, TrendingUp, Zap, Globe } from 'lucide-react';
 import { heroContent } from '../data/content';
+import { trackContact } from '../utils/meta-tracking';
 
 // Brand showcase cards – real project photos
 const showcaseCards = [
@@ -52,7 +53,10 @@ const itemVariants = {
 
 export const Hero: React.FC = () => {
   const scrollToProcess = () => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
-  const scrollToAudit = () => document.getElementById('audit')?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToAudit = () => {
+    trackContact({ eventSource: 'Hero CTA' });
+    document.getElementById('audit')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const allCards = [...showcaseCards, ...showcaseCards, ...showcaseCards];
   const allLogos = [...clientLogos, ...clientLogos, ...clientLogos];
