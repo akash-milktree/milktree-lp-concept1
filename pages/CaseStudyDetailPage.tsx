@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
@@ -7,7 +7,6 @@ import { Footer } from '../sections/Footer';
 import { Reveal } from '../components/animations/Reveal';
 import { caseStudies } from '../data/content';
 
-const CAL_LINK = 'https://cal.com/milktree-agency/free-brand-digital-presence-audit-30-minutes';
 
 export const CaseStudyDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -78,7 +77,32 @@ export const CaseStudyDetailPage: React.FC = () => {
               </section>
             </Reveal>
 
-            {/* Gallery images */}
+            {/* Deliverables */}
+            {study.deliverables && study.deliverables.length > 0 && (
+              <Reveal>
+                <section className="cs-detail__section">
+                  <h2 className="cs-detail__section-heading">Deliverables</h2>
+                  <ul className="cs-detail__deliverables">
+                    {study.deliverables.map((item, i) => (
+                      <li key={i} className="cs-detail__deliverable-item">{item}</li>
+                    ))}
+                  </ul>
+                </section>
+              </Reveal>
+            )}
+
+            {/* Body text */}
+            {study.bodyText && (
+              <Reveal>
+                <section className="cs-detail__section">
+                  {study.bodyText.split('\n\n').map((paragraph, i) => (
+                    <p key={i} className="cs-detail__text">{paragraph}</p>
+                  ))}
+                </section>
+              </Reveal>
+            )}
+
+            {/* Gallery images — landscape images span full row */}
             {study.galleryImages && study.galleryImages.length > 0 && (
               <Reveal>
                 <div className="cs-detail__gallery">
@@ -90,6 +114,12 @@ export const CaseStudyDetailPage: React.FC = () => {
                         className="cs-detail__gallery-img"
                         loading="lazy"
                         decoding="async"
+                        onLoad={(e) => {
+                          const el = e.currentTarget;
+                          if (el.naturalWidth > el.naturalHeight) {
+                            el.parentElement?.classList.add('cs-detail__gallery-img-wrap--landscape');
+                          }
+                        }}
                       />
                     </div>
                   ))}
@@ -97,28 +127,47 @@ export const CaseStudyDetailPage: React.FC = () => {
               </Reveal>
             )}
 
-            {/* CTA block */}
-            <Reveal>
-              <div className="cs-detail__cta-block">
-                <p className="cs-detail__cta-heading">Ready for results like these?</p>
-                <p className="cs-detail__cta-sub">
-                  Book a free brand audit — we'll give you an honest view of where you stand.
-                </p>
-                <a
-                  href={CAL_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cs-detail__cta-btn"
-                  onClick={() => {
-                    if (typeof window.gtag === 'function') {
-                      window.gtag('event', 'cta_click', { event_category: 'Case Study CTA', event_label: 'Book Free Brand Audit', send_to: 'G-9GHX9JVN9S' });
-                    }
-                  }}
-                >
-                  Book Your Free Brand Audit
-                </a>
-              </div>
-            </Reveal>
+            {/* Challenges */}
+            {study.challenges && (
+              <Reveal>
+                <section className="cs-detail__section">
+                  <h2 className="cs-detail__section-heading">Challenges</h2>
+                  <p className="cs-detail__text">{study.challenges}</p>
+                </section>
+              </Reveal>
+            )}
+
+            {/* Solution */}
+            {study.solution && (
+              <Reveal>
+                <section className="cs-detail__section">
+                  <h2 className="cs-detail__section-heading">Solution</h2>
+                  <p className="cs-detail__text">{study.solution}</p>
+                  {study.results && study.results.length > 0 && (
+                    <ul className="cs-detail__results">
+                      {study.results.map((result, i) => (
+                        <li key={i} className="cs-detail__result-item">
+                          <span className="cs-detail__result-check">✅</span> {result}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </section>
+              </Reveal>
+            )}
+
+            {/* Testimonial */}
+            {study.testimonialQuote && (
+              <Reveal>
+                <blockquote className="cs-detail__testimonial">
+                  <p className="cs-detail__testimonial-quote">"{study.testimonialQuote}"</p>
+                  <footer className="cs-detail__testimonial-footer">
+                    <span className="cs-detail__testimonial-name">{study.testimonialName}</span>
+                    <span className="cs-detail__testimonial-role">{study.testimonialRole}</span>
+                  </footer>
+                </blockquote>
+              </Reveal>
+            )}
 
           </div>
         </article>

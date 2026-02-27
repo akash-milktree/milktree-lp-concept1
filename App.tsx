@@ -57,7 +57,6 @@ const CaseStudies = lazy(() => import('./sections/CaseStudies').then(m => ({ def
 const Pricing    = lazy(() => import('./sections/Pricing').then(m => ({ default: m.Pricing })));
 const TrustedBy  = lazy(() => import('./sections/TrustedBy').then(m => ({ default: m.TrustedBy })));
 const FAQ        = lazy(() => import('./sections/FAQ').then(m => ({ default: m.FAQ })));
-const FinalCTA   = lazy(() => import('./sections/FinalCTA').then(m => ({ default: m.FinalCTA })));
 const CaseStudiesPage    = lazy(() => import('./pages/CaseStudiesPage').then(m => ({ default: m.CaseStudiesPage })));
 const CaseStudyDetailPage = lazy(() => import('./pages/CaseStudyDetailPage').then(m => ({ default: m.CaseStudyDetailPage })));
 
@@ -75,7 +74,6 @@ const HomePage: React.FC = () => (
         <Pricing />
         <TrustedBy />
         <FAQ />
-        <FinalCTA />
       </Suspense>
     </main>
     <Footer />

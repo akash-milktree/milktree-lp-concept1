@@ -8,13 +8,16 @@ import { caseStudies } from '../data/content';
 export const CaseStudies: React.FC = () => {
   const trackRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const cardWidth = 517 + 24; // card width + gap
+  const getCardWidth = () => {
+    const margin = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--site-margin')) || 48;
+    return (window.innerWidth - margin - 24 * 3) / 3 + 24;
+  };
 
   const scrollTo = (index: number) => {
     const clamped = Math.max(0, Math.min(index, caseStudies.length - 1));
     setCurrentIndex(clamped);
     if (trackRef.current) {
-      trackRef.current.scrollTo({ left: clamped * cardWidth, behavior: 'smooth' });
+      trackRef.current.scrollTo({ left: clamped * getCardWidth(), behavior: 'smooth' });
     }
   };
 

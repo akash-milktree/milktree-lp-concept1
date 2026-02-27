@@ -128,6 +128,27 @@ export const Navbar: React.FC = () => {
             </Button>
           </div>
 
+          {/* Mobile CTA — shown next to burger toggle */}
+          <div className="navbar__mobile-cta">
+            <Button
+              variant="primary"
+              size="sm"
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                if (typeof window.gtag === 'function') {
+                  window.gtag('event', 'cta_click', { event_category: 'Navbar Mobile Pill', event_label: 'Free Audit', send_to: 'G-9GHX9JVN9S' });
+                }
+                if (isHome) {
+                  scrollToSection('audit');
+                } else {
+                  window.open('https://cal.com/milktreeagency/brand-audit', '_blank', 'noopener,noreferrer');
+                }
+              }}
+            >
+              Free Audit
+            </Button>
+          </div>
+
           <button
             className="navbar__mobile-toggle"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

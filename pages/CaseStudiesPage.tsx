@@ -68,26 +68,6 @@ export const CaseStudiesPage: React.FC = () => {
               ))}
             </div>
 
-            {/* Bottom CTA */}
-            <Reveal>
-              <div className="cs-page__cta">
-                <p className="cs-page__cta-text">Want results like these?</p>
-                <a
-                  href="https://cal.com/milktree-agency/free-brand-digital-presence-audit-30-minutes"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cs-page__cta-btn"
-                  onClick={() => {
-                    if (typeof window.gtag === 'function') {
-                      window.gtag('event', 'cta_click', { event_category: 'Work Archive CTA', event_label: 'Book Free Brand Audit', send_to: 'G-9GHX9JVN9S' });
-                    }
-                  }}
-                >
-                  Book Your Free Brand Audit
-                </a>
-                <p className="cs-page__cta-note">Spots are limited — we work with select clients each month.</p>
-              </div>
-            </Reveal>
           </div>
         </section>
 
