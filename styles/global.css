@@ -2582,7 +2582,11 @@ ul, ol {
   }
 
   .hero__showcase-card {
-    height: 280px !important;
+    height: auto;
+  }
+
+  .hero__card-img {
+    height: 280px;
   }
 
   /* ── Problem section ── */
@@ -3009,7 +3013,11 @@ ul, ol {
   }
 
   .hero__showcase-card {
-    height: 220px !important;
+    height: auto;
+  }
+
+  .hero__card-img {
+    height: 200px;
   }
 
   .hero__marquee-item {
