@@ -2512,6 +2512,11 @@ ul, ol {
     padding: 64px 0;
   }
 
+  /* Cal.com embed stacks event details + calendar on mobile viewports */
+  .finalcta__cal-wrap {
+    height: 920px;
+  }
+
   /* ── Navbar ── */
   .navbar__links {
     display: none;
@@ -2559,9 +2564,17 @@ ul, ol {
 
   .hero__badge {
     font-size: 12px;
-    padding: 4px 12px;
-    height: 34px;
+    padding: 6px 14px;
+    height: auto;
     gap: 8px;
+    white-space: normal;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .hero__badge-sep {
+    display: none;
   }
 
   .hero__cta-group {
@@ -2711,49 +2724,70 @@ ul, ol {
     margin-bottom: 40px;
   }
 
-  /* On mobile, collapse compare table to vertical cards */
+  /* On mobile, keep grid layout but allow horizontal scroll */
   .compare__table {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    /* subtle scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.2) transparent;
+  }
+
+  .compare__table::-webkit-scrollbar {
+    height: 4px;
+  }
+  .compare__table::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .compare__table::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.2);
+    border-radius: 4px;
+  }
+
+  .compare__header-row,
+  .compare__row {
+    grid-template-columns: 120px repeat(5, 140px);
+    min-width: max-content;
   }
 
   .compare__header-row {
-    display: none; /* hide column headers on mobile */
+    padding-bottom: 16px;
   }
 
   .compare__row {
-    grid-template-columns: 1fr;
-    gap: 8px;
     padding: 20px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .compare__row--highlight {
-    padding: 16px;
+    padding: 16px 12px;
     border-radius: 12px;
     margin: 4px 0;
   }
 
   .compare__row-label {
-    font-size: 16px;
-    margin-bottom: 4px;
+    font-size: 15px;
+    font-weight: 700;
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background: var(--color-bg);
+    padding-right: 8px;
   }
 
-  .compare__cell {
-    flex-direction: row;
-    justify-content: flex-start;
-    gap: 8px;
-    text-align: left;
-    padding: 0;
-  }
-
-  .compare__cell-desc {
-    font-size: 14px;
+  .compare__row--highlight .compare__row-label {
+    background: var(--color-accent);
   }
 
   .compare__col-header {
-    font-size: 14px;
+    font-size: 15px;
+  }
+
+  .compare__cell {
+    padding: 0 8px;
+  }
+
+  .compare__cell-desc {
+    font-size: 13px;
   }
 
   /* ── Results Stats ── */
@@ -3127,7 +3161,8 @@ ul, ol {
   }
 
   .finalcta__cal-wrap {
-    height: clamp(420px, 60vh, 520px);
+    /* Mobile embed stacks event details + calendar vertically, needs more height */
+    height: 920px;
   }
 
   .tby__card {
