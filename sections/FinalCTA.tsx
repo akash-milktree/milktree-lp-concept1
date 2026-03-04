@@ -1,59 +1,88 @@
-import React, { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useForm, ValidationError } from '@formspree/react';
 import { Reveal } from '../components/animations/Reveal';
-import { Zap } from 'lucide-react';
-import { trackContact } from '../utils/meta-tracking';
+import { Zap, ArrowRight, CheckCircle } from 'lucide-react';
+import { trackContact, trackLead } from '../utils/meta-tracking';
 
+const BUDGET_OPTIONS = [
+  'Under $5K',
+  '$5K – $15K',
+  '$15K – $30K',
+  '$30K+',
+  'Not sure yet',
+];
+
+const SERVICE_OPTIONS = [
+  'Brand strategy & positioning',
+  'Visual identity (logo, type, colour)',
+  'Website design & development',
+  'Ongoing brand partner (retainer)',
+  'Something else',
+];
 
 export const FinalCTA: React.FC = () => {
-  const sectionRef = useRef<HTMLElement>(null);
+  const [state, handleSubmit] = useForm('audit-form');
+  const [step, setStep] = useState(0); // 0 = info, 1 = details
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [website, setWebsite] = useState('');
+  const [service, setService] = useState('');
+  const [budget, setBudget] = useState('');
+  const [goal, setGoal] = useState('');
 
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
+  const canProceed = name.trim() !== '' && email.trim() !== '' && email.includes('@');
+  const canSubmit = service !== '';
 
-    const initCal = () => {
-      if ((window as any).Cal?.loaded) return; // already loaded
+  const onStep1 = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!canProceed) return;
+    trackContact({ eventSource: 'Audit Form Step 1', userData: { email } });
+    setStep(1);
+  };
 
-      const script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.innerHTML = `
-        (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-        Cal("init", "free-brand-digital-presence-audit-30-minutes", {origin:"https://app.cal.com"});
-        Cal.ns["free-brand-digital-presence-audit-30-minutes"]("inline", {
-          elementOrSelector: "#my-cal-inline-free-brand-digital-presence-audit-30-minutes",
-          config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true"},
-          calLink: "milktree-agency/free-brand-digital-presence-audit-30-minutes",
-        });
-        Cal.ns["free-brand-digital-presence-audit-30-minutes"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
-      `;
-      document.body.appendChild(script);
-    };
+  const onFinalSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!canSubmit) return;
 
-    // If the section is already in or near the viewport when mounted, init immediately.
-    // This handles the case where the lazy-loaded component mounts while already visible.
-    const rect = section.getBoundingClientRect();
-    if (rect.top < window.innerHeight + 300) {
-      initCal();
-      return;
+    // GA4 event
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'generate_lead', {
+        event_category: 'Audit Form',
+        event_label: service,
+        send_to: 'G-9GHX9JVN9S',
+      });
     }
 
-    // Otherwise wait until it scrolls into range
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (!entries[0].isIntersecting) return;
-        io.disconnect();
-        initCal();
-      },
-      { rootMargin: '200px' }
-    );
+    // Meta Lead event with email for CAPI matching
+    trackLead({ eventSource: 'Audit Form Submit', userData: { email } });
 
-    io.observe(section);
-    return () => io.disconnect();
-  }, []);
+    handleSubmit(e);
+  };
+
+  if (state.succeeded) {
+    return (
+      <section className="finalcta-section" id="audit">
+        <div className="finalcta__container">
+          <motion.div
+            className="finalcta__success"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <CheckCircle size={56} color="#63cc79" strokeWidth={1.5} />
+            <h2 className="finalcta__heading">You're in.</h2>
+            <p className="finalcta__subtext">
+              We'll review your brand and get back to you within 24 hours with a personalized audit.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+    );
+  }
 
   return (
-    <section className="finalcta-section" id="audit" ref={sectionRef}>
+    <section className="finalcta-section" id="audit">
       <div className="finalcta__container">
 
         <Reveal>
@@ -64,43 +93,182 @@ export const FinalCTA: React.FC = () => {
 
         <Reveal delay={0.08}>
           <p className="finalcta__subtext">
-            Book a free brand audit and get an honest view of where you stand.
+            Get a free brand audit — we'll review your positioning, identity, and digital presence, then send you actionable insights within 24 hours.
           </p>
         </Reveal>
 
         <Reveal delay={0.16}>
-          <motion.button
-            className="finalcta__btn"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            transition={{ duration: 0.2, ease: [0.44, 0, 0.56, 1] }}
-            onClick={() => {
-              if (typeof window.gtag === 'function') {
-                window.gtag('event', 'cta_click', { event_category: 'Final CTA', event_label: 'Book Your Free Brand Audit', send_to: 'G-9GHX9JVN9S' });
-              }
-              trackContact({ eventSource: 'Final CTA' });
-              window.open('https://cal.com/milktree-agency/free-brand-digital-presence-audit-30-minutes', '_blank', 'noopener,noreferrer');
-            }}
-          >
-            <motion.span
-              className="finalcta__btn-icon"
-              whileHover={{ rotate: 20 }}
-              transition={{ duration: 0.25 }}
-            >
-              <Zap size={36} fill="rgb(251,230,77)" stroke="none" />
-            </motion.span>
-            <span>Book Your Free Brand Audit</span>
-          </motion.button>
-        </Reveal>
+          <div className="finalcta__form-wrap">
 
-        <Reveal delay={0.22}>
-          <p className="finalcta__note">Spots are limited — we work with select clients each month.</p>
-        </Reveal>
+            {/* Progress indicator */}
+            <div className="finalcta__steps">
+              <div className={`finalcta__step ${step >= 0 ? 'finalcta__step--active' : ''}`}>
+                <span className="finalcta__step-num">1</span>
+                <span className="finalcta__step-label">Your info</span>
+              </div>
+              <div className="finalcta__step-line" />
+              <div className={`finalcta__step ${step >= 1 ? 'finalcta__step--active' : ''}`}>
+                <span className="finalcta__step-num">2</span>
+                <span className="finalcta__step-label">Your brand</span>
+              </div>
+            </div>
 
-        {/* Cal.com inline embed */}
-        <Reveal delay={0.32}>
-          <div className="finalcta__cal-wrap">
-            <div id="my-cal-inline-free-brand-digital-presence-audit-30-minutes" className="finalcta__cal" />
+            <AnimatePresence mode="wait">
+              {step === 0 ? (
+                <motion.form
+                  key="step-0"
+                  className="finalcta__form"
+                  onSubmit={onStep1}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="finalcta__field">
+                    <label className="finalcta__label" htmlFor="audit-name">Name *</label>
+                    <input
+                      id="audit-name"
+                      name="name"
+                      type="text"
+                      className="finalcta__input"
+                      placeholder="Your full name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      required
+                      autoComplete="name"
+                    />
+                  </div>
+
+                  <div className="finalcta__field">
+                    <label className="finalcta__label" htmlFor="audit-email">Work email *</label>
+                    <input
+                      id="audit-email"
+                      name="email"
+                      type="email"
+                      className="finalcta__input"
+                      placeholder="you@company.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      autoComplete="email"
+                    />
+                    <ValidationError prefix="Email" field="email" errors={state.errors} className="finalcta__error" />
+                  </div>
+
+                  <div className="finalcta__field">
+                    <label className="finalcta__label" htmlFor="audit-website">Website</label>
+                    <input
+                      id="audit-website"
+                      name="website"
+                      type="url"
+                      className="finalcta__input"
+                      placeholder="https://yourcompany.com"
+                      value={website}
+                      onChange={(e) => setWebsite(e.target.value)}
+                      autoComplete="url"
+                    />
+                  </div>
+
+                  <motion.button
+                    type="submit"
+                    className="finalcta__btn"
+                    disabled={!canProceed}
+                    whileHover={canProceed ? { scale: 1.02 } : {}}
+                    whileTap={canProceed ? { scale: 0.98 } : {}}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <span>Continue</span>
+                    <ArrowRight size={20} />
+                  </motion.button>
+                </motion.form>
+              ) : (
+                <motion.form
+                  key="step-1"
+                  className="finalcta__form"
+                  onSubmit={onFinalSubmit}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {/* Hidden fields to include step 1 data in submission */}
+                  <input type="hidden" name="name" value={name} />
+                  <input type="hidden" name="email" value={email} />
+                  <input type="hidden" name="website" value={website} />
+
+                  <div className="finalcta__field">
+                    <label className="finalcta__label">What do you need help with? *</label>
+                    <div className="finalcta__chips">
+                      {SERVICE_OPTIONS.map((opt) => (
+                        <button
+                          key={opt}
+                          type="button"
+                          className={`finalcta__chip ${service === opt ? 'finalcta__chip--selected' : ''}`}
+                          onClick={() => setService(opt)}
+                        >
+                          {opt}
+                        </button>
+                      ))}
+                    </div>
+                    <input type="hidden" name="service" value={service} />
+                  </div>
+
+                  <div className="finalcta__field">
+                    <label className="finalcta__label">Approximate budget</label>
+                    <div className="finalcta__chips">
+                      {BUDGET_OPTIONS.map((opt) => (
+                        <button
+                          key={opt}
+                          type="button"
+                          className={`finalcta__chip ${budget === opt ? 'finalcta__chip--selected' : ''}`}
+                          onClick={() => setBudget(budget === opt ? '' : opt)}
+                        >
+                          {opt}
+                        </button>
+                      ))}
+                    </div>
+                    <input type="hidden" name="budget" value={budget} />
+                  </div>
+
+                  <div className="finalcta__field">
+                    <label className="finalcta__label" htmlFor="audit-goal">What's the #1 thing you want to fix?</label>
+                    <textarea
+                      id="audit-goal"
+                      name="goal"
+                      className="finalcta__input finalcta__textarea"
+                      placeholder="e.g. Our website doesn't convert, our brand looks outdated..."
+                      value={goal}
+                      onChange={(e) => setGoal(e.target.value)}
+                      rows={3}
+                    />
+                  </div>
+
+                  <div className="finalcta__form-actions">
+                    <button
+                      type="button"
+                      className="finalcta__back-btn"
+                      onClick={() => setStep(0)}
+                    >
+                      Back
+                    </button>
+
+                    <motion.button
+                      type="submit"
+                      className="finalcta__btn finalcta__btn--submit"
+                      disabled={!canSubmit || state.submitting}
+                      whileHover={canSubmit ? { scale: 1.02 } : {}}
+                      whileTap={canSubmit ? { scale: 0.98 } : {}}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Zap size={20} fill="rgb(0,0,0)" stroke="none" />
+                      <span>{state.submitting ? 'Sending...' : 'Get My Free Audit'}</span>
+                    </motion.button>
+                  </div>
+                </motion.form>
+              )}
+            </AnimatePresence>
+
+            <p className="finalcta__note">Spots are limited — we work with select clients each month.</p>
           </div>
         </Reveal>
 

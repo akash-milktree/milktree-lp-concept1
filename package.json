@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@formspree/react": "^3.0.0",
     "@types/react-router-dom": "^5.3.3",
     "framer-motion": "10.16.4",
     "lucide-react": "0.292.0",

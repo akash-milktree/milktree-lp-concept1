@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { trackPageView, trackLead, trackSchedule } from './utils/meta-tracking';
+import { FormspreeProvider } from '@formspree/react';
+import { trackPageView } from './utils/meta-tracking';
 
 declare global {
   interface Window {
@@ -10,7 +11,7 @@ declare global {
 }
 
 // ── Analytics tracker (GA4 + Meta Pixel + CAPI) ─────────────────────────────
-// Fires page_view on every route change and listens for Cal.com booking events
+// Fires page_view on every route change
 const AnalyticsTracker: React.FC = () => {
   const location = useLocation();
   const isFirstRender = useRef(true);
@@ -35,29 +36,6 @@ const AnalyticsTracker: React.FC = () => {
     trackPageView();
   }, [location]);
 
-  // Cal.com booking success → Lead conversion (GA4 + Meta)
-  useEffect(() => {
-    const handleMessage = (e: MessageEvent) => {
-      if (e.data?.action === 'bookingSuccessful') {
-        // GA4 generate_lead
-        if (typeof window.gtag === 'function') {
-          window.gtag('event', 'generate_lead', {
-            event_category: 'Cal.com',
-            event_label: 'Booking Confirmed',
-            value: 1,
-            send_to: 'G-9GHX9JVN9S',
-          });
-        }
-
-        // Meta Lead + Schedule (Pixel + CAPI)
-        trackLead({ eventSource: 'Cal.com Booking' });
-        trackSchedule({ eventSource: 'Cal.com Booking' });
-      }
-    };
-    window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
-  }, []);
-
   return null;
 };
 import { Navbar } from './components/ui/Navbar';
@@ -73,6 +51,7 @@ const CaseStudies = lazy(() => import('./sections/CaseStudies').then(m => ({ def
 const Pricing    = lazy(() => import('./sections/Pricing').then(m => ({ default: m.Pricing })));
 const TrustedBy  = lazy(() => import('./sections/TrustedBy').then(m => ({ default: m.TrustedBy })));
 const FAQ        = lazy(() => import('./sections/FAQ').then(m => ({ default: m.FAQ })));
+const FinalCTA   = lazy(() => import('./sections/FinalCTA').then(m => ({ default: m.FinalCTA })));
 const CaseStudiesPage    = lazy(() => import('./pages/CaseStudiesPage').then(m => ({ default: m.CaseStudiesPage })));
 const CaseStudyDetailPage = lazy(() => import('./pages/CaseStudyDetailPage').then(m => ({ default: m.CaseStudyDetailPage })));
 
@@ -90,6 +69,7 @@ const HomePage: React.FC = () => (
         <Pricing />
         <TrustedBy />
         <FAQ />
+        <FinalCTA />
       </Suspense>
     </main>
     <Footer />
@@ -98,14 +78,16 @@ const HomePage: React.FC = () => (
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      <AnalyticsTracker />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/work" element={<Suspense fallback={null}><CaseStudiesPage /></Suspense>} />
-        <Route path="/work/:slug" element={<Suspense fallback={null}><CaseStudyDetailPage /></Suspense>} />
-      </Routes>
-    </BrowserRouter>
+    <FormspreeProvider project="2950084415100813029">
+      <BrowserRouter>
+        <AnalyticsTracker />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/work" element={<Suspense fallback={null}><CaseStudiesPage /></Suspense>} />
+          <Route path="/work/:slug" element={<Suspense fallback={null}><CaseStudyDetailPage /></Suspense>} />
+        </Routes>
+      </BrowserRouter>
+    </FormspreeProvider>
   );
 };
 

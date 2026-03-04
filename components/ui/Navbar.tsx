@@ -122,7 +122,7 @@ export const Navbar: React.FC = () => {
                 if (isHome) {
                   scrollToSection('audit');
                 } else {
-                  window.open('https://cal.com/milktree-agency/free-brand-digital-presence-audit-30-minutes', '_blank', 'noopener,noreferrer');
+                  window.location.href = '/#audit';
                 }
               }}
             >
@@ -144,7 +144,7 @@ export const Navbar: React.FC = () => {
                 if (isHome) {
                   scrollToSection('audit');
                 } else {
-                  window.open('https://cal.com/milktree-agency/free-brand-digital-presence-audit-30-minutes', '_blank', 'noopener,noreferrer');
+                  window.location.href = '/#audit';
                 }
               }}
             >
@@ -204,7 +204,7 @@ export const Navbar: React.FC = () => {
                   if (isHome) {
                     scrollToSection('audit');
                   } else {
-                    window.open('https://cal.com/milktree-agency/free-brand-digital-presence-audit-30-minutes', '_blank', 'noopener,noreferrer');
+                    window.location.href = '/#audit';
                   }
                 }}
               >
