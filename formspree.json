@@ -1,4 +1,20 @@
 {
   "project": "2950084415100813029",
-  "deployKey": "87589512c03942d6a22938fe53e6a3cb"
+  "deployKey": "87589512c03942d6a22938fe53e6a3cb",
+  "forms": {
+    "auditForm": {
+      "name": "Brand Audit Lead Form",
+      "fields": {
+        "name": { "required": true },
+        "email": { "required": true, "type": "email" },
+        "website": {},
+        "service": { "required": true },
+        "budget": {},
+        "goal": {}
+      },
+      "actions": [
+        { "type": "email", "to": "levi@milktreeagency.com" }
+      ]
+    }
+  }
 }
