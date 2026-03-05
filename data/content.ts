@@ -62,7 +62,7 @@ export const processSteps = {
     {
       number: "01",
       title: "Audit and Diagnose",
-      description: "We review your brand positioning, messaging, and visual identity. You get a clear, honest assessment.",
+      description: "We hop on a call to understand your brand, goals, and challenges. Within 48 hours, you get a clear, honest audit.",
     },
     {
       number: "02",
@@ -476,13 +476,13 @@ export const testimonials = [
 
 export const finalCtaContent = {
   headline: "See what your brand is really saying.",
-  subtext: "Book a free brand audit and get:",
+  subtext: "Request your free brand audit — here's what you'll get:",
   benefits: [
-    "A positioning review",
-    "A messaging clarity score",
+    "A 30-minute call to understand your brand",
+    "A positioning and messaging review",
     "A visual identity assessment",
-    "A prioritised action plan",
+    "A prioritised action plan — delivered in 48 hours",
   ],
-  cta: "Book Your Free Brand Audit",
+  cta: "Get My Free Audit",
   note: "No cost. No commitment. Just clarity.",
 };

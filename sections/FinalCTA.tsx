@@ -78,7 +78,7 @@ export const FinalCTA: React.FC = () => {
 
         <Reveal delay={0.08}>
           <p className="finalcta__subtext">
-            Get a free brand audit — we'll review your positioning, identity, and digital presence, then send you actionable insights within 24 hours.
+            Request your free brand audit — we'll book a call to understand your brand, then deliver a personalised audit within 48 hours.
           </p>
         </Reveal>
 
