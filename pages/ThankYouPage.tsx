@@ -1,23 +1,23 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle, Clock, Mail, Sparkles } from 'lucide-react';
+import { ArrowRight, CheckCircle, CalendarCheck, Phone, FileText } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const steps = [
   {
-    icon: <Mail size={24} />,
-    title: 'Check your inbox',
-    desc: 'You\'ll receive a confirmation email shortly.',
+    icon: <CalendarCheck size={24} />,
+    title: 'Book your audit call',
+    desc: 'Check your inbox — we\'ll send you a link to schedule a 30-minute call at a time that suits you.',
   },
   {
-    icon: <Clock size={24} />,
-    title: 'We review your brand',
-    desc: 'Our team will audit your positioning, identity, and digital presence.',
+    icon: <Phone size={24} />,
+    title: 'We take your brief on the call',
+    desc: 'On the call, we\'ll dig into your brand, goals, and where you\'re stuck — so the audit is tailored to you.',
   },
   {
-    icon: <Sparkles size={24} />,
-    title: 'Get your personalised audit',
-    desc: 'Within 24 hours, you\'ll receive actionable insights to strengthen your brand.',
+    icon: <FileText size={24} />,
+    title: 'Receive your audit in 48 hours',
+    desc: 'Within 48 hours of the call, you\'ll get a personalised brand audit with clear, actionable next steps.',
   },
 ];
 
@@ -49,7 +49,7 @@ export const ThankYouPage: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.15 }}
         >
-          You're in. We'll take it from here.
+          You're in. Here's what happens next.
         </motion.h1>
 
         <motion.p
@@ -58,7 +58,7 @@ export const ThankYouPage: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.25 }}
         >
-          Thanks for requesting your free brand audit. Here's what happens next:
+          Thanks for requesting your free brand audit. We just need one more thing — a quick call to understand your brand before we get to work.
         </motion.p>
 
         {/* What happens next steps */}
