@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useForm, ValidationError } from '@formspree/react';
+import { useNavigate } from 'react-router-dom';
 import { Reveal } from '../components/animations/Reveal';
-import { Zap, ArrowRight, CheckCircle } from 'lucide-react';
+import { Zap, ArrowRight } from 'lucide-react';
 import { trackContact, trackLead } from '../utils/meta-tracking';
 
 const BUDGET_OPTIONS = [
-  'Under $5K',
-  '$5K – $15K',
-  '$15K – $30K',
-  '$30K+',
-  'Not sure yet',
+  '£0 – £999',
+  '£1,499 – £1,999',
 ];
 
 const SERVICE_OPTIONS = [
@@ -30,9 +28,17 @@ export const FinalCTA: React.FC = () => {
   const [service, setService] = useState('');
   const [budget, setBudget] = useState('');
   const [goal, setGoal] = useState('');
+  const navigate = useNavigate();
 
   const canProceed = name.trim() !== '' && email.trim() !== '' && email.includes('@');
   const canSubmit = service !== '';
+
+  // Redirect to thank you page on successful submission
+  useEffect(() => {
+    if (state.succeeded) {
+      navigate('/thank-you');
+    }
+  }, [state.succeeded, navigate]);
 
   const onStep1 = (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,27 +65,6 @@ export const FinalCTA: React.FC = () => {
 
     handleSubmit(e);
   };
-
-  if (state.succeeded) {
-    return (
-      <section className="finalcta-section" id="audit">
-        <div className="finalcta__container">
-          <motion.div
-            className="finalcta__success"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            <CheckCircle size={56} color="#63cc79" strokeWidth={1.5} />
-            <h2 className="finalcta__heading">You're in.</h2>
-            <p className="finalcta__subtext">
-              We'll review your brand and get back to you within 24 hours with a personalized audit.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section className="finalcta-section" id="audit">
@@ -160,9 +145,9 @@ export const FinalCTA: React.FC = () => {
                     <input
                       id="audit-website"
                       name="website"
-                      type="url"
+                      type="text"
                       className="finalcta__input"
-                      placeholder="https://yourcompany.com"
+                      placeholder="yourcompany.com"
                       value={website}
                       onChange={(e) => setWebsite(e.target.value)}
                       autoComplete="url"

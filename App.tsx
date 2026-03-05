@@ -54,6 +54,7 @@ const FAQ        = lazy(() => import('./sections/FAQ').then(m => ({ default: m.F
 const FinalCTA   = lazy(() => import('./sections/FinalCTA').then(m => ({ default: m.FinalCTA })));
 const CaseStudiesPage    = lazy(() => import('./pages/CaseStudiesPage').then(m => ({ default: m.CaseStudiesPage })));
 const CaseStudyDetailPage = lazy(() => import('./pages/CaseStudyDetailPage').then(m => ({ default: m.CaseStudyDetailPage })));
+const ThankYouPage       = lazy(() => import('./pages/ThankYouPage').then(m => ({ default: m.ThankYouPage })));
 
 const HomePage: React.FC = () => (
   <>
@@ -85,6 +86,7 @@ const App: React.FC = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/work" element={<Suspense fallback={null}><CaseStudiesPage /></Suspense>} />
           <Route path="/work/:slug" element={<Suspense fallback={null}><CaseStudyDetailPage /></Suspense>} />
+          <Route path="/thank-you" element={<Suspense fallback={null}><ThankYouPage /></Suspense>} />
         </Routes>
       </BrowserRouter>
     </FormspreeProvider>
