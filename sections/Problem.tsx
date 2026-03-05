@@ -29,6 +29,9 @@ const cardVariants = {
 
 export const Problem: React.FC = () => {
   const scrollToAudit = () => {
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'cta_click', { event_category: 'Problem', event_label: 'Book Your Free Brand Audit', send_to: 'G-9GHX9JVN9S' });
+    }
     trackContact({ eventSource: 'Problem Section CTA' });
     document.getElementById('audit')?.scrollIntoView({ behavior: 'smooth' });
   };

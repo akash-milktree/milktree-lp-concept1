@@ -1,7 +1,20 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle, CalendarCheck, Phone, FileText } from 'lucide-react';
+import { ArrowRight, CheckCircle, CalendarCheck, Phone, FileText, Mail, Clock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { trackSchedule, trackCustom } from '../utils/meta-tracking';
+
+declare global {
+  interface Window {
+    gtag: (...args: any[]) => void;
+  }
+}
+
+const statusItems = [
+  { icon: <CheckCircle size={16} />, label: 'Brief received' },
+  { icon: <Mail size={16} />, label: 'Confirmation email sent' },
+  { icon: <CalendarCheck size={16} />, label: 'Book your free call below' },
+];
 
 const steps = [
   {
@@ -26,20 +39,49 @@ export const ThankYouPage: React.FC = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    // GA4 — thank you page view (use as conversion goal in Google Ads)
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'conversion', {
+        event_category: 'Lead',
+        event_label: 'Thank You Page View',
+        value: 1,
+        currency: 'GBP',
+        send_to: 'G-9GHX9JVN9S',
+      });
+    }
+
+    // Meta Schedule event (Pixel + CAPI) — high-intent signal
+    trackSchedule({ eventSource: 'Thank You Page' });
   }, []);
 
   return (
     <div className="thankyou">
       <div className="thankyou__container">
 
+        {/* Status bar */}
+        <motion.div
+          className="thankyou__status-bar"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          {statusItems.map((item, i) => (
+            <div key={i} className="thankyou__status-item">
+              {item.icon}
+              <span>{item.label}</span>
+            </div>
+          ))}
+        </motion.div>
+
         {/* Success icon */}
         <motion.div
           className="thankyou__icon-wrap"
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] }}
+          transition={{ duration: 0.5, delay: 0.1, ease: [0.21, 0.47, 0.32, 0.98] }}
         >
-          <CheckCircle size={64} color="#63cc79" strokeWidth={1.5} />
+          <CheckCircle size={64} color="var(--color-accent)" strokeWidth={1.5} />
         </motion.div>
 
         {/* Heading */}
@@ -47,7 +89,7 @@ export const ThankYouPage: React.FC = () => {
           className="thankyou__heading"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.15 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
         >
           You're in. Here's what happens next.
         </motion.h1>
@@ -56,7 +98,7 @@ export const ThankYouPage: React.FC = () => {
           className="thankyou__subtext"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.25 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
         >
           Thanks for requesting your free brand audit. We just need one more thing — a quick call to understand your brand before we get to work.
         </motion.p>
@@ -66,7 +108,7 @@ export const ThankYouPage: React.FC = () => {
           className="thankyou__steps"
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.6, delay: 0.45 }}
         >
           {steps.map((step, i) => (
             <div key={i} className="thankyou__step">
@@ -82,19 +124,42 @@ export const ThankYouPage: React.FC = () => {
           ))}
         </motion.div>
 
-        {/* CTA back to home */}
-        <motion.button
-          className="thankyou__btn"
-          onClick={() => navigate('/')}
+        {/* Book call CTA */}
+        <motion.a
+          className="thankyou__book-btn"
+          href="https://cal.com/milktree-agency/free-brand-digital-presence-audit-30-minutes"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => {
+            if (typeof window.gtag === 'function') {
+              window.gtag('event', 'book_call_click', {
+                event_category: 'Thank You',
+                event_label: 'Book My Free Call',
+                send_to: 'G-9GHX9JVN9S',
+              });
+            }
+            trackCustom('BookCallClick', { customData: { source: 'Thank You Page' } });
+          }}
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          <span>Back to homepage</span>
+          <CalendarCheck size={20} />
+          <span>Book My Free Call</span>
           <ArrowRight size={18} />
-        </motion.button>
+        </motion.a>
+
+        <motion.p
+          className="thankyou__fallback"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.7 }}
+        >
+          <Clock size={14} />
+          <span>Can't book now? Check your email for the booking link.</span>
+        </motion.p>
 
       </div>
     </div>

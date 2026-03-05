@@ -26,6 +26,9 @@ const retainerIncludes = [
 
 export const Pricing: React.FC = () => {
   const scrollToAudit = (source: string) => {
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'cta_click', { event_category: 'Pricing', event_label: source, send_to: 'G-9GHX9JVN9S' });
+    }
     trackContact({ eventSource: source });
     document.getElementById('audit')?.scrollIntoView({ behavior: 'smooth' });
   };

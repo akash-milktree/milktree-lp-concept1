@@ -15,9 +15,20 @@ export const CaseStudyDetailPage: React.FC = () => {
 
   useEffect(() => { window.scrollTo(0, 0); }, [slug]);
 
-  // Track ViewContent for Meta Pixel + CAPI
+  // Track ViewContent for Meta Pixel + CAPI + GA4
   useEffect(() => {
     if (study) {
+      // GA4 view_item
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'view_item', {
+          content_type: 'case_study',
+          item_id: study.slug,
+          item_name: study.title,
+          item_category: study.tags?.[0] || 'Case Study',
+          send_to: 'G-9GHX9JVN9S',
+        });
+      }
+      // Meta ViewContent (Pixel + CAPI)
       trackViewContent({
         contentName: study.title,
         contentCategory: study.tags?.[0] || 'Case Study',

@@ -11,8 +11,14 @@ import { trackViewContent } from '../utils/meta-tracking';
 export const CaseStudiesPage: React.FC = () => {
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
-  // Track ViewContent for the portfolio page
+  // Track ViewContent for the portfolio page (Meta + GA4)
   useEffect(() => {
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'view_item_list', {
+        item_list_name: 'Case Studies Portfolio',
+        send_to: 'G-9GHX9JVN9S',
+      });
+    }
     trackViewContent({
       contentName: 'Case Studies Portfolio',
       contentCategory: 'Portfolio',

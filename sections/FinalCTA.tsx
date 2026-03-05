@@ -43,6 +43,17 @@ export const FinalCTA: React.FC = () => {
   const onStep1 = (e: React.FormEvent) => {
     e.preventDefault();
     if (!canProceed) return;
+
+    // GA4 — form start / micro-conversion
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'form_start', {
+        event_category: 'Audit Form',
+        event_label: 'Step 1 Complete',
+        send_to: 'G-9GHX9JVN9S',
+      });
+    }
+
+    // Meta Contact (Pixel + CAPI) with email for match rate
     trackContact({ eventSource: 'Audit Form Step 1', userData: { email } });
     setStep(1);
   };
@@ -51,16 +62,18 @@ export const FinalCTA: React.FC = () => {
     e.preventDefault();
     if (!canSubmit) return;
 
-    // GA4 event
+    // GA4 — primary conversion event
     if (typeof window.gtag === 'function') {
       window.gtag('event', 'generate_lead', {
         event_category: 'Audit Form',
         event_label: service,
+        value: 1,
+        currency: 'GBP',
         send_to: 'G-9GHX9JVN9S',
       });
     }
 
-    // Meta Lead event with email for CAPI matching
+    // Meta Lead event (Pixel + CAPI) with email for match rate
     trackLead({ eventSource: 'Audit Form Submit', userData: { email } });
 
     handleSubmit(e);
