@@ -47,7 +47,7 @@ export const CaseStudiesPage: React.FC = () => {
               <p className="cs-page__label">Our Work</p>
               <h1 className="cs-page__heading">Real brands.<br />Real results.</h1>
               <p className="cs-page__subtext">
-                Every client below came to us wanting more than a pretty logo. Here's what we built — and what happened next.
+                Every client below came to us wanting more than a pretty logo. Here's what we built, and what happened next.
               </p>
             </Reveal>
           </div>

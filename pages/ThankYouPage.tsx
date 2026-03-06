@@ -21,12 +21,12 @@ const steps = [
   {
     icon: <CalendarCheck size={24} />,
     title: 'Book your audit call',
-    desc: 'Check your inbox — we\'ll send you a link to schedule a 30-minute call at a time that suits you.',
+    desc: 'Check your inbox. We\'ll send you a link to schedule a 30-minute call at a time that suits you.',
   },
   {
     icon: <Phone size={24} />,
     title: 'We take your brief on the call',
-    desc: 'On the call, we\'ll dig into your brand, goals, and where you\'re stuck — so the audit is tailored to you.',
+    desc: 'On the call, we\'ll dig into your brand, goals, and where you\'re stuck so the audit is tailored to you.',
   },
   {
     icon: <FileText size={24} />,
@@ -90,7 +90,7 @@ export const ThankYouPage: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          Thanks for requesting your free brand audit. We just need one more thing — a quick call to understand your brand before we get to work.
+          Thanks for requesting your free brand audit. We just need one more thing: a quick call to understand your brand before we get to work.
         </motion.p>
 
         {/* Status bar — moved below subtitle */}

@@ -1,7 +1,7 @@
 export const heroContent = {
   badge: "Brand Identity Agency",
   headline: "Your brand should sell for you.",
-  subheadline: "We build brand identities that make you the obvious choice — so the right clients come to you, and your team never second-guesses how to represent the business.",
+  subheadline: "We build brand identities that make you the obvious choice. The right clients come to you, and your team always knows how to represent the business.",
   stats: [
     { number: "200+", label: "brands built" },
     { number: "250%", label: "avg. enquiry increase" },
@@ -49,7 +49,7 @@ export const servicesContent = {
     },
     {
       title: "Creative Direction",
-      description: "Visual standards that keep your brand consistent across every channel — without needing you to approve every asset.",
+      description: "Visual standards that keep your brand consistent across every channel, without needing you to approve every asset.",
       icon: "Wand2",
     },
   ],
@@ -86,7 +86,7 @@ export const caseStudies = [
   {
     slug: "police-mortgages",
     title: "Police Mortgages",
-    headline: "A total brand and digital transformation — without losing a single ranking.",
+    headline: "A total brand and digital transformation, without losing a single ranking.",
     services: "Brand Identity Refresh, WordPress Website Rebuild, SEO Migration & Optimisation",
     tags: ["Finance", "Mortgages"],
     coverImage: "/photos/case studies/police mortgages/0wJP1agTSjS5C320be836kZIJs.png",
@@ -98,16 +98,16 @@ export const caseStudies = [
       "SEO Migration & Optimisation",
       "Conversion Copywriting & Content Updates",
     ],
-    bodyText: "Police Mortgages already had the trust of their audience, but their brand and website didn't reflect the quality of service they provided. They needed more than a cosmetic refresh — they needed a digital overhaul that could drive leads, grow visibility, and keep their niche positioning intact. Milktree rebuilt their brand and website from the ground up, with SEO-first thinking to ensure performance gains from day one.",
+    bodyText: "Police Mortgages already had the trust of their audience, but their brand and website didn't reflect the quality of service they provided. They needed more than a cosmetic refresh. They needed a digital overhaul that could drive leads, grow visibility, and keep their niche positioning intact. Milktree rebuilt their brand and website from the ground up, with SEO-first thinking to ensure performance gains from day one.",
     challenges: "Police Mortgages faced a double challenge: their brand identity was outdated, and their website was underperforming in both usability and search visibility. At the same time, they had a wealth of strong SEO rankings that couldn't be risked during a rebuild. They needed a partner who could deliver a modern, trustworthy brand experience while keeping every technical ranking signal intact.",
-    solution: "Milktree executed a full rebrand and website relaunch. We developed a refreshed visual identity designed to resonate with their police audience, paired with a modern WordPress site built for speed, clarity, and conversions. On the technical side, we carefully migrated their legacy SEO structure — protecting existing rankings while positioning them for long-term organic growth.",
+    solution: "Milktree executed a full rebrand and website relaunch. We developed a refreshed visual identity designed to resonate with their police audience, paired with a modern WordPress site built for speed, clarity, and conversions. On the technical side, we carefully migrated their legacy SEO structure, protecting existing rankings while positioning them for long-term organic growth.",
     results: [
       "11,000+ new users within weeks of launch",
       "300% increase in organic traffic",
       "Longer time on site and higher user engagement",
       "A trusted brand image that finally matched their reputation",
     ],
-    testimonialQuote: "Milktree transformed our brand and website without losing what made us strong in the first place. The new site is faster, smarter, and brings in more leads every day. Our SEO didn't just stay safe — it's performing better than ever.",
+    testimonialQuote: "Milktree transformed our brand and website without losing what made us strong in the first place. The new site is faster, smarter, and brings in more leads every day. Our SEO didn't just stay safe. It's performing better than ever.",
     testimonialName: "Chris",
     testimonialRole: "Director, Police Mortgages",
     galleryImages: [
@@ -132,16 +132,16 @@ export const caseStudies = [
       "Performance Marketing",
       "CRM Setup & Marketing Automation",
     ],
-    bodyText: "With no digital infrastructure in place, HMO Checker needed more than just a launch website — they needed a funnel. Milktree created a conversion-first WordPress site, a custom waitlist system, precision-targeted Meta Ads, and a full CRM setup with email and WhatsApp automation. The result: a scalable growth engine that delivered thousands of early sign-ups at industry-leading acquisition costs.",
+    bodyText: "With no digital setup in place, HMO Checker needed more than just a launch website. They needed a funnel. Milktree created a conversion-first WordPress site, a custom waitlist system, targeted Meta Ads, and a full CRM setup with email and WhatsApp automation. The result was a growth engine that delivered thousands of early sign-ups at low acquisition costs.",
     challenges: "HMO Checker was starting from a blank slate. With no existing brand assets, website, or marketing funnel, they needed to validate demand quickly while building a scalable foundation for growth. The challenge was not just to generate leads, but to ensure they were high-intent and ready to convert into paying users.",
-    solution: "Milktree built a full-stack growth system — a WordPress website designed for conversions, a custom waitlist funnel to validate early demand, Meta Ads campaigns optimised across Reels, carousel, and image formats (with Reels driving CTR above 1.1%), and a CRM-powered nurture journey with automated emails, WhatsApp touchpoints, and smart sequencing.",
+    solution: "Milktree built a complete growth system: a WordPress website designed for conversions, a custom waitlist funnel to test early demand, Meta Ads campaigns across Reels, carousel, and image formats (with Reels driving CTR above 1.1%), and a CRM-powered nurture journey with automated emails, WhatsApp touchpoints, and smart sequencing.",
     results: [
       "1,500+ early sign-ups from the V1 campaign",
       "Best-performing ads delivered CPA between £3.79–£5.55",
       "CTR above 1.1%, with video formats outperforming static ads by 3x",
       "Scalable system primed for V2 growth at CPA under £12",
     ],
-    testimonialQuote: "Milktree took us from an idea to a full growth system. The website, funnel, ads, and CRM all work together seamlessly. We've not only proven demand — we've built the foundation to scale.",
+    testimonialQuote: "Milktree took us from an idea to a full growth system. The website, funnel, ads, and CRM all work together seamlessly. We've not only proven demand, we've built the foundation to scale.",
     testimonialName: "Edward",
     testimonialRole: "Founder, HMO Checker",
     galleryImages: [
@@ -166,7 +166,7 @@ export const caseStudies = [
       "Website Copywriting & Content Structuring",
       "SEO Setup & Launch Support",
     ],
-    bodyText: "For Alltrad, reputation and trust are everything. They required a brand identity that felt established yet fresh, and a website that would stand as their primary touchpoint for clients and contractors. Milktree delivered a complete rebrand alongside a WordPress website that showcased their services clearly and professionally — helping them compete in a highly visual, credibility-driven industry.",
+    bodyText: "For Alltrad, reputation and trust are everything. They needed a brand identity that felt established yet fresh, and a website that would serve as their main touchpoint for clients and contractors. Milktree delivered a complete rebrand alongside a WordPress website that showed their services clearly and professionally, helping them compete in a highly visual, trust-driven industry.",
     challenges: "Alltrad came to us with no digital presence and only their reputation to rely on. In a competitive construction and roofing market, they needed a brand that inspired confidence while clearly communicating their service range. The challenge was to design a site that was professional and user-friendly, appealing both to commercial contractors and local homeowners.",
     solution: "Milktree developed a clean, trustworthy visual identity paired with a modern website built on WordPress and Elementor. The site balances technical detail with clarity, allowing users to easily explore services and request quotes. A focus on user experience, strong visuals, and SEO-friendly structure ensured that Alltrad's online presence matched their real-world expertise, giving them a competitive edge in their sector.",
     galleryImages: [
@@ -183,7 +183,7 @@ export const caseStudies = [
     services: "WordPress Website, Custom Van Archive, Conversion Funnel, Performance Marketing",
     tags: ["Automotive", "eCommerce"],
     coverImage: "/photos/case studies/flexibuy/R6SmStBRWkdMyr0M37aqdGCtXE4.png",
-    description: "Flexibuy is a commercial vehicle leasing and rental platform that needed a functional, conversion-focused website. They wanted more than just a digital brochure — they needed a system that could guide buyers to the right van and seamlessly generate leads. Milktree designed and developed a new WordPress site with a custom archive system that simplified search and funneled users straight into enquiries.",
+    description: "Flexibuy is a commercial vehicle leasing and rental platform that needed a website built to convert. They wanted more than a digital brochure. They needed a system that could guide buyers to the right van and generate leads. Milktree designed and developed a new WordPress site with a custom archive system that made search simple and funnelled users straight into enquiries.",
     scopeOfWork: "WordPress Website (Elementor), Custom Van Archive Search System, Conversion Funnel Integration, Performance Marketing",
     deliverables: [
       "WordPress Website (Elementor)",
@@ -196,11 +196,11 @@ export const caseStudies = [
     solution: "Milktree built a fresh, modern WordPress website using Elementor, designed around usability and conversions. At its core, we implemented a smart van archive system, allowing buyers to filter vehicles by make, model, size, fuel type, and more. This created a clear funnel from search to enquiry. Paired with precision-targeted ad campaigns, the new website transformed Flexibuy's online presence into a powerful lead engine.",
     results: [
       "257 qualified leads from just £840.55 in ad spend",
-      "Cost per lead at £3.27 — over 60% lower than industry averages",
+      "Cost per lead at £3.27, over 60% lower than industry averages",
       "CTR: 2.89% | CPC: £0.27 | CPM: £7.78",
       "A 57% drop in cost per lead compared to previous campaigns",
     ],
-    testimonialQuote: "Milktree gave us more than a website — they gave us a lead machine. The van archive system makes it easy for customers to find exactly what they want, and the campaigns have filled our pipeline with serious buyers. It's changed the way we do business.",
+    testimonialQuote: "Milktree gave us more than a website. They gave us a lead machine. The van archive system makes it easy for customers to find exactly what they want, and the campaigns have filled our pipeline with serious buyers. It's changed the way we do business.",
     testimonialName: "Felix",
     testimonialRole: "Director, Flexibuy Vans",
     galleryImages: [
@@ -217,7 +217,7 @@ export const caseStudies = [
     services: "Website Design, Online Booking, Paid Ads",
     tags: ["Hospitality", "Restaurant"],
     coverImage: "/photos/case studies/olive tree southampton/EPlodfhC43e81BdS9JS0vSG7NJc.png",
-    description: "The Olive Tree is a modern Mediterranean restaurant in Southampton. They needed more than just an online menu — they needed a website that worked as a full lead generation system. Milktree designed and developed a sleek WordPress site on Elementor, integrating a 3rd-party booking system and creating a funnel that converts browsers into diners. Paired with email campaigns and ads, the site has become the engine of their customer growth.",
+    description: "The Olive Tree is a modern Mediterranean restaurant in Southampton. They needed more than just an online menu. They needed a website that worked as a full lead generation system. Milktree designed and developed a sleek WordPress site on Elementor, integrating a booking system and creating a funnel that turns browsers into diners. Paired with email campaigns and ads, the site has become the engine of their customer growth.",
     scopeOfWork: "WordPress Website (Elementor), 3rd-Party Booking Integration, Email Marketing Campaigns, Performance Marketing",
     deliverables: [
       "WordPress Website (Elementor)",
@@ -285,8 +285,8 @@ export const caseStudies = [
     ],
     bodyText: "From concept to launch, Powerforce Renewables needed more than just a logo and a website, they needed a cohesive brand story. Milktree built a strong visual identity and a future-ready WordPress website that positioned the company as a modern, credible player in the renewable energy space.",
     challenges: "Powerforce Renewables came to us without an established identity or digital presence. In an industry where credibility and clarity are key, they needed a brand that could communicate trust and professionalism at first glance. The website needed to balance technical information with accessibility, ensuring homeowners and businesses alike could easily understand their services.",
-    solution: "Milktree created a clean, modern brand identity anchored in clarity and sustainability. The website, built with WordPress and Elementor, offered a streamlined user journey — from learning about renewable solutions to requesting a quote. With contemporary design, easy navigation, and SEO-friendly structure, the site brought Powerforce Renewables into line with industry leaders while standing out with its own confident voice.",
-    testimonialQuote: "Milktree helped us transform an idea into a full-fledged brand. The website reflects exactly who we are — modern, reliable, and focused on sustainability. The process was seamless and the result exceeded our expectations.",
+    solution: "Milktree created a clean, modern brand identity anchored in clarity and sustainability. The website, built with WordPress and Elementor, offered a smooth user journey from learning about renewable solutions to requesting a quote. With modern design, easy navigation, and SEO-friendly structure, the site brought Powerforce Renewables in line with industry leaders while standing out with its own confident voice.",
+    testimonialQuote: "Milktree helped us turn an idea into a full brand. The website reflects exactly who we are: modern, reliable, and focused on sustainability. The process was smooth and the result beat our expectations.",
     testimonialName: "Andy",
     testimonialRole: "Managing Director, Powerforce Renewables",
     galleryImages: [
@@ -305,7 +305,7 @@ export const caseStudies = [
     services: "Website Design & Development, Booking Integration, Mobile-First Experience",
     tags: ["Events", "Festival"],
     coverImage: "/photos/case studies/playing the field/X5fKwSMk9XDzKn4EWMXlgpmH2uU.png",
-    description: "Playing The Field is a vibrant UK festival that celebrates live music, community, and unforgettable summer experiences. While the event had a logo and some brand guidelines in place, they needed a digital home that could keep up with their ambitions. Milktree stepped in to design and build a full WordPress website — modern, bold, and equipped to handle bookings — that set the stage for future growth.",
+    description: "Playing The Field is a vibrant UK festival that celebrates live music, community, and unforgettable summer experiences. While the event had a logo and some brand guidelines in place, they needed a digital home that could keep up with their ambitions. Milktree stepped in to design and build a full WordPress website that was modern, bold, and ready to handle bookings, setting the stage for future growth.",
     scopeOfWork: "Website Design & Development (WordPress + Elementor), Booking Platform Integration, Content Layout & Festival Information Architecture, Responsive & Mobile-First Experience",
     deliverables: [
       "Website Design & Development (WordPress + Elementor)",
@@ -314,7 +314,7 @@ export const caseStudies = [
       "Responsive & Mobile-First Experience",
     ],
     bodyText: "With their next big festival approaching, Playing The Field needed more than just a landing page. They wanted a full-featured website that could capture their brand energy while making ticket sales seamless. Milktree delivered a dynamic site on WordPress with Elementor and integrated booking functionality, turning their vision into a high-performing festival platform.",
-    challenges: "Playing The Field's previous landing page was underwhelming — difficult to navigate, limited in design, and not built to convert visitors into attendees. They needed a platform that could not only showcase the excitement of their festival but also handle practicalities like ticketing, scheduling, and vendor information.",
+    challenges: "Playing The Field's previous landing page was underwhelming. It was hard to navigate, limited in design, and not built to turn visitors into attendees. They needed a platform that could show the excitement of their festival while also handling ticketing, scheduling, and vendor information.",
     solution: "Milktree created a bold and engaging website that captured the spirit of the festival while delivering on function. With Elementor, we designed a site that was visually expressive, easy to update, and optimized for all devices. The seamless booking integration meant fans could secure tickets without friction, resulting in a 50% increase in leads compared to their old landing page.",
     testimonialQuote: "Milktree gave us a website that finally matches the energy of our festival. The booking system works flawlessly, and we've already seen a huge jump in ticket sales and enquiries. It's been a game-changer for us.",
     testimonialName: "Pete",
@@ -335,7 +335,7 @@ export const caseStudies = [
     services: "Brand Identity, Logo Design, Social Media Templates",
     tags: ["Telecoms", "Startup"],
     coverImage: "/photos/case studies/eazyphone/BhryeiFGjC9WnXlRH6ZN88oLhwU.png",
-    description: "EazyPhone, a telecoms startup, needed a brand that would turn heads in an industry known for playing it safe. We built their entire brand identity from scratch — logo, colours, fonts, and social templates — creating something bold and memorable. The result? A startup ready to shake up the telecoms world with a brand that demands attention.",
+    description: "EazyPhone, a telecoms startup, needed a brand that would turn heads in an industry known for playing it safe. We built their entire brand identity from scratch: logo, colours, fonts, and social templates, creating something bold and memorable. The result? A startup ready to shake up the telecoms world with a brand that demands attention.",
     scopeOfWork: "Complete Brand Identity, Logo Design, Colour Palette & Fonts, Social Media Templates",
     deliverables: [
       "Complete brand identity",
@@ -343,9 +343,9 @@ export const caseStudies = [
       "Colour palette and fonts",
       "Social media templates",
     ],
-    bodyText: "EazyPhone came to us with a clear vision: they didn't want to blend in. As a new player in the telecoms industry, they understood that looking like everyone else meant getting lost in the crowd. They needed an agency brave enough to help them break the mould. From day one, they were ready to take risks and stand out — they just needed the right partner to bring that boldness to life through their brand.",
+    bodyText: "EazyPhone came to us with a clear vision: they didn't want to blend in. As a new player in the telecoms industry, they understood that looking like everyone else meant getting lost in the crowd. They needed an agency brave enough to help them break the mould. From day one, they were ready to take risks and stand out. They just needed the right partner to bring that boldness to life through their brand.",
     challenges: "The telecoms industry has a problem: everyone looks the same. Most companies play it safe with boring blues and predictable designs. For EazyPhone, this was both a challenge and an opportunity. As a startup, they couldn't compete on size or budget with the big players. If they looked like just another telecoms company, they'd be ignored. They needed a brand that would grab attention instantly and stick in people's minds. Without it, they'd never get noticed in such a crowded market.",
-    solution: "We created a complete brand identity for EazyPhone that breaks every rule in the telecoms playbook. Starting from nothing, we built their brand from the ground up. Every element — from the logo to the colour choices to the font pairings — was designed to stand out. We gave them social media templates that keep their bold personality consistent across all platforms. The end result is exactly what they asked for: a brand that's memorable, bold, and impossible to ignore. EazyPhone now has the visual impact they need to compete with established players, proving that sometimes being different is the smartest strategy of all.",
+    solution: "We created a complete brand identity for EazyPhone that breaks every rule in the telecoms playbook. Starting from nothing, we built their brand from the ground up. Every element, from the logo to the colour choices to the font pairings, was designed to stand out. We gave them social media templates that keep their bold personality consistent across all platforms. The end result is exactly what they asked for: a brand that's memorable, bold, and impossible to ignore. EazyPhone now has the visual impact they need to compete with established players, proving that sometimes being different is the smartest strategy of all.",
     galleryImages: [
       "/photos/case studies/eazyphone/99Lp3cDFMWvW6hvIc0FU7Ck4.png",
       "/photos/case studies/eazyphone/fe0ik2cJOjlk1wh6ybkSFDyS70.png",
@@ -370,7 +370,7 @@ export const caseStudies = [
       "Trade show signage",
       "Social media infographics",
     ],
-    bodyText: "When Bluestone Mortgages approached us, they knew their brand wasn't quite hitting the mark anymore. The mortgage industry was shifting, and they needed to shift with it. Rather than starting from scratch, they wanted to build on what they already had — keeping the best bits of their brand while making it feel current and relevant. They needed a partner who could breathe new life into their identity without losing what made them unique.",
+    bodyText: "When Bluestone Mortgages came to us, they knew their brand wasn't quite hitting the mark anymore. The mortgage industry was shifting, and they needed to shift with it. Rather than starting from scratch, they wanted to build on what they already had, keeping the best bits of their brand while making it feel current and relevant. They needed a partner who could breathe new life into their identity without losing what made them unique.",
     challenges: "Bluestone Mortgages main challenge was clear: their brand felt outdated in a rapidly evolving market. While their service was excellent, their visual identity wasn't connecting with modern customers or brokers. They were losing ground to competitors with fresher, more appealing brands. The disconnect between their quality service and dated appearance was holding back their growth. They needed to look as professional and forward-thinking as they actually were.",
     solution: "Bluestone Mortgages main challenge was clear: their brand felt outdated in a rapidly evolving market. While their service was excellent, their visual identity wasn't connecting with modern customers or brokers. They were losing ground to competitors with fresher, more appealing brands. The disconnect between their quality service and dated appearance was holding back their growth. They needed to look as professional and forward-thinking as they actually were.",
     galleryImages: [
@@ -448,7 +448,7 @@ export const testimonials = [
     role: "Chef Patron, AO Restaurant",
   },
   {
-    quote: "Milktree helped us transform an idea into a full-fledged brand. The website reflects exactly who we are—modern, reliable, and focused on sustainability. The process was seamless and the result exceeded our expectations.",
+    quote: "Milktree helped us turn an idea into a full brand. The website reflects exactly who we are: modern, reliable, and focused on sustainability. The process was smooth and the result beat our expectations.",
     name: "Andy",
     role: "Managing Director, Powerforce Renewables",
   },
@@ -476,12 +476,12 @@ export const testimonials = [
 
 export const finalCtaContent = {
   headline: "See what your brand is really saying.",
-  subtext: "Request your free brand audit — here's what you'll get:",
+  subtext: "Request your free brand audit. Here's what you'll get:",
   benefits: [
     "A 30-minute call to understand your brand",
     "A positioning and messaging review",
     "A visual identity assessment",
-    "A prioritised action plan — delivered in 48 hours",
+    "A prioritised action plan, delivered in 48 hours",
   ],
   cta: "Get My Free Audit",
   note: "No cost. No commitment. Just clarity.",

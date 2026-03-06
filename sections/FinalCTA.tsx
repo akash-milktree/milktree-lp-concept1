@@ -93,7 +93,7 @@ export const FinalCTA: React.FC = () => {
 
         <Reveal delay={0.08}>
           <p className="finalcta__subtext">
-            Request your free brand audit — we'll book a call to understand your brand, then deliver a personalised audit within 48 hours.
+            Request your free brand audit. We'll book a call to understand your brand, then deliver a personalised audit within 48 hours.
           </p>
         </Reveal>
 
@@ -272,12 +272,12 @@ export const FinalCTA: React.FC = () => {
               )}
             </AnimatePresence>
 
-            <p className="finalcta__note">Spots are limited — we take on 4 new brand builds per month.</p>
+            <p className="finalcta__note">Spots are limited. We take on 4 new brand builds per month.</p>
 
             {/* Social proof */}
             <div className="finalcta__proof">
               <p className="finalcta__proof-quote">"The audit alone gave us more clarity than 6 months of trying to figure it out ourselves."</p>
-              <p className="finalcta__proof-attr">— Chris, Director, Police Mortgages</p>
+              <p className="finalcta__proof-attr">Chris, Director, Police Mortgages</p>
               <p className="finalcta__proof-stat">Join 200+ brands who started with a free audit</p>
             </div>
           </div>

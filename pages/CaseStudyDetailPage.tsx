@@ -50,7 +50,7 @@ export const CaseStudyDetailPage: React.FC = () => {
     <>
       <Helmet>
         <title>{study.title} Case Study | Milktree Agency</title>
-        <meta name="description" content={study.headline + ' — ' + study.services} />
+        <meta name="description" content={study.headline + ' | ' + study.services} />
         <link rel="canonical" href={`https://milktreeagency.com/work/${study.slug}`} />
         <meta property="og:title" content={`${study.title} Case Study | Milktree Agency`} />
         <meta property="og:description" content={study.headline} />
