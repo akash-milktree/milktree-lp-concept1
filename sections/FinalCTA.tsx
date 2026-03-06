@@ -162,7 +162,7 @@ export const FinalCTA: React.FC = () => {
                     <input
                       id="audit-website"
                       name="website"
-                      type="url"
+                      type="text"
                       className="finalcta__input"
                       placeholder="yourcompany.com"
                       value={website}

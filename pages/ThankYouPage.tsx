@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import { ArrowRight, CheckCircle, CalendarCheck, Phone, FileText, Mail, Clock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { trackSchedule, trackCustom } from '../utils/meta-tracking';
+import { Navbar } from '../components/ui/Navbar';
+import { Footer } from '../sections/Footer';
 
 declare global {
   interface Window {
@@ -57,12 +59,14 @@ export const ThankYouPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="thankyou">
-      <Helmet>
-        <title>Thank You | Milktree Agency</title>
-        <meta name="robots" content="noindex, nofollow" />
-      </Helmet>
-      <div className="thankyou__container">
+    <>
+      <Navbar />
+      <div className="thankyou">
+        <Helmet>
+          <title>Thank You | Milktree Agency</title>
+          <meta name="robots" content="noindex, nofollow" />
+        </Helmet>
+        <div className="thankyou__container">
 
         {/* Success icon */}
         <motion.div
@@ -178,7 +182,9 @@ export const ThankYouPage: React.FC = () => {
           <span>Back to Home</span>
         </motion.button>
 
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
