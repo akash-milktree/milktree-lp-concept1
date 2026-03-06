@@ -33,6 +33,14 @@ const faqs = [
     q: 'What happens after the brand is delivered?',
     a: 'We offer a 60-day post-launch support period where we answer questions and make small refinements as you roll out. If you need ongoing strategic support, our monthly retainer keeps Milktree in your corner as a brand partner.',
   },
+  {
+    q: 'How much does a brand build cost?',
+    a: 'Our Brand Build projects typically start from around £1,000 and scale based on scope and complexity. Every project is scoped individually after an initial audit call. We offer fixed pricing with no hidden fees so you know exactly what you are paying before we start.',
+  },
+  {
+    q: 'How is working with Milktree different from hiring a freelance designer?',
+    a: 'A freelance designer typically delivers visual assets like a logo and colour palette. We build a complete brand system: positioning strategy, messaging framework, visual identity, and guidelines. The difference is that our clients see measurable business results like increased enquiries and higher-quality leads, not just a prettier logo.',
+  },
 ];
 
 export const FAQ: React.FC = () => {

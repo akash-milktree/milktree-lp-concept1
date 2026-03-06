@@ -52,7 +52,7 @@ const itemVariants = {
 };
 
 export const Hero: React.FC = () => {
-  const scrollToProcess = () => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToProcess = () => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' });
   const scrollToAudit = () => {
     if (typeof window.gtag === 'function') {
       window.gtag('event', 'cta_click', { event_category: 'Hero', event_label: 'Book Your Free Brand Audit', send_to: 'G-9GHX9JVN9S' });

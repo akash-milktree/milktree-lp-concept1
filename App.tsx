@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { FormspreeProvider } from '@formspree/react';
 import { trackPageView } from './utils/meta-tracking';
 
@@ -41,6 +42,7 @@ const AnalyticsTracker: React.FC = () => {
 import { Navbar } from './components/ui/Navbar';
 import { Hero } from './sections/Hero';
 import { Footer } from './sections/Footer';
+import { HomepageSchema } from './components/SchemaMarkup';
 
 // Below-fold sections — code-split so they don't block initial render
 const Problem    = lazy(() => import('./sections/Problem').then(m => ({ default: m.Problem })));
@@ -58,6 +60,20 @@ const ThankYouPage       = lazy(() => import('./pages/ThankYouPage').then(m => (
 
 const HomePage: React.FC = () => (
   <>
+    <Helmet>
+      <title>Milktree Agency | Brand Identity That Sells For You</title>
+      <meta name="description" content="We build brand identities that make businesses clear, trusted, and the obvious choice. 200+ brands built across 15+ industries. Book your free brand audit." />
+      <link rel="canonical" href="https://milktreeagency.com/" />
+      <meta property="og:title" content="Milktree Agency | Brand Identity That Sells For You" />
+      <meta property="og:description" content="We build brand identities that make businesses clear, trusted, and the obvious choice. 200+ brands built. Book your free brand audit." />
+      <meta property="og:url" content="https://milktreeagency.com/" />
+      <meta property="og:type" content="website" />
+      <meta property="og:image" content="https://milktreeagency.com/logos/favicon.svg" />
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:title" content="Milktree Agency | Brand Identity That Sells For You" />
+      <meta name="twitter:description" content="We build brand identities that make businesses clear, trusted, and the obvious choice. 200+ brands built." />
+    </Helmet>
+    <HomepageSchema />
     <Navbar />
     <main>
       <Hero />

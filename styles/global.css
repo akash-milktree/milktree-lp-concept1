@@ -4396,3 +4396,155 @@ html {
     font-size: 16px;
   }
 }
+
+/* ================================================================
+   New elements from CRO/SEO audit implementation
+   ================================================================ */
+
+/* ── Form social proof ── */
+.finalcta__time-hint {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.finalcta__hint {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin-top: 4px;
+}
+
+.finalcta__proof {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.finalcta__proof-quote {
+  font-size: 14px;
+  font-style: italic;
+  color: var(--color-text-secondary);
+  margin: 0 0 8px;
+  line-height: 1.5;
+}
+
+.finalcta__proof-attr {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin: 0 0 12px;
+}
+
+.finalcta__proof-stat {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-accent);
+  margin: 0;
+}
+
+/* ── Results section CTA ── */
+.results__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 32px;
+  padding: 14px 28px;
+  background: var(--color-accent);
+  color: var(--color-accent-text);
+  border: none;
+  border-radius: var(--radius-pill);
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.results__cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(255, 220, 4, 0.3);
+}
+
+/* ── Case Studies section CTA ── */
+.cs-cta-text {
+  font-size: 16px;
+  color: var(--color-text-secondary);
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.cs-cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  color: var(--color-accent);
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: gap 0.2s ease;
+  padding: 0;
+}
+
+.cs-cta-link:hover {
+  gap: 8px;
+}
+
+/* ── Footer columns ── */
+.footer__columns {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 48px 40px 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  border-top: 1px solid var(--color-border);
+}
+
+.footer__col-heading {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 0 16px;
+}
+
+.footer__col-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer__col-link {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer__col-link:hover {
+  color: #fff;
+}
+
+/* ── Footer mobile ── */
+@media (max-width: 640px) {
+  .footer__columns {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 32px 20px 0;
+  }
+
+  .finalcta__proof-quote {
+    font-size: 13px;
+  }
+}

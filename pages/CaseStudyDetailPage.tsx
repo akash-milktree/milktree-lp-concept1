@@ -1,5 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Navbar } from '../components/ui/Navbar';
@@ -7,6 +8,7 @@ import { Footer } from '../sections/Footer';
 import { Reveal } from '../components/animations/Reveal';
 import { caseStudies } from '../data/content';
 import { trackViewContent } from '../utils/meta-tracking';
+import { CaseStudySchema } from '../components/SchemaMarkup';
 
 
 export const CaseStudyDetailPage: React.FC = () => {
@@ -46,6 +48,28 @@ export const CaseStudyDetailPage: React.FC = () => {
 
   return (
     <>
+      <Helmet>
+        <title>{study.title} Case Study | Milktree Agency</title>
+        <meta name="description" content={study.headline + ' — ' + study.services} />
+        <link rel="canonical" href={`https://milktreeagency.com/work/${study.slug}`} />
+        <meta property="og:title" content={`${study.title} Case Study | Milktree Agency`} />
+        <meta property="og:description" content={study.headline} />
+        <meta property="og:url" content={`https://milktreeagency.com/work/${study.slug}`} />
+        <meta property="og:type" content="article" />
+        <meta property="og:image" content={`https://milktreeagency.com${study.coverImage}`} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${study.title} Case Study | Milktree Agency`} />
+        <meta name="twitter:description" content={study.headline} />
+        <meta name="twitter:image" content={`https://milktreeagency.com${study.coverImage}`} />
+      </Helmet>
+      <CaseStudySchema
+        title={study.title}
+        headline={study.headline}
+        description={study.description}
+        slug={study.slug}
+        coverImage={study.coverImage}
+        tags={study.tags}
+      />
       <Navbar />
       <main>
 

@@ -7,8 +7,10 @@ import { Zap, ArrowRight } from 'lucide-react';
 import { trackContact, trackLead } from '../utils/meta-tracking';
 
 const BUDGET_OPTIONS = [
-  '£0 – £999',
-  '£1,499 – £1,999',
+  'Under £1,000',
+  '£1,000 – £2,000',
+  '£2,000 – £5,000',
+  '£5,000+',
 ];
 
 const SERVICE_OPTIONS = [
@@ -25,13 +27,13 @@ export const FinalCTA: React.FC = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [website, setWebsite] = useState('');
-  const [service, setService] = useState('');
+  const [services, setServices] = useState<string[]>([]);
   const [budget, setBudget] = useState('');
   const [goal, setGoal] = useState('');
   const navigate = useNavigate();
 
   const canProceed = name.trim() !== '' && email.trim() !== '' && email.includes('@');
-  const canSubmit = service !== '';
+  const canSubmit = services.length > 0;
 
   // Redirect to thank you page on successful submission
   useEffect(() => {
@@ -66,7 +68,7 @@ export const FinalCTA: React.FC = () => {
     if (typeof window.gtag === 'function') {
       window.gtag('event', 'generate_lead', {
         event_category: 'Audit Form',
-        event_label: service,
+        event_label: services.join(', '),
         value: 1,
         currency: 'GBP',
         send_to: 'G-9GHX9JVN9S',
@@ -96,6 +98,7 @@ export const FinalCTA: React.FC = () => {
         </Reveal>
 
         <Reveal delay={0.16}>
+          <p className="finalcta__time-hint">Takes 30 seconds. No commitment.</p>
           <div className="finalcta__form-wrap">
 
             {/* Progress indicator */}
@@ -138,19 +141,20 @@ export const FinalCTA: React.FC = () => {
                   </div>
 
                   <div className="finalcta__field">
-                    <label className="finalcta__label" htmlFor="audit-email">Work email *</label>
+                    <label className="finalcta__label" htmlFor="audit-email">Email *</label>
                     <input
                       id="audit-email"
                       name="email"
                       type="email"
                       className="finalcta__input"
-                      placeholder="you@company.com"
+                      placeholder="name@example.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
                       autoComplete="email"
                     />
                     <ValidationError prefix="Email" field="email" errors={state.errors} className="finalcta__error" />
+                    <span className="finalcta__hint">We'll only use this to send your audit results.</span>
                   </div>
 
                   <div className="finalcta__field">
@@ -158,7 +162,7 @@ export const FinalCTA: React.FC = () => {
                     <input
                       id="audit-website"
                       name="website"
-                      type="text"
+                      type="url"
                       className="finalcta__input"
                       placeholder="yourcompany.com"
                       value={website}
@@ -201,14 +205,16 @@ export const FinalCTA: React.FC = () => {
                         <button
                           key={opt}
                           type="button"
-                          className={`finalcta__chip ${service === opt ? 'finalcta__chip--selected' : ''}`}
-                          onClick={() => setService(opt)}
+                          className={`finalcta__chip ${services.includes(opt) ? 'finalcta__chip--selected' : ''}`}
+                          onClick={() => setServices(prev =>
+                            prev.includes(opt) ? prev.filter(s => s !== opt) : [...prev, opt]
+                          )}
                         >
                           {opt}
                         </button>
                       ))}
                     </div>
-                    <input type="hidden" name="service" value={service} />
+                    <input type="hidden" name="service" value={services.join(', ')} />
                   </div>
 
                   <div className="finalcta__field">
@@ -266,7 +272,14 @@ export const FinalCTA: React.FC = () => {
               )}
             </AnimatePresence>
 
-            <p className="finalcta__note">Spots are limited — we work with select clients each month.</p>
+            <p className="finalcta__note">Spots are limited — we take on 4 new brand builds per month.</p>
+
+            {/* Social proof */}
+            <div className="finalcta__proof">
+              <p className="finalcta__proof-quote">"The audit alone gave us more clarity than 6 months of trying to figure it out ourselves."</p>
+              <p className="finalcta__proof-attr">— Chris, Director, Police Mortgages</p>
+              <p className="finalcta__proof-stat">Join 200+ brands who started with a free audit</p>
+            </div>
           </div>
         </Reveal>
 

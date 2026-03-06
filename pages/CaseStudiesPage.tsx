@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Navbar } from '../components/ui/Navbar';
@@ -27,6 +28,15 @@ export const CaseStudiesPage: React.FC = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Our Work | Milktree Agency</title>
+        <meta name="description" content="Real brands, real results. See how we've helped 200+ businesses build brand identities that drive growth across finance, hospitality, tech, and more." />
+        <link rel="canonical" href="https://milktreeagency.com/work" />
+        <meta property="og:title" content="Our Work | Milktree Agency" />
+        <meta property="og:description" content="Real brands, real results. See how we've helped 200+ businesses build brand identities that drive growth." />
+        <meta property="og:url" content="https://milktreeagency.com/work" />
+        <meta property="og:type" content="website" />
+      </Helmet>
       <Navbar />
       <main>
 

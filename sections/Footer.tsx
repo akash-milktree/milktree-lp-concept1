@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { trackContact, trackCustom } from '../utils/meta-tracking';
 
 
@@ -52,6 +53,62 @@ export const Footer: React.FC = () => {
       {/* Full-width actual logo — ghost style */}
       <div className="footer__logo-wrap">
         <FooterLogo />
+      </div>
+
+      {/* Footer columns */}
+      <div className="footer__columns">
+        <div className="footer__col">
+          <h4 className="footer__col-heading">Services</h4>
+          <ul className="footer__col-list">
+            <li><a href="/#services" className="footer__col-link">Brand Positioning</a></li>
+            <li><a href="/#services" className="footer__col-link">Messaging Framework</a></li>
+            <li><a href="/#services" className="footer__col-link">Visual Identity</a></li>
+            <li><a href="/#services" className="footer__col-link">Brand Guidelines</a></li>
+            <li><a href="/#services" className="footer__col-link">Creative Direction</a></li>
+          </ul>
+        </div>
+        <div className="footer__col">
+          <h4 className="footer__col-heading">Company</h4>
+          <ul className="footer__col-list">
+            <li><Link to="/work" className="footer__col-link">Case Studies</Link></li>
+            <li><a href="/#pricing" className="footer__col-link">Pricing</a></li>
+            <li><a href="/#faq" className="footer__col-link">FAQs</a></li>
+            <li><a href="mailto:levi@milktreeagency.com" className="footer__col-link">Contact</a></li>
+          </ul>
+        </div>
+        <div className="footer__col">
+          <h4 className="footer__col-heading">Connect</h4>
+          <ul className="footer__col-list">
+            <li>
+              <a
+                href="https://www.instagram.com/milktreeagency/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer__col-link"
+                onClick={() => trackCustom('SocialClick', { customData: { platform: 'Instagram' } })}
+              >Instagram</a>
+            </li>
+            <li>
+              <a
+                href="https://www.linkedin.com/company/milktreeagency/posts/?feedView=all"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer__col-link"
+                onClick={() => trackCustom('SocialClick', { customData: { platform: 'LinkedIn' } })}
+              >LinkedIn</a>
+            </li>
+            <li>
+              <a
+                href="mailto:levi@milktreeagency.com"
+                className="footer__col-link"
+                onClick={() => {
+                  trackContact({ eventSource: 'Footer Email Link' });
+                  trackCustom('SocialClick', { customData: { platform: 'Email' } });
+                }}
+              >levi@milktreeagency.com</a>
+            </li>
+          </ul>
+        </div>
       </div>
 
       {/* Bottom row */}

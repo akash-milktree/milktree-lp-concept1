@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { ArrowRight, CheckCircle, CalendarCheck, Phone, FileText, Mail, Clock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -57,6 +58,10 @@ export const ThankYouPage: React.FC = () => {
 
   return (
     <div className="thankyou">
+      <Helmet>
+        <title>Thank You | Milktree Agency</title>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
       <div className="thankyou__container">
 
         {/* Status bar */}

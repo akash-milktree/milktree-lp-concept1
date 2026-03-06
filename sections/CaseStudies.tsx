@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import { Reveal } from '../components/animations/Reveal';
 import { caseStudies } from '../data/content';
+import { trackContact } from '../utils/meta-tracking';
 
 export const CaseStudies: React.FC = () => {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -90,6 +91,24 @@ export const CaseStudies: React.FC = () => {
             <ChevronRight size={20} />
           </button>
         </div>
+
+        <Reveal delay={0.1}>
+          <p className="cs-cta-text">
+            Want results like these?{' '}
+            <button
+              className="cs-cta-link"
+              onClick={() => {
+                if (typeof window.gtag === 'function') {
+                  window.gtag('event', 'cta_click', { event_category: 'Case Studies', event_label: 'Get a free audit', send_to: 'G-9GHX9JVN9S' });
+                }
+                trackContact({ eventSource: 'Case Studies CTA' });
+                document.getElementById('audit')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              Get a free brand audit <ArrowRight size={14} />
+            </button>
+          </p>
+        </Reveal>
       </div>
     </section>
   );

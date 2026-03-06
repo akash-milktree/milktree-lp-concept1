@@ -1,7 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { useInView, motion, useSpring, useMotionValue } from 'framer-motion';
+import { Zap } from 'lucide-react';
 import { Reveal } from '../components/animations/Reveal';
 import { resultsContent } from '../data/content';
+import { trackContact } from '../utils/meta-tracking';
 
 interface CountUpProps {
   target: number;
@@ -55,6 +57,22 @@ export const Results: React.FC = () => {
 
         <Reveal delay={0.3}>
           <p className="results__tagline">{resultsContent.tagline}</p>
+        </Reveal>
+
+        <Reveal delay={0.4}>
+          <button
+            className="results__cta"
+            onClick={() => {
+              if (typeof window.gtag === 'function') {
+                window.gtag('event', 'cta_click', { event_category: 'Results', event_label: 'Book Your Free Brand Audit', send_to: 'G-9GHX9JVN9S' });
+              }
+              trackContact({ eventSource: 'Results CTA' });
+              document.getElementById('audit')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
+            <Zap size={18} />
+            <span>Book Your Free Brand Audit</span>
+          </button>
         </Reveal>
       </div>
     </section>

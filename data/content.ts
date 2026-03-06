@@ -1,7 +1,7 @@
 export const heroContent = {
   badge: "Brand Identity Agency",
   headline: "Your brand should sell for you.",
-  subheadline: "We build brand identities that make businesses clear, trusted, and chosen — so your brand sells for you, attracts better clients, and grows without you having to explain yourself.",
+  subheadline: "We build brand identities that make you the obvious choice — so the right clients come to you, and your team never second-guesses how to represent the business.",
   stats: [
     { number: "200+", label: "brands built" },
     { number: "250%", label: "avg. enquiry increase" },
@@ -49,7 +49,7 @@ export const servicesContent = {
     },
     {
       title: "Creative Direction",
-      description: "Clear visual standards across all channels and campaigns.",
+      description: "Visual standards that keep your brand consistent across every channel — without needing you to approve every asset.",
       icon: "Wand2",
     },
   ],
@@ -395,7 +395,7 @@ export const differentiators = {
     },
     {
       title: "Built to last",
-      description: "We design systems, not one-off assets. Your brand should compound over time.",
+      description: "We design systems, not one-off assets. Your brand should get stronger over time.",
       color: "purple",
     },
     {
