@@ -64,21 +64,6 @@ export const ThankYouPage: React.FC = () => {
       </Helmet>
       <div className="thankyou__container">
 
-        {/* Status bar */}
-        <motion.div
-          className="thankyou__status-bar"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          {statusItems.map((item, i) => (
-            <div key={i} className="thankyou__status-item">
-              {item.icon}
-              <span>{item.label}</span>
-            </div>
-          ))}
-        </motion.div>
-
         {/* Success icon */}
         <motion.div
           className="thankyou__icon-wrap"
@@ -107,6 +92,21 @@ export const ThankYouPage: React.FC = () => {
         >
           Thanks for requesting your free brand audit. We just need one more thing — a quick call to understand your brand before we get to work.
         </motion.p>
+
+        {/* Status bar — moved below subtitle */}
+        <motion.div
+          className="thankyou__status-bar"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.35 }}
+        >
+          {statusItems.map((item, i) => (
+            <div key={i} className="thankyou__status-item">
+              {item.icon}
+              <span>{item.label}</span>
+            </div>
+          ))}
+        </motion.div>
 
         {/* What happens next steps */}
         <motion.div
@@ -165,6 +165,18 @@ export const ThankYouPage: React.FC = () => {
           <Clock size={14} />
           <span>Can't book now? Check your email for the booking link.</span>
         </motion.p>
+
+        {/* Back to home */}
+        <motion.button
+          className="thankyou__home-btn"
+          onClick={() => navigate('/')}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.8 }}
+        >
+          <ArrowRight size={16} style={{ transform: 'rotate(180deg)' }} />
+          <span>Back to Home</span>
+        </motion.button>
 
       </div>
     </div>

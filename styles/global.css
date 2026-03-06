@@ -4316,7 +4316,6 @@ html {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 100px;
-  margin-bottom: 16px;
 }
 
 .thankyou__status-item {
@@ -4364,6 +4363,29 @@ html {
   color: rgba(255, 255, 255, 0.4);
   font-family: var(--font-primary);
   margin: 0;
+}
+
+/* Back to home button */
+.thankyou__home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 100px;
+  padding: 12px 24px;
+  font-family: var(--font-primary);
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 8px;
+}
+
+.thankyou__home-btn:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 @media (max-width: 480px) {
