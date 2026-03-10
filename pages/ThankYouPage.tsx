@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { ArrowRight, CheckCircle, CalendarCheck, Phone, FileText, Mail, Clock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { trackSchedule, trackCustom } from '../utils/meta-tracking';
+import { trackLead, trackSchedule, trackCustom } from '../utils/meta-tracking';
 import { Navbar } from '../components/ui/Navbar';
 import { Footer } from '../sections/Footer';
 
@@ -53,6 +53,9 @@ export const ThankYouPage: React.FC = () => {
         send_to: 'G-9GHX9JVN9S',
       });
     }
+
+    // Meta Lead event (Pixel + CAPI) — primary conversion, fires on confirmed form submission
+    trackLead({ eventSource: 'Thank You Page' });
 
     // Meta Schedule event (Pixel + CAPI) — high-intent signal
     trackSchedule({ eventSource: 'Thank You Page' });

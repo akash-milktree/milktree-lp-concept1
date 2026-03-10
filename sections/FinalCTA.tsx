@@ -4,7 +4,7 @@ import { useForm, ValidationError } from '@formspree/react';
 import { useNavigate } from 'react-router-dom';
 import { Reveal } from '../components/animations/Reveal';
 import { Zap, ArrowRight } from 'lucide-react';
-import { trackContact, trackLead } from '../utils/meta-tracking';
+import { trackContact } from '../utils/meta-tracking';
 
 const BUDGET_OPTIONS = [
   'Under £1,000',
@@ -74,9 +74,6 @@ export const FinalCTA: React.FC = () => {
         send_to: 'G-9GHX9JVN9S',
       });
     }
-
-    // Meta Lead event (Pixel + CAPI) with email for match rate
-    trackLead({ eventSource: 'Audit Form Submit', userData: { email } });
 
     handleSubmit(e);
   };
