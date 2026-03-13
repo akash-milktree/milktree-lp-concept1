@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { MilktreeLogo } from './MilktreeLogo';
 import { Button } from './Button';
 import { trackContact } from '../../utils/meta-tracking';
+import { isPaidTraffic } from '../../utils/paid-traffic';
 
 const sectionLinks = [
   { label: "Services", target: "services" },
@@ -26,6 +27,7 @@ export const Navbar: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const isHome = location.pathname === '/';
+  const isPaid = isPaidTraffic();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious() || 0;
@@ -87,27 +89,29 @@ export const Navbar: React.FC = () => {
             <MilktreeLogo variant="full" color="light" />
           </a>
 
-          <div className="navbar__divider" />
+          {!isPaid && <div className="navbar__divider" />}
 
-          <div className="navbar__links">
-            {sectionLinks.map((link) => (
-              <a
-                key={link.target}
-                href={`/#${link.target}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick(link.target);
-                }}
-              >
-                {link.label}
-              </a>
-            ))}
-            <Link to="/work" className={location.pathname.startsWith('/work') ? 'navbar__link--active' : ''}>
-              Case Studies
-            </Link>
-          </div>
+          {!isPaid && (
+            <div className="navbar__links">
+              {sectionLinks.map((link) => (
+                <a
+                  key={link.target}
+                  href={`/#${link.target}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick(link.target);
+                  }}
+                >
+                  {link.label}
+                </a>
+              ))}
+              <Link to="/work" className={location.pathname.startsWith('/work') ? 'navbar__link--active' : ''}>
+                Case Studies
+              </Link>
+            </div>
+          )}
 
-          <div className="navbar__divider" />
+          {!isPaid && <div className="navbar__divider" />}
 
           <div className="navbar__desktop-cta">
             <Button
@@ -152,13 +156,15 @@ export const Navbar: React.FC = () => {
             </Button>
           </div>
 
-          <button
-            className="navbar__mobile-toggle"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
+          {!isPaid && (
+            <button
+              className="navbar__mobile-toggle"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          )}
         </div>
       </motion.nav>
 
