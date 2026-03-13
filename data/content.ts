@@ -1,13 +1,13 @@
 export const heroContent = {
   badge: "Brand Identity Agency",
-  headline: "Your brand should sell for you.",
+  headline: "Nobody knows what you do. We fix that.",
   subheadline: "We build brand identities that make you the obvious choice. The right clients come to you, and your team always knows how to represent the business.",
   stats: [
     { number: "200+", label: "brands built" },
     { number: "250%", label: "avg. enquiry increase" },
     { number: "15+", label: "industries served" },
   ],
-  primaryCta: "Book Your Free Brand Audit",
+  primaryCta: "Get My Free Brand Audit",
   secondaryCta: "View recent work",
 };
 

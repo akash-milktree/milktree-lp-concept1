@@ -55,6 +55,7 @@ export const Pricing: React.FC = () => {
             <div className="pricing__card-top">
               <p className="pricing__card-label">Brand Build</p>
               <h3 className="pricing__card-name">One-off project</h3>
+              <p className="pricing__card-price">From £1,500</p>
               <p className="pricing__card-desc">
                 Everything you need to launch with a brand that positions you as the obvious choice.
               </p>
@@ -78,7 +79,7 @@ export const Pricing: React.FC = () => {
               <button className="pricing__cta pricing__cta--dark" onClick={() => scrollToAudit('Pricing Brand Build CTA')}>
                 Book a free audit
               </button>
-              <p className="pricing__footnote">Fixed scope. Fixed price. No surprises.</p>
+              <p className="pricing__footnote">Pricing depends on scope. We give you a clear quote after your free audit.</p>
             </div>
           </div>
 
@@ -87,6 +88,7 @@ export const Pricing: React.FC = () => {
             <div className="pricing__card-top">
               <p className="pricing__card-label pricing__card-label--light">Brand Partner</p>
               <h3 className="pricing__card-name pricing__card-name--light">Monthly retainer</h3>
+              <p className="pricing__card-price pricing__card-price--light">From £750/mo</p>
               <p className="pricing__card-desc pricing__card-desc--light">
                 Ongoing brand strategy and creative direction for companies scaling past their founding story.
               </p>

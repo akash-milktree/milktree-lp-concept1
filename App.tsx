@@ -43,9 +43,11 @@ import { Navbar } from './components/ui/Navbar';
 import { Hero } from './sections/Hero';
 import { Footer } from './sections/Footer';
 import { HomepageSchema } from './components/SchemaMarkup';
+import { StickyMobileCTA } from './components/ui/StickyMobileCTA';
 
 // Below-fold sections — code-split so they don't block initial render
 const Problem    = lazy(() => import('./sections/Problem').then(m => ({ default: m.Problem })));
+const Process    = lazy(() => import('./sections/Process').then(m => ({ default: m.Process })));
 const WhatWeDo   = lazy(() => import('./sections/WhatWeDo').then(m => ({ default: m.WhatWeDo })));
 const WhyMilktree = lazy(() => import('./sections/WhyMilktree').then(m => ({ default: m.WhyMilktree })));
 const Results    = lazy(() => import('./sections/Results').then(m => ({ default: m.Results })));
@@ -79,6 +81,7 @@ const HomePage: React.FC = () => (
       <Hero />
       <Suspense fallback={null}>
         <Problem />
+        <Process />
         <WhatWeDo />
         <CaseStudies />
         <WhyMilktree />
@@ -90,6 +93,7 @@ const HomePage: React.FC = () => (
       </Suspense>
     </main>
     <Footer />
+    <StickyMobileCTA />
   </>
 );
 

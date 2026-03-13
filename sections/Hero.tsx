@@ -4,7 +4,6 @@ import { Reveal } from '../components/animations/Reveal';
 import { Button } from '../components/ui/Button';
 import { ArrowRight, Sparkles, TrendingUp, Zap, Globe } from 'lucide-react';
 import { heroContent } from '../data/content';
-import { trackContact } from '../utils/meta-tracking';
 
 // Brand showcase cards – real project photos
 const showcaseCards = [
@@ -55,9 +54,8 @@ export const Hero: React.FC = () => {
   const scrollToProcess = () => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' });
   const scrollToAudit = () => {
     if (typeof window.gtag === 'function') {
-      window.gtag('event', 'cta_click', { event_category: 'Hero', event_label: 'Book Your Free Brand Audit', send_to: 'G-9GHX9JVN9S' });
+      window.gtag('event', 'cta_click', { event_category: 'Hero', event_label: 'Get My Free Brand Audit', send_to: 'G-9GHX9JVN9S' });
     }
-    trackContact({ eventSource: 'Hero CTA' });
     document.getElementById('audit')?.scrollIntoView({ behavior: 'smooth' });
   };
 
