@@ -70,6 +70,9 @@ export const FinalCTA: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
             >
+              {/* Formspree requires 'service' — default for the simplified single-step form */}
+              <input type="hidden" name="service" value="Brand Audit Request" />
+
               <div className="finalcta__field">
                 <label className="finalcta__label" htmlFor="audit-name">Name *</label>
                 <input
