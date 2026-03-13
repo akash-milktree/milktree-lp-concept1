@@ -17,12 +17,15 @@
 declare global {
   interface Window {
     fbq: (...args: any[]) => void;
+    __MT_INIT_PV_ID?: string;
   }
 }
 
 interface UserData {
   email?: string;
   phone?: string;
+  firstName?: string;
+  lastName?: string;
   fbc?: string;
   fbp?: string;
   userAgent?: string;
@@ -85,6 +88,26 @@ function getFbcFromUrl(): string | undefined {
   return `fb.1.${Date.now()}.${fbclid}`;
 }
 
+/**
+ * Get or create a persistent anonymous external ID for cross-device matching.
+ * Stored in localStorage so it persists across sessions.
+ */
+function getOrCreateExternalId(): string {
+  if (typeof window === 'undefined') return '';
+  const key = 'mt_external_id';
+  try {
+    let id = localStorage.getItem(key);
+    if (!id) {
+      id = generateEventId();
+      localStorage.setItem(key, id);
+    }
+    return id;
+  } catch {
+    // localStorage may be unavailable (private browsing, etc.)
+    return generateEventId();
+  }
+}
+
 /** Collect user data for CAPI (hashed where needed) */
 async function collectUserData(extra?: Partial<UserData>): Promise<Record<string, any>> {
   const userData: Record<string, any> = {};
@@ -107,6 +130,15 @@ async function collectUserData(extra?: Partial<UserData>): Promise<Record<string
     userData.event_source_url = window.location.href;
   }
 
+  // External ID — persistent anonymous ID for cross-device matching (EMQ boost)
+  const externalId = getOrCreateExternalId();
+  if (externalId) {
+    userData.external_id = [await sha256(externalId)];
+  }
+
+  // Country code — UK-targeted campaign (EMQ boost)
+  userData.ct = [await sha256('gb')];
+
   // Hash email if provided
   if (extra?.email) {
     userData.em = [await sha256(extra.email)];
@@ -115,6 +147,16 @@ async function collectUserData(extra?: Partial<UserData>): Promise<Record<string
   // Hash phone if provided
   if (extra?.phone) {
     userData.ph = [await sha256(extra.phone)];
+  }
+
+  // Hash first name if provided
+  if (extra?.firstName) {
+    userData.fn = [await sha256(extra.firstName)];
+  }
+
+  // Hash last name if provided
+  if (extra?.lastName) {
+    userData.ln = [await sha256(extra.lastName)];
   }
 
   return userData;
@@ -173,8 +215,41 @@ async function sendMetaEvent(
 // ── Public API ───────────────────────────────────────────────────────────────
 
 /**
+ * Initial PageView CAPI — fires the server-side counterpart for the initial
+ * PageView that the Pixel base code in index.html already fired.
+ * Uses the same eventID stored on window.__MT_INIT_PV_ID for deduplication.
+ *
+ * Call this ONCE from AnalyticsTracker on first mount.
+ */
+export function trackInitialPageViewCAPI(): void {
+  const eventId = typeof window !== 'undefined' ? window.__MT_INIT_PV_ID : undefined;
+  if (!eventId) return;
+
+  // Clear it so it can't fire again
+  window.__MT_INIT_PV_ID = undefined;
+
+  // CAPI only — pixel already fired in index.html with matching eventID
+  collectUserData().then((collectedUserData) => {
+    fetch('/api/meta-capi', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        event_name: 'PageView',
+        event_id: eventId,
+        event_time: Math.floor(Date.now() / 1000),
+        event_source_url: window?.location?.href || '',
+        action_source: 'website',
+        user_data: collectedUserData,
+        custom_data: {},
+      }),
+      keepalive: true,
+    }).catch(() => {});
+  }).catch(() => {});
+}
+
+/**
  * PageView — call on SPA route changes.
- * (The initial PageView is handled by the Pixel base code in index.html)
+ * Fires BOTH pixel and CAPI with matching eventID.
  */
 export function trackPageView(): void {
   const eventId = generateEventId();

@@ -26,7 +26,12 @@
       s.parentNode.insertBefore(t,s)}(window, document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', '993503079134900');
-      fbq('track', 'PageView');
+      // Generate eventID for CAPI deduplication — React fires the matching CAPI call on mount
+      var _mtId='xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){
+        var r=Math.random()*16|0;return(c==='x'?r:(r&0x3|0x8)).toString(16);
+      });
+      window.__MT_INIT_PV_ID=_mtId;
+      fbq('track', 'PageView', {}, {eventID: _mtId});
     </script>
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-9GHX9JVN9S"></script>

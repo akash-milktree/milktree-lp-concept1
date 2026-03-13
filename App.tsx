@@ -2,7 +2,7 @@ import React, { useEffect, useRef, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { FormspreeProvider } from '@formspree/react';
-import { trackPageView } from './utils/meta-tracking';
+import { trackPageView, trackInitialPageViewCAPI } from './utils/meta-tracking';
 
 declare global {
   interface Window {
@@ -17,10 +17,12 @@ const AnalyticsTracker: React.FC = () => {
   const location = useLocation();
   const isFirstRender = useRef(true);
 
-  // Page view on route change (skip first render — Pixel base code handles initial PageView)
+  // Page view on route change
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
+      // Fire CAPI for the initial PageView (pixel already fired in index.html)
+      trackInitialPageViewCAPI();
       return;
     }
 

@@ -37,8 +37,16 @@ export const FinalCTA: React.FC = () => {
       });
     }
 
-    // Meta Contact (Pixel + CAPI) with email for match rate
-    trackContact({ eventSource: 'Audit Form Submit', userData: { email } });
+    // Meta Contact (Pixel + CAPI) with email + name for match rate
+    const nameParts = name.trim().split(/\s+/);
+    trackContact({
+      eventSource: 'Audit Form Submit',
+      userData: {
+        email,
+        firstName: nameParts[0] || undefined,
+        lastName: nameParts.length > 1 ? nameParts.slice(1).join(' ') : undefined,
+      },
+    });
 
     handleSubmit(e);
   };

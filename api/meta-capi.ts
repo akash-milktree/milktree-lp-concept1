@@ -49,13 +49,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       custom_data: body.custom_data || {},
     };
 
-    // Map user data fields
+    // Map user data fields (PII fields are already SHA-256 hashed on the client)
     const ud = body.user_data || {};
     if (ud.fbp) event.user_data.fbp = ud.fbp;
     if (ud.fbc) event.user_data.fbc = ud.fbc;
     if (ud.client_user_agent) event.user_data.client_user_agent = ud.client_user_agent;
-    if (ud.em) event.user_data.em = ud.em;    // Already SHA-256 hashed on client
-    if (ud.ph) event.user_data.ph = ud.ph;    // Already SHA-256 hashed on client
+    if (ud.em) event.user_data.em = ud.em;              // hashed email
+    if (ud.ph) event.user_data.ph = ud.ph;              // hashed phone
+    if (ud.fn) event.user_data.fn = ud.fn;              // hashed first name
+    if (ud.ln) event.user_data.ln = ud.ln;              // hashed last name
+    if (ud.ct) event.user_data.ct = ud.ct;              // hashed country code
+    if (ud.external_id) event.user_data.external_id = ud.external_id; // hashed anonymous ID
 
     // Add server-side IP (from Vercel request headers)
     const clientIp =
