@@ -4,7 +4,7 @@ import { Menu, X } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { MilktreeLogo } from './MilktreeLogo';
 import { Button } from './Button';
-import { trackContact } from '../../utils/meta-tracking';
+import { trackCustom } from '../../utils/meta-tracking';
 import { isPaidTraffic } from '../../utils/paid-traffic';
 
 const sectionLinks = [
@@ -122,7 +122,7 @@ export const Navbar: React.FC = () => {
                 if (typeof window.gtag === 'function') {
                   window.gtag('event', 'cta_click', { event_category: 'Navbar', event_label: 'Free Audit', send_to: 'G-9GHX9JVN9S' });
                 }
-                trackContact({ eventSource: 'Navbar Desktop CTA' });
+                trackCustom('CTAClick', { customData: { source: 'Navbar Desktop CTA' } });
                 if (isHome) {
                   scrollToSection('audit');
                 } else {
@@ -144,7 +144,7 @@ export const Navbar: React.FC = () => {
                 if (typeof window.gtag === 'function') {
                   window.gtag('event', 'cta_click', { event_category: 'Navbar Mobile Pill', event_label: 'Free Audit', send_to: 'G-9GHX9JVN9S' });
                 }
-                trackContact({ eventSource: 'Navbar Mobile Pill CTA' });
+                trackCustom('CTAClick', { customData: { source: 'Navbar Mobile Pill CTA' } });
                 if (isHome) {
                   scrollToSection('audit');
                 } else {
@@ -206,7 +206,7 @@ export const Navbar: React.FC = () => {
                   if (typeof window.gtag === 'function') {
                     window.gtag('event', 'cta_click', { event_category: 'Navbar Mobile', event_label: 'Book Your Free Brand Audit', send_to: 'G-9GHX9JVN9S' });
                   }
-                  trackContact({ eventSource: 'Navbar Mobile Menu CTA' });
+                  trackCustom('CTAClick', { customData: { source: 'Navbar Mobile Menu CTA' } });
                   if (isHome) {
                     scrollToSection('audit');
                   } else {

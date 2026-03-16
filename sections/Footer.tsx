@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { trackContact, trackCustom } from '../utils/meta-tracking';
+import { trackCustom } from '../utils/meta-tracking';
 
 
 const LinkedIn = () => (
@@ -102,7 +102,6 @@ export const Footer: React.FC = () => {
                 href="mailto:levi@milktreeagency.com"
                 className="footer__col-link"
                 onClick={() => {
-                  trackContact({ eventSource: 'Footer Email Link' });
                   trackCustom('SocialClick', { customData: { platform: 'Email' } });
                 }}
               >levi@milktreeagency.com</a>
@@ -139,7 +138,6 @@ export const Footer: React.FC = () => {
             className="footer__social-link"
             aria-label="Email"
             onClick={() => {
-              trackContact({ eventSource: 'Footer Email Link' });
               trackCustom('SocialClick', { customData: { platform: 'Email' } });
             }}
           ><EmailIcon /></a>

@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Reveal } from '../components/animations/Reveal';
 import { Check } from 'lucide-react';
-import { trackContact } from '../utils/meta-tracking';
+import { trackCustom } from '../utils/meta-tracking';
 
 const oneOffIncludes = [
   'Brand positioning strategy',
@@ -29,7 +29,7 @@ export const Pricing: React.FC = () => {
     if (typeof window.gtag === 'function') {
       window.gtag('event', 'cta_click', { event_category: 'Pricing', event_label: source, send_to: 'G-9GHX9JVN9S' });
     }
-    trackContact({ eventSource: source });
+    trackCustom('CTAClick', { customData: { source } });
     document.getElementById('audit')?.scrollIntoView({ behavior: 'smooth' });
   };
 

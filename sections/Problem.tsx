@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Reveal } from '../components/animations/Reveal';
 import { Button } from '../components/ui/Button';
 import { AlertTriangle, Zap, ArrowRight } from 'lucide-react';
-import { trackContact } from '../utils/meta-tracking';
+import { trackCustom } from '../utils/meta-tracking';
 
 const painPoints = [
   'Your brand looks different depending on where someone finds you.',
@@ -32,7 +32,7 @@ export const Problem: React.FC = () => {
     if (typeof window.gtag === 'function') {
       window.gtag('event', 'cta_click', { event_category: 'Problem', event_label: 'Book Your Free Brand Audit', send_to: 'G-9GHX9JVN9S' });
     }
-    trackContact({ eventSource: 'Problem Section CTA' });
+    trackCustom('CTAClick', { customData: { source: 'Problem Section CTA' } });
     document.getElementById('audit')?.scrollIntoView({ behavior: 'smooth' });
   };
 

@@ -3,7 +3,7 @@ import { useInView, motion, useSpring, useMotionValue } from 'framer-motion';
 import { Zap } from 'lucide-react';
 import { Reveal } from '../components/animations/Reveal';
 import { resultsContent } from '../data/content';
-import { trackContact } from '../utils/meta-tracking';
+import { trackCustom } from '../utils/meta-tracking';
 
 interface CountUpProps {
   target: number;
@@ -66,7 +66,7 @@ export const Results: React.FC = () => {
               if (typeof window.gtag === 'function') {
                 window.gtag('event', 'cta_click', { event_category: 'Results', event_label: 'Book Your Free Brand Audit', send_to: 'G-9GHX9JVN9S' });
               }
-              trackContact({ eventSource: 'Results CTA' });
+              trackCustom('CTAClick', { customData: { source: 'Results CTA' } });
               document.getElementById('audit')?.scrollIntoView({ behavior: 'smooth' });
             }}
           >

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import { Reveal } from '../components/animations/Reveal';
 import { caseStudies } from '../data/content';
-import { trackContact } from '../utils/meta-tracking';
+import { trackCustom } from '../utils/meta-tracking';
 
 export const CaseStudies: React.FC = () => {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -101,7 +101,7 @@ export const CaseStudies: React.FC = () => {
                 if (typeof window.gtag === 'function') {
                   window.gtag('event', 'cta_click', { event_category: 'Case Studies', event_label: 'Get a free audit', send_to: 'G-9GHX9JVN9S' });
                 }
-                trackContact({ eventSource: 'Case Studies CTA' });
+                trackCustom('CTAClick', { customData: { source: 'Case Studies CTA' } });
                 document.getElementById('audit')?.scrollIntoView({ behavior: 'smooth' });
               }}
             >
