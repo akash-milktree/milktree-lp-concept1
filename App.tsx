@@ -61,6 +61,7 @@ const FinalCTA   = lazy(() => import('./sections/FinalCTA').then(m => ({ default
 const CaseStudiesPage    = lazy(() => import('./pages/CaseStudiesPage').then(m => ({ default: m.CaseStudiesPage })));
 const CaseStudyDetailPage = lazy(() => import('./pages/CaseStudyDetailPage').then(m => ({ default: m.CaseStudyDetailPage })));
 const ThankYouPage       = lazy(() => import('./pages/ThankYouPage').then(m => ({ default: m.ThankYouPage })));
+const AuditLandingPage   = lazy(() => import('./pages/AuditLandingPage').then(m => ({ default: m.AuditLandingPage })));
 
 const HomePage: React.FC = () => (
   <>
@@ -109,6 +110,7 @@ const App: React.FC = () => {
           <Route path="/work" element={<Suspense fallback={null}><CaseStudiesPage /></Suspense>} />
           <Route path="/work/:slug" element={<Suspense fallback={null}><CaseStudyDetailPage /></Suspense>} />
           <Route path="/thank-you" element={<Suspense fallback={null}><ThankYouPage /></Suspense>} />
+          <Route path="/audit" element={<Suspense fallback={null}><AuditLandingPage /></Suspense>} />
         </Routes>
       </BrowserRouter>
     </FormspreeProvider>

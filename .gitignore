@@ -2,3 +2,9 @@ node_modules/
 dist/
 .DS_Store
 *.local
+
+# Local working files — not part of the deployable site
+*.zip
+skills/
+.lp-export-tmp/
+package-lock?2*.json
