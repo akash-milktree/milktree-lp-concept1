@@ -2,6 +2,7 @@ User-agent: *
 Allow: /
 Disallow: /thank-you
 Disallow: /audit
+Disallow: /audit/
 Disallow: /audit-assets/
 
 Sitemap: https://milktreeagency.com/sitemap.xml

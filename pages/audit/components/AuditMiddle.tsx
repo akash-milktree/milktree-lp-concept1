@@ -13,8 +13,10 @@ import { Eyebrow, Icon } from './AuditPrimitives';
 // ── PROCESS ──────────────────────────────────────────────────────
 interface ProcessStep { num: string; title: string; desc: string; dur: string }
 
+// AUDIT FIX (§4.4): step 01 reworded to carry the ENG-01 ad hook ("Give us 20 minutes...")
+// onto the LP. Lifts ENG-01 message-match from 3/5 to 4/5 without ad-specific LP variants.
 const STEPS: ProcessStep[] = [
-  { num: '01', title: 'Audit & diagnose',     desc: 'Drop your details. Within 48 hours we deliver a written audit — the honest read on your brand, before anything else.', dur: 'Week 0' },
+  { num: '01', title: 'Audit & diagnose',     desc: 'Give us 20 minutes on a discovery call. Within 48 hours of the call you get a tight, honest written audit — the read on your brand before anything else.', dur: 'Week 0' },
   { num: '02', title: 'Position & message',   desc: 'We set where you sit in the market and build the messaging framework that makes it stick everywhere.',                  dur: 'Week 1–2' },
   { num: '03', title: 'Identity & system',    desc: 'Logo, colour, type, motion, components. Designed as a system — not a collection of files.',                              dur: 'Week 2–4' },
   { num: '04', title: 'Rollout & momentum',   desc: 'Guidelines, templates, and the first wave of assets. Your team ships day one, not month three.',                          dur: 'Week 4–6' },

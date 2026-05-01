@@ -15,6 +15,19 @@
       "actions": [
         { "type": "email", "to": "levi@milktreeagency.com" }
       ]
+    },
+    "auditLpForm": {
+      "name": "Audit LP — Paid Traffic Lead Form",
+      "fields": {
+        "name": { "required": true },
+        "email": { "required": true, "type": "email" },
+        "website": {},
+        "focus": {},
+        "service": { "required": true }
+      },
+      "actions": [
+        { "type": "email", "to": "levi@milktreeagency.com" }
+      ]
     }
   }
 }

@@ -54,8 +54,16 @@ export const AuditHero: React.FC = () => {
               We <span style={{ color: '#FFDC04' }}>fix that.</span>
             </h1>
 
-            <p className="fg-2" style={{ fontSize: 'clamp(17px, 1.4vw, 21px)', lineHeight: 1.55, maxWidth: 560, marginTop: 32 }}>
-              We build brand identities that make you the obvious choice. The right clients come to you, and your team always knows how to represent the business. 200+ brands built. Average enquiry lift: 250%.
+            {/*
+              AUDIT FIX (§4.5 #1): "Clarity problem" line woven into the hero subhead.
+              This is the most-shared theme between the proven ad winner and the LP —
+              having it above the fold lifts message-match for AWR-01, DES-01, and ACT-01.
+            */}
+            <p className="fg-2" style={{ fontSize: 'clamp(17px, 1.4vw, 21px)', lineHeight: 1.55, maxWidth: 580, marginTop: 32 }}>
+              It's not a design problem. It's a <span style={{ color: '#fff', fontWeight: 600 }}>clarity problem</span>. We build brand identities that make you the obvious choice — so the right clients come to you, and your team knows exactly how to represent the business.
+            </p>
+            <p className="fg-3" style={{ fontSize: 14, marginTop: 14, letterSpacing: '0.02em' }}>
+              200+ brands built · Average enquiry lift 250% · 4–6 week delivery
             </p>
 
             <div style={{ display: 'flex', gap: 10, marginTop: 34, flexWrap: 'wrap' }}>
@@ -147,20 +155,25 @@ const FOCUS_OPTIONS = ['Brand identity', 'Website / LP', 'Design system', 'Conte
 type FocusOption = (typeof FOCUS_OPTIONS)[number];
 
 const BookingCard: React.FC = () => {
-  const [state, handleSubmit] = useForm('auditForm');
+  const [state, handleSubmit] = useForm('auditLpForm');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [focus, setFocus] = useState<FocusOption>('Brand identity');
   const navigate = useNavigate();
 
-  const canSubmit = name.trim() !== '' && email.trim() !== '' && email.includes('@');
-
-  // Redirect to thank-you on success — same flow as the existing site's audit form.
+  // Redirect to LP-isolated thank-you on success.
+  // Path differs by host: on audit.milktreeagency.com it's /thank-you (subdomain root = /audit),
+  // on the main domain it's /audit/thank-you.
   useEffect(() => {
     if (state.succeeded) {
-      navigate('/thank-you?lp=audit&card=hero');
+      const isAuditSubdomain =
+        typeof window !== 'undefined' && window.location.hostname === 'audit.milktreeagency.com';
+      const path = isAuditSubdomain ? '/thank-you' : '/audit/thank-you';
+      navigate(`${path}?card=hero`);
     }
   }, [state.succeeded, navigate]);
+
+  const canSubmit = name.trim() !== '' && email.trim() !== '' && email.includes('@');
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

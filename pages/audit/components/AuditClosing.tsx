@@ -20,19 +20,23 @@ import { trackContact } from '../../../utils/meta-tracking';
 
 // ── FINAL CTA (bottom audit form) ────────────────────────────────
 export const FinalCTA: React.FC = () => {
-  const [state, handleSubmit] = useForm('auditForm');
+  const [state, handleSubmit] = useForm('auditLpForm');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [website, setWebsite] = useState('');
   const navigate = useNavigate();
 
-  const canSubmit = name.trim() !== '' && email.trim() !== '' && email.includes('@');
-
+  // Redirect to LP-isolated thank-you on success — host-aware path.
   useEffect(() => {
     if (state.succeeded) {
-      navigate('/thank-you?lp=audit&card=final');
+      const isAuditSubdomain =
+        typeof window !== 'undefined' && window.location.hostname === 'audit.milktreeagency.com';
+      const path = isAuditSubdomain ? '/thank-you' : '/audit/thank-you';
+      navigate(`${path}?card=final`);
     }
   }, [state.succeeded, navigate]);
+
+  const canSubmit = name.trim() !== '' && email.trim() !== '' && email.includes('@');
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

@@ -41,6 +41,33 @@ export const Problem: React.FC = () => (
         <ProblemCard label="Without a system" tone="coral" items={PAINS} />
         <ProblemCard label="With Milktree" tone="green" items={FIXES} />
       </div>
+
+      {/*
+        AUDIT FIX (§4.4): "Your hero line is your pitch" callout — carries the DES-02 ad
+        hook ("Your homepage is one sentence from winning") onto the LP. Lifts DES-02
+        message-match from 3/5 to 4-5/5 without per-ad LP variants.
+      */}
+      <div style={{
+        marginTop: 32,
+        position: 'relative',
+        borderRadius: 28,
+        padding: 'clamp(28px, 3.5vw, 44px)',
+        background: 'linear-gradient(135deg, rgba(255,220,4,0.04) 0%, rgba(255,255,255,0.015) 100%)',
+        border: '1px solid rgba(255,220,4,0.18)',
+        overflow: 'hidden',
+      }}>
+        <div aria-hidden style={{ position: 'absolute', top: -1, left: 28, right: 28, height: 1, background: 'linear-gradient(90deg, transparent, rgba(255,220,4,0.5), transparent)' }} />
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 12px', borderRadius: 9999, background: 'rgba(0,0,0,0.35)', border: '1px solid rgba(255,220,4,0.35)', color: '#FFDC04', fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 18 }}>
+          <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#FFDC04' }} />
+          Start with the hero line
+        </div>
+        <p style={{ fontSize: 'clamp(20px, 2.4vw, 30px)', fontWeight: 500, lineHeight: 1.3, letterSpacing: '-0.02em', color: '#fff', margin: 0, fontFamily: 'AuditGelasio, serif', fontStyle: 'italic', maxWidth: 920 }}>
+          "Your homepage is one sentence from winning. The hero line is the entire pitch — if it doesn't land, nothing below it will."
+        </p>
+        <p className="fg-3" style={{ fontSize: 13, marginTop: 14, letterSpacing: '0.02em' }}>
+          We've rewritten the hero line for 200+ brands. Average enquiry lift: 250%.
+        </p>
+      </div>
     </div>
     <style>{`@media (max-width: 760px) { .audit-lp .pg-grid { grid-template-columns: 1fr !important; } }`}</style>
   </section>

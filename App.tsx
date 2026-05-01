@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { FormspreeProvider } from '@formspree/react';
 import { trackPageView, trackInitialPageViewCAPI } from './utils/meta-tracking';
@@ -62,6 +62,18 @@ const CaseStudiesPage    = lazy(() => import('./pages/CaseStudiesPage').then(m =
 const CaseStudyDetailPage = lazy(() => import('./pages/CaseStudyDetailPage').then(m => ({ default: m.CaseStudyDetailPage })));
 const ThankYouPage       = lazy(() => import('./pages/ThankYouPage').then(m => ({ default: m.ThankYouPage })));
 const AuditLandingPage   = lazy(() => import('./pages/AuditLandingPage').then(m => ({ default: m.AuditLandingPage })));
+const AuditThankYouPage  = lazy(() => import('./pages/AuditThankYouPage').then(m => ({ default: m.AuditThankYouPage })));
+
+// audit.milktreeagency.com is the dedicated subdomain for the paid-traffic LP.
+// On that host:
+//   /          → AuditLandingPage (URL stays clean)
+//   /thank-you → AuditThankYouPage
+//   *          → redirect back to /
+// On the main domain (milktreeagency.com), all routes work as before, plus
+//   /audit            → AuditLandingPage
+//   /audit/thank-you  → AuditThankYouPage
+const isAuditSubdomain =
+  typeof window !== 'undefined' && window.location.hostname === 'audit.milktreeagency.com';
 
 const HomePage: React.FC = () => (
   <>
@@ -106,11 +118,23 @@ const App: React.FC = () => {
       <BrowserRouter>
         <AnalyticsTracker />
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/work" element={<Suspense fallback={null}><CaseStudiesPage /></Suspense>} />
-          <Route path="/work/:slug" element={<Suspense fallback={null}><CaseStudyDetailPage /></Suspense>} />
-          <Route path="/thank-you" element={<Suspense fallback={null}><ThankYouPage /></Suspense>} />
-          <Route path="/audit" element={<Suspense fallback={null}><AuditLandingPage /></Suspense>} />
+          {isAuditSubdomain ? (
+            <>
+              {/* On audit.milktreeagency.com: only the LP + LP thank-you exist */}
+              <Route path="/" element={<Suspense fallback={null}><AuditLandingPage /></Suspense>} />
+              <Route path="/thank-you" element={<Suspense fallback={null}><AuditThankYouPage /></Suspense>} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </>
+          ) : (
+            <>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/work" element={<Suspense fallback={null}><CaseStudiesPage /></Suspense>} />
+              <Route path="/work/:slug" element={<Suspense fallback={null}><CaseStudyDetailPage /></Suspense>} />
+              <Route path="/thank-you" element={<Suspense fallback={null}><ThankYouPage /></Suspense>} />
+              <Route path="/audit" element={<Suspense fallback={null}><AuditLandingPage /></Suspense>} />
+              <Route path="/audit/thank-you" element={<Suspense fallback={null}><AuditThankYouPage /></Suspense>} />
+            </>
+          )}
         </Routes>
       </BrowserRouter>
     </FormspreeProvider>
