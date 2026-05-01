@@ -169,7 +169,14 @@ const SERVICE_OPTIONS = [
 ] as const;
 
 const BookingCard: React.FC = () => {
-  const [state, handleSubmit] = useForm('auditLpForm');
+  // FIX (May 2): switched from `auditLpForm` → `auditForm` because the
+  // auditLpForm recipient (levi@milktreeagency.com) wasn't verified
+  // server-side. Submissions returned 200 OK but Formspree silently
+  // dropped the email dispatch. `auditForm` is the proven-working
+  // main-site form (verified months ago); a hidden `source` field
+  // tags LP submissions so Levi can filter them out from main-site
+  // submissions in his inbox.
+  const [state, handleSubmit] = useForm('auditForm');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [company, setCompany] = useState('');
@@ -236,6 +243,10 @@ const BookingCard: React.FC = () => {
       }}
     >
       <div style={{ position: 'absolute', top: -1, left: 24, right: 24, height: 1, background: 'linear-gradient(90deg, transparent, rgba(255,220,4,0.5), transparent)' }} />
+
+      {/* Hidden tag so Levi can filter LP submissions from main-site
+          submissions in his inbox. */}
+      <input type="hidden" name="source" value="Audit LP - Hero Card" />
 
       <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 18 }}>
         <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#63CC79', boxShadow: '0 0 10px rgba(99,204,121,0.8)' }} />
