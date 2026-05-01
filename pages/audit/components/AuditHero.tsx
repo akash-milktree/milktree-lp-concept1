@@ -152,17 +152,29 @@ const BackgroundOrbits: React.FC = () => {
 
 // ── BookingCard — Formspree-wired audit request form ──────────────
 // AUDIT FIX (May 2): replaced "What's the focus?" chip-picker with two
-// qualifying fields (Company name + Website). Reasoning: focus chips
-// asked what work to do; better signal for the discovery call is who
-// is asking + what their site looks like today. Levi can pre-research
-// before the call. Fields kept short (4 total: 2 required, 2 optional)
-// to keep conversion friction low.
+// qualifying fields (Company name + Website). May 2 v2: added a service
+// dropdown so the call has agenda before it starts. Hidden source-tracking
+// field dropped — the user-selected service IS the value Levi sees.
+// 5 fields total (3 required, 2 optional) — still under the typical
+// "drop conversion ~10% per extra field" threshold for B2B paid traffic.
+const SERVICE_OPTIONS = [
+  'Brand strategy',
+  'Brand identity',
+  'Website / landing page',
+  'Design system',
+  'Content strategy',
+  'Social media design',
+  'Generative AI visuals',
+  'Not sure yet',
+] as const;
+
 const BookingCard: React.FC = () => {
   const [state, handleSubmit] = useForm('auditLpForm');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [company, setCompany] = useState('');
   const [website, setWebsite] = useState('');
+  const [service, setService] = useState<string>('');
   const navigate = useNavigate();
 
   // Redirect to LP-isolated thank-you on success.
@@ -177,7 +189,10 @@ const BookingCard: React.FC = () => {
     }
   }, [state.succeeded, navigate]);
 
-  const canSubmit = name.trim() !== '' && email.trim() !== '' && email.includes('@');
+  const canSubmit =
+    name.trim() !== '' &&
+    email.trim() !== '' && email.includes('@') &&
+    service !== '';
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -221,9 +236,6 @@ const BookingCard: React.FC = () => {
       }}
     >
       <div style={{ position: 'absolute', top: -1, left: 24, right: 24, height: 1, background: 'linear-gradient(90deg, transparent, rgba(255,220,4,0.5), transparent)' }} />
-
-      {/* Hidden Formspree field — service tag so submissions can be filtered by source */}
-      <input type="hidden" name="service" value="Audit LP - Hero Card" />
 
       <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 18 }}>
         <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#63CC79', boxShadow: '0 0 10px rgba(99,204,121,0.8)' }} />
@@ -273,6 +285,34 @@ const BookingCard: React.FC = () => {
           onChange={(e) => setWebsite(e.target.value)}
           autoComplete="url"
         />
+        <select
+          className="field"
+          name="service"
+          required
+          value={service}
+          onChange={(e) => setService(e.target.value)}
+          style={{
+            // Native select needs the appearance + arrow tweaks to match
+            // the .field input styling (which is in audit-lp.css).
+            appearance: 'none',
+            WebkitAppearance: 'none',
+            MozAppearance: 'none',
+            backgroundImage: "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='none' stroke='%23ffffff80' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M1 1l5 5 5-5'/></svg>\")",
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'right 16px center',
+            paddingRight: 40,
+            color: service === '' ? 'rgba(255,255,255,0.35)' : '#fff',
+          }}
+        >
+          <option value="" disabled style={{ color: 'rgba(255,255,255,0.35)', background: '#0A0A0A' }}>
+            What service do you need?
+          </option>
+          {SERVICE_OPTIONS.map((opt) => (
+            <option key={opt} value={opt} style={{ color: '#fff', background: '#0A0A0A' }}>
+              {opt}
+            </option>
+          ))}
+        </select>
       </div>
 
       <Button type="submit" size="md" style={{ marginTop: 22, width: '100%', justifyContent: 'center', opacity: state.submitting ? 0.6 : 1 }}>
