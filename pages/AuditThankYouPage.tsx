@@ -75,7 +75,8 @@ export const AuditThankYouPage: React.FC = () => {
         <meta name="googlebot" content="noindex, nofollow" />
       </Helmet>
 
-      {/* Minimal nav — logo only, no links anywhere */}
+      {/* Minimal nav: logo only, no links anywhere. Logo upsized to match the
+          LP navbar (size 22). */}
       <div style={{ position: 'fixed', top: 18, left: 0, right: 0, zIndex: 100, display: 'flex', justifyContent: 'center', pointerEvents: 'none', padding: '0 16px' }}>
         <div style={{
           pointerEvents: 'auto',
@@ -84,10 +85,10 @@ export const AuditThankYouPage: React.FC = () => {
           WebkitBackdropFilter: 'blur(16px)',
           border: '1px solid rgba(255,255,255,0.08)',
           borderRadius: 9999,
-          padding: '11px 22px',
+          padding: '13px 24px',
           display: 'flex', alignItems: 'center',
         }}>
-          <Logo />
+          <Logo size={22} />
         </div>
       </div>
 
@@ -125,7 +126,7 @@ export const AuditThankYouPage: React.FC = () => {
           }}>
             {[
               { n: '01', title: 'Book your audit call', desc: 'Pick a 30-minute slot below at a time that suits you. Same week if possible.' },
-              { n: '02', title: 'We take your brief on the call', desc: 'On the call we\'ll dig into your brand, goals, and where you\'re stuck — so the audit is tailored to you.' },
+              { n: '02', title: 'We take your brief on the call', desc: 'On the call we\'ll dig into your brand, goals, and where you\'re stuck. The audit is tailored to you.' },
               { n: '03', title: 'Receive your audit in 48 hours', desc: 'Within 48 hours of the call you get a personalised brand audit with clear, actionable next steps.' },
             ].map((step, i) => (
               <div key={step.n} style={{ display: 'flex', gap: 18, padding: i > 0 ? '20px 0 0' : '0', borderTop: i > 0 ? '1px solid rgba(255,255,255,0.06)' : 'none', marginTop: i > 0 ? 20 : 0 }}>
@@ -154,7 +155,7 @@ export const AuditThankYouPage: React.FC = () => {
 
           {/* Fallback note */}
           <p className="fg-3" style={{ fontSize: 13, marginTop: 20, display: 'inline-flex', alignItems: 'center', gap: 8 }}>
-            Can't book now? Check your inbox — we've sent the booking link there too.
+            Can't book now? Check your inbox. We've sent the booking link there too.
           </p>
         </div>
       </main>

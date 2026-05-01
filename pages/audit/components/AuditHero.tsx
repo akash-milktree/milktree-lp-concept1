@@ -56,11 +56,11 @@ export const AuditHero: React.FC = () => {
 
             {/*
               AUDIT FIX (§4.5 #1): "Clarity problem" line woven into the hero subhead.
-              This is the most-shared theme between the proven ad winner and the LP —
-              having it above the fold lifts message-match for AWR-01, DES-01, and ACT-01.
+              This is the most-shared theme between the proven ad winner and the LP.
+              Em dash removed; sentence split into two for Grade-7 UK English readability.
             */}
             <p className="fg-2" style={{ fontSize: 'clamp(17px, 1.4vw, 21px)', lineHeight: 1.55, maxWidth: 580, marginTop: 32 }}>
-              It's not a design problem. It's a <span style={{ color: '#fff', fontWeight: 600 }}>clarity problem</span>. We build brand identities that make you the obvious choice — so the right clients come to you, and your team knows exactly how to represent the business.
+              It's not a design problem. It's a <span style={{ color: '#fff', fontWeight: 600 }}>clarity problem</span>. We build brand identities that make you the obvious choice. The right clients come to you, and your team knows exactly how to represent the business.
             </p>
             <p className="fg-3" style={{ fontSize: 14, marginTop: 14, letterSpacing: '0.02em' }}>
               200+ brands built · Average enquiry lift 250% · 4–6 week delivery
@@ -87,8 +87,12 @@ export const AuditHero: React.FC = () => {
           </div>
         </div>
 
-        {/* Logo marquee strip */}
-        <div style={{ marginTop: 96, padding: '28px 0', borderTop: '1px solid rgba(255,255,255,0.08)', borderBottom: '1px solid rgba(255,255,255,0.08)', position: 'relative' }}>
+        {/* Logo marquee strip
+            AUDIT FIX: removed redundant outer top border. The label dividers
+            on either side of "Trusted by..." already provide a top edge,
+            and stacking another full-width line above looked like a double
+            divider. borderBottom kept for separation from the next section. */}
+        <div style={{ marginTop: 96, padding: '28px 0', borderBottom: '1px solid rgba(255,255,255,0.08)', position: 'relative' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 20, marginBottom: 20, color: 'rgba(255,255,255,0.5)', fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
             <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.06)' }} />
             <span>Trusted by 200+ brands across 15 industries</span>
@@ -147,18 +151,18 @@ const BackgroundOrbits: React.FC = () => {
 };
 
 // ── BookingCard — Formspree-wired audit request form ──────────────
-// AUDIT FIX: was a fake form ("Book a free 30-minute call"); now real Formspree
-// submission, fires Meta Pixel + CAPI Contact, navigates to /thank-you on success
-// (the existing /thank-you page fires the Lead + Schedule events to keep
-// attribution consistent with the rest of the site).
-const FOCUS_OPTIONS = ['Brand identity', 'Website / LP', 'Design system', 'Content + AI'] as const;
-type FocusOption = (typeof FOCUS_OPTIONS)[number];
-
+// AUDIT FIX (May 2): replaced "What's the focus?" chip-picker with two
+// qualifying fields (Company name + Website). Reasoning: focus chips
+// asked what work to do; better signal for the discovery call is who
+// is asking + what their site looks like today. Levi can pre-research
+// before the call. Fields kept short (4 total: 2 required, 2 optional)
+// to keep conversion friction low.
 const BookingCard: React.FC = () => {
   const [state, handleSubmit] = useForm('auditLpForm');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [focus, setFocus] = useState<FocusOption>('Brand identity');
+  const [company, setCompany] = useState('');
+  const [website, setWebsite] = useState('');
   const navigate = useNavigate();
 
   // Redirect to LP-isolated thank-you on success.
@@ -218,9 +222,8 @@ const BookingCard: React.FC = () => {
     >
       <div style={{ position: 'absolute', top: -1, left: 24, right: 24, height: 1, background: 'linear-gradient(90deg, transparent, rgba(255,220,4,0.5), transparent)' }} />
 
-      {/* Hidden Formspree fields */}
-      <input type="hidden" name="service" value="Audit LP — Hero Card" />
-      <input type="hidden" name="focus" value={focus} />
+      {/* Hidden Formspree field — service tag so submissions can be filtered by source */}
+      <input type="hidden" name="service" value="Audit LP - Hero Card" />
 
       <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 18 }}>
         <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#63CC79', boxShadow: '0 0 10px rgba(99,204,121,0.8)' }} />
@@ -231,7 +234,7 @@ const BookingCard: React.FC = () => {
         Get your free brand audit.
       </h3>
       <p className="fg-2" style={{ fontSize: 14, lineHeight: 1.55, marginTop: 8 }}>
-        Tell us the focus. We'll come back within 48 hours with a personalised audit and a sharp, honest take.
+        Tell us a bit about your business. We'll send a personalised audit within 48 hours.
       </p>
 
       <div style={{ marginTop: 18, display: 'grid', gap: 10 }}>
@@ -254,31 +257,22 @@ const BookingCard: React.FC = () => {
           onChange={(e) => setEmail(e.target.value)}
           autoComplete="email"
         />
-      </div>
-
-      <div className="fg-3" style={{ fontSize: 11.5, letterSpacing: '0.14em', fontWeight: 700, textTransform: 'uppercase', marginTop: 18, marginBottom: 10 }}>
-        What's the focus?
-      </div>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-        {FOCUS_OPTIONS.map((f) => {
-          const active = focus === f;
-          return (
-            <button
-              type="button"
-              key={f}
-              onClick={() => setFocus(f)}
-              style={{
-                padding: '9px 14px', borderRadius: 9999, fontSize: 13, fontWeight: 600, cursor: 'pointer',
-                border: `1px solid ${active ? '#FFDC04' : 'rgba(255,255,255,0.12)'}`,
-                background: active ? '#FFDC04' : 'rgba(255,255,255,0.03)',
-                color: active ? '#000' : 'rgba(255,255,255,0.78)',
-                transition: 'all 0.2s',
-              }}
-            >
-              {f}
-            </button>
-          );
-        })}
+        <input
+          className="field"
+          name="company"
+          placeholder="Company name"
+          value={company}
+          onChange={(e) => setCompany(e.target.value)}
+          autoComplete="organization"
+        />
+        <input
+          className="field"
+          name="website"
+          placeholder="Website (optional)"
+          value={website}
+          onChange={(e) => setWebsite(e.target.value)}
+          autoComplete="url"
+        />
       </div>
 
       <Button type="submit" size="md" style={{ marginTop: 22, width: '100%', justifyContent: 'center', opacity: state.submitting ? 0.6 : 1 }}>
@@ -287,7 +281,7 @@ const BookingCard: React.FC = () => {
 
       {state.errors && state.errors.getAllFieldErrors().length > 0 && (
         <div style={{ marginTop: 12, padding: '10px 14px', borderRadius: 8, background: 'rgba(239,136,105,0.1)', border: '1px solid rgba(239,136,105,0.3)', color: '#EF8869', fontSize: 13 }}>
-          Couldn't submit — please check your details and try again.
+          Couldn't submit. Please check your details and try again.
         </div>
       )}
 

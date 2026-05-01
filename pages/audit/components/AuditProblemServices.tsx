@@ -12,7 +12,7 @@ const PAINS = [
   'Your brand looks different everywhere it shows up.',
   'Your message changes every time someone new writes it.',
   'Every creative decision comes back to your inbox.',
-  'You look polished — but never unmistakable.',
+  'You look polished, but never unmistakable.',
 ];
 const FIXES = [
   'One identity system. Consistent across every surface.',
@@ -33,7 +33,7 @@ export const Problem: React.FC = () => (
           </h2>
         </div>
         <p className="fg-2" style={{ maxWidth: 380, fontSize: 17, lineHeight: 1.6 }}>
-          Most brands don't fail because they look bad. They fail because nothing they say — or show — agrees with anything else they say or show.
+          Most brands don't fail because they look bad. They fail because nothing they say agrees with anything else they say or show.
         </p>
       </div>
 
@@ -59,13 +59,13 @@ export const Problem: React.FC = () => (
         <div aria-hidden style={{ position: 'absolute', top: -1, left: 28, right: 28, height: 1, background: 'linear-gradient(90deg, transparent, rgba(255,220,4,0.5), transparent)' }} />
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 12px', borderRadius: 9999, background: 'rgba(0,0,0,0.35)', border: '1px solid rgba(255,220,4,0.35)', color: '#FFDC04', fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 18 }}>
           <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#FFDC04' }} />
-          Start with the hero line
+          Start with the first line
         </div>
         <p style={{ fontSize: 'clamp(20px, 2.4vw, 30px)', fontWeight: 500, lineHeight: 1.3, letterSpacing: '-0.02em', color: '#fff', margin: 0, fontFamily: 'AuditGelasio, serif', fontStyle: 'italic', maxWidth: 920 }}>
-          "Your homepage is one sentence from winning. The hero line is the entire pitch — if it doesn't land, nothing below it will."
+          "Your homepage is one sentence from winning. The first line is the whole pitch. If it doesn't land, nothing below it will."
         </p>
         <p className="fg-3" style={{ fontSize: 13, marginTop: 14, letterSpacing: '0.02em' }}>
-          We've rewritten the hero line for 200+ brands. Average enquiry lift: 250%.
+          We've rewritten the first line for 200+ brands. Average enquiry lift: 250%.
         </p>
       </div>
     </div>
@@ -110,7 +110,7 @@ interface ServiceItem { title: string; desc: string; icon: IconFn; meta: string 
 
 const SERVICES: ServiceItem[] = [
   { title: 'Brand Strategy',         desc: 'Positioning, audience, narrative. The commercial argument before the visual one.',                          icon: Icon.compass,  meta: 'Strategy · Workshop' },
-  { title: 'Branding',               desc: 'Identity systems — logo, mark, colour, type, motion — built to scale, not for a deck.',                      icon: Icon.layers,   meta: 'Identity · Guidelines' },
+  { title: 'Branding',               desc: 'Identity systems (logo, mark, colour, type, motion) built to scale, not for a deck.',                          icon: Icon.layers,   meta: 'Identity · Guidelines' },
   { title: 'Design System',          desc: 'Tokens, components, documentation. One source of truth for every designer, every channel.',                  icon: Icon.grid,     meta: 'Tokens · Components' },
   { title: 'UI / UX & Websites',     desc: 'High-conversion landing pages, one-pagers, and marketing sites. Shipped in weeks.',                          icon: Icon.monitor,  meta: 'Web · Landing pages' },
   { title: 'Content Strategy',       desc: 'Content pillars, editorial calendar, frameworks that give your team a clear lane.',                          icon: Icon.type,     meta: 'Editorial · Voice' },
@@ -131,13 +131,19 @@ export const Services: React.FC = () => (
           </h2>
         </div>
         <p className="fg-2" style={{ maxWidth: 380, fontSize: 17, lineHeight: 1.6 }}>
-          Each service stands alone — but they compound when you run them together. Most clients start with one and bring us in for the rest within a quarter.
+          Each service stands alone, but they compound when you run them together. Most clients start with one and bring us in for the rest within a quarter.
         </p>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: 16 }} className="svc-grid">
         {SERVICES.map((s, i) => {
-          const span = i === 0 ? 6 : i === 1 ? 6 : 4;
+          // AUDIT FIX: symmetric bento layout — fills the empty 4-col slot
+          // that previously sat next to "Generative AI Visuals". Pattern:
+          //   row 1: 6 + 6   (cards 1, 2)
+          //   row 2: 4 + 4 + 4 (cards 3, 4, 5)
+          //   row 3: 6 + 6   (cards 6, 7)
+          // Every row fills the 12-col grid → no awkward whitespace.
+          const span = i === 0 ? 6 : i === 1 ? 6 : i === 5 ? 6 : i === 6 ? 6 : 4;
           return <ServiceCard key={i} {...s} num={String(i + 1).padStart(2, '0')} colSpan={span} big={i === 0} />;
         })}
       </div>

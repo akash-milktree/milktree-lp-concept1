@@ -86,7 +86,7 @@ export const FinalCTA: React.FC = () => {
               See what your brand is <span style={{ color: '#FFDC04' }}>really</span> <span style={{ fontStyle: 'italic', fontFamily: 'AuditGelasio, serif', fontWeight: 500 }}>saying.</span>
             </h2>
             <p className="fg-2" style={{ fontSize: 'clamp(16px, 1.4vw, 19px)', lineHeight: 1.55, marginTop: 20, maxWidth: 520 }}>
-              Drop your email. We'll come back within 48 hours with a short, honest read on your brand — and whether we're the right studio to fix it.
+              Drop your email. We'll come back within 48 hours with a short, honest read on your brand. And whether we're the right studio to fix it.
             </p>
             <ul style={{ listStyle: 'none', padding: 0, margin: '28px 0 0', display: 'grid', gap: 10, maxWidth: 480 }}>
               {[
@@ -113,7 +113,7 @@ export const FinalCTA: React.FC = () => {
               backdropFilter: 'blur(12px)',
             }}
           >
-            <input type="hidden" name="service" value="Audit LP — Final CTA" />
+            <input type="hidden" name="service" value="Audit LP - Final CTA" />
 
             <div className="fg-3" style={{ fontSize: 11, letterSpacing: '0.14em', fontWeight: 700, textTransform: 'uppercase' }}>Free · 48h turnaround</div>
             <h3 style={{ fontSize: 26, fontWeight: 700, letterSpacing: '-0.03em', color: '#fff', margin: '10px 0 0', lineHeight: 1.15 }}>Request your brand audit</h3>
@@ -153,7 +153,7 @@ export const FinalCTA: React.FC = () => {
 
             {state.errors && state.errors.getAllFieldErrors().length > 0 && (
               <div style={{ marginTop: 12, padding: '10px 14px', borderRadius: 8, background: 'rgba(239,136,105,0.1)', border: '1px solid rgba(239,136,105,0.3)', color: '#EF8869', fontSize: 13 }}>
-                Couldn't submit — please check your details and try again.
+                Couldn't submit. Please check your details and try again.
               </div>
             )}
 
@@ -178,10 +178,10 @@ export const FinalCTA: React.FC = () => {
 const FAQ_ITEMS = [
   { q: 'How long does a typical engagement take?',                a: 'Most identity + site builds ship in 4–6 weeks. Design systems and content ops run on retainer. You\'ll get a fixed scope and a written timeline after the audit.' },
   { q: 'What does it cost?',                                      a: 'Brand builds start from around £6,000. Websites and landing pages from around £3,500. Retainers are quoted per quarter. We share a clear number after we understand the scope.' },
-  { q: 'Do you work with early-stage / pre-launch brands?',       a: 'Yes — half our work is zero-to-one. We help you decide what to build before we build it.' },
+  { q: 'Do you work with early-stage / pre-launch brands?',       a: 'Yes. Half our work is zero-to-one. We help you decide what to build before we build it.' },
   { q: 'How does the generative AI side actually work?',          a: 'We train on your brand assets to produce on-brand imagery, then hand over pipelines, prompts, and a template library your team can run without us.' },
-  { q: 'Can we keep working with you after launch?',              a: 'Most clients do. After the initial build we move into a content + design retainer or hand everything over with full guidelines — your call.' },
-  { q: 'Do you only work with UK clients?',                       a: 'No — we\'re London-based but work across the UK, Europe, and the US. Most engagements run remotely with one or two on-sites if it helps the work.' },
+  { q: 'Can we keep working with you after launch?',              a: 'Most clients do. After the initial build we move into a content + design retainer, or hand everything over with full guidelines. Your call.' },
+  { q: 'Do you only work with UK clients?',                       a: 'No. We\'re London-based but work across the UK, Europe, and the US. Most engagements run remotely with one or two on-sites if it helps the work.' },
 ];
 
 export const FAQ: React.FC = () => {

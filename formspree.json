@@ -17,12 +17,12 @@
       ]
     },
     "auditLpForm": {
-      "name": "Audit LP — Paid Traffic Lead Form",
+      "name": "Audit LP - Paid Traffic Lead Form",
       "fields": {
         "name": { "required": true },
         "email": { "required": true, "type": "email" },
+        "company": {},
         "website": {},
-        "focus": {},
         "service": { "required": true }
       },
       "actions": [

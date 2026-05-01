@@ -15,11 +15,12 @@ interface ProcessStep { num: string; title: string; desc: string; dur: string }
 
 // AUDIT FIX (§4.4): step 01 reworded to carry the ENG-01 ad hook ("Give us 20 minutes...")
 // onto the LP. Lifts ENG-01 message-match from 3/5 to 4/5 without ad-specific LP variants.
+// May 2: em dashes removed across all step descs for Grade-7 UK English readability.
 const STEPS: ProcessStep[] = [
-  { num: '01', title: 'Audit & diagnose',     desc: 'Give us 20 minutes on a discovery call. Within 48 hours of the call you get a tight, honest written audit — the read on your brand before anything else.', dur: 'Week 0' },
-  { num: '02', title: 'Position & message',   desc: 'We set where you sit in the market and build the messaging framework that makes it stick everywhere.',                  dur: 'Week 1–2' },
-  { num: '03', title: 'Identity & system',    desc: 'Logo, colour, type, motion, components. Designed as a system — not a collection of files.',                              dur: 'Week 2–4' },
-  { num: '04', title: 'Rollout & momentum',   desc: 'Guidelines, templates, and the first wave of assets. Your team ships day one, not month three.',                          dur: 'Week 4–6' },
+  { num: '01', title: 'Audit & diagnose',     desc: 'Give us 20 minutes on a discovery call. Within 48 hours you get a tight, honest written audit. The read on your brand before anything else.', dur: 'Week 0' },
+  { num: '02', title: 'Position & message',   desc: 'We set where you sit in the market and build the messaging framework that makes it stick everywhere.',                                          dur: 'Week 1–2' },
+  { num: '03', title: 'Identity & system',    desc: 'Logo, colour, type, motion, components. Designed as a system, not a collection of files.',                                                       dur: 'Week 2–4' },
+  { num: '04', title: 'Rollout & momentum',   desc: 'Guidelines, templates, and the first wave of assets. Your team ships day one, not month three.',                                                  dur: 'Week 4–6' },
 ];
 
 export const Process: React.FC = () => (
@@ -30,7 +31,7 @@ export const Process: React.FC = () => (
           <Eyebrow num="03 / How it works">The process</Eyebrow>
           <h2 style={{ fontSize: 'clamp(32px, 4.4vw, 64px)', fontWeight: 700, letterSpacing: '-0.035em', lineHeight: 1.05, color: '#fff', marginTop: 18 }}>
             From diagnosis to<br />
-            <span style={{ color: '#FFDC04' }}>rollout</span> <span className="fg-3">— in four to six weeks.</span>
+            <span style={{ color: '#FFDC04' }}>rollout</span> <span className="fg-3">in four to six weeks.</span>
           </h2>
         </div>
       </div>
@@ -60,12 +61,15 @@ const Step: React.FC<StepProps> = ({ num, title, desc, dur, last }) => {
         transition: 'background 0.3s',
         background: hover ? 'linear-gradient(90deg, rgba(255,220,4,0.04), transparent)' : 'transparent',
       }}>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', position: 'relative', zIndex: 2 }}>
+        {/* AUDIT FIX: solid black background masks the timeline gradient line
+            that sits behind the column. The previous near-transparent
+            rgba(255,255,255,0.04) let the line bleed through the number. */}
         <div style={{
           width: 44, height: 44, borderRadius: '50%',
-          background: hover ? '#FFDC04' : 'rgba(255,255,255,0.04)',
+          background: hover ? '#FFDC04' : '#000',
           color: hover ? '#000' : '#fff',
-          border: `1px solid ${hover ? '#FFDC04' : 'rgba(255,255,255,0.12)'}`,
+          border: `1px solid ${hover ? '#FFDC04' : 'rgba(255,255,255,0.18)'}`,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           fontSize: 12, fontWeight: 800, letterSpacing: '0.06em',
           transition: 'all 0.3s',
@@ -81,15 +85,19 @@ const Step: React.FC<StepProps> = ({ num, title, desc, dur, last }) => {
 };
 
 // ── WORK / CASE STUDIES ─────────────────────────────────────────
-interface CaseStudy { slug: string; brand: string; tags: string[]; stat: string; label: string; accent: string }
+// AUDIT FIX (May 2): Cover images now come from data/content.ts case-study
+// hero photos. Replaces the previous AbstractArt SVG gradients (which
+// looked like generic placeholders) with real client work — much stronger
+// proof for paid traffic.
+interface CaseStudy { slug: string; brand: string; tags: string[]; stat: string; label: string; accent: string; coverImage: string }
 
 const CASES: CaseStudy[] = [
-  { slug: 'flexibuy', brand: 'Flexibuy Vans',       tags: ['Web', 'Performance'], stat: '£3.27',  label: 'Cost per lead (60% below industry)', accent: '#FFDC04' },
-  { slug: 'police',   brand: 'Police Mortgages',    tags: ['Brand', 'Web'],       stat: '300%',   label: 'Organic traffic increase',           accent: '#63CC79' },
-  { slug: 'ao',       brand: 'Restaurant AO',       tags: ['Identity', 'Web'],    stat: '564%',   label: 'Page views, first 30 days',          accent: '#EF8869' },
-  { slug: 'hmo',      brand: 'HMO Checker',         tags: ['SaaS', 'Funnel'],     stat: '1,500+', label: 'Early sign-ups, V1 launch',          accent: '#7D5DFF' },
-  { slug: 'ptf',      brand: 'Playing The Field',   tags: ['Events', 'Web'],      stat: '+50%',   label: 'Ticket leads vs. prior page',        accent: '#EA6DF8' },
-  { slug: 'blue',     brand: 'Bluestone Mortgages', tags: ['Brand', 'Print'],     stat: '+20%',   label: 'Engagement lift',                    accent: '#FFDC04' },
+  { slug: 'flexibuy', brand: 'Flexibuy Vans',       tags: ['Web', 'Performance'], stat: '£3.27',  label: 'Cost per lead (60% below industry)', accent: '#FFDC04', coverImage: '/photos/case studies/flexibuy/R6SmStBRWkdMyr0M37aqdGCtXE4.png' },
+  { slug: 'police',   brand: 'Police Mortgages',    tags: ['Brand', 'Web'],       stat: '300%',   label: 'Organic traffic increase',           accent: '#63CC79', coverImage: '/photos/case studies/police mortgages/0wJP1agTSjS5C320be836kZIJs.png' },
+  { slug: 'ao',       brand: 'Restaurant AO',       tags: ['Identity', 'Web'],    stat: '564%',   label: 'Page views, first 30 days',          accent: '#EF8869', coverImage: '/photos/case studies/restaurant ao/H1LRHrlVpO97096mUHjZSE4FtQ.png' },
+  { slug: 'hmo',      brand: 'HMO Checker',         tags: ['SaaS', 'Funnel'],     stat: '1,500+', label: 'Early sign-ups, V1 launch',          accent: '#7D5DFF', coverImage: '/photos/case studies/hmo checker/vH7DvEmgOwmG0bLogLYVhsDns.png' },
+  { slug: 'ptf',      brand: 'Playing The Field',   tags: ['Events', 'Web'],      stat: '+50%',   label: 'Ticket leads vs. prior page',        accent: '#EA6DF8', coverImage: '/photos/case studies/playing the field/X5fKwSMk9XDzKn4EWMXlgpmH2uU.png' },
+  { slug: 'blue',     brand: 'Bluestone Mortgages', tags: ['Brand', 'Print'],     stat: '+20%',   label: 'Engagement lift',                    accent: '#FFDC04', coverImage: '/photos/case studies/bluestone mortgages/BnvDGMJ8q8bQ3qvekK0FEy0sUs.png' },
 ];
 
 export const Work: React.FC = () => (
@@ -118,7 +126,7 @@ export const Work: React.FC = () => (
   </section>
 );
 
-const CaseCard: React.FC<CaseStudy> = ({ brand, tags, stat, label, accent }) => {
+const CaseCard: React.FC<CaseStudy> = ({ brand, tags, stat, label, accent, coverImage }) => {
   const [hover, setHover] = useState(false);
   return (
     <div
@@ -126,7 +134,7 @@ const CaseCard: React.FC<CaseStudy> = ({ brand, tags, stat, label, accent }) => 
       onMouseLeave={() => setHover(false)}
       style={{
         position: 'relative', borderRadius: 24, overflow: 'hidden',
-        background: 'rgba(255,255,255,0.02)',
+        background: '#0A0A0A',
         border: '1px solid rgba(255,255,255,0.08)',
         transition: 'border-color 0.3s, transform 0.3s',
         transform: hover ? 'translateY(-6px)' : 'translateY(0)',
@@ -134,25 +142,37 @@ const CaseCard: React.FC<CaseStudy> = ({ brand, tags, stat, label, accent }) => 
         display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
         padding: 24,
       }}>
-      <div aria-hidden style={{ position: 'absolute', inset: 0, opacity: 0.9, pointerEvents: 'none' }}>
-        <AbstractArt accent={accent} />
-      </div>
-      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.75) 100%)' }} />
+      {/* Real client cover image (replaces AbstractArt) */}
+      <img
+        src={coverImage}
+        alt={`${brand} case study`}
+        loading="lazy"
+        style={{
+          position: 'absolute', inset: 0,
+          width: '100%', height: '100%',
+          objectFit: 'cover',
+          opacity: 0.95,
+          transform: hover ? 'scale(1.04)' : 'scale(1)',
+          transition: 'transform 0.5s cubic-bezier(0.21,0.47,0.32,0.98)',
+        }}
+      />
+      {/* Gradient overlay so the stat + brand name stay legible */}
+      <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0.92) 100%)' }} />
 
       <div style={{ position: 'relative', display: 'flex', gap: 6, flexWrap: 'wrap' }}>
         {tags.map(t => (
-          <span key={t} style={{ fontSize: 10.5, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.7)', background: 'rgba(0,0,0,0.45)', border: '1px solid rgba(255,255,255,0.14)', padding: '5px 10px', borderRadius: 9999 }}>{t}</span>
+          <span key={t} style={{ fontSize: 10.5, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.85)', background: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(4px)', border: '1px solid rgba(255,255,255,0.18)', padding: '5px 10px', borderRadius: 9999 }}>{t}</span>
         ))}
       </div>
 
       <div style={{ position: 'relative' }}>
-        <div style={{ fontSize: 'clamp(34px, 3.6vw, 56px)', fontWeight: 700, letterSpacing: '-0.035em', color: accent, lineHeight: 1, fontFamily: 'AuditSatoshi' }}>
+        <div style={{ fontSize: 'clamp(34px, 3.6vw, 56px)', fontWeight: 700, letterSpacing: '-0.035em', color: accent, lineHeight: 1, fontFamily: 'AuditSatoshi', textShadow: '0 2px 12px rgba(0,0,0,0.6)' }}>
           {stat}
         </div>
-        <div className="fg-2" style={{ fontSize: 13.5, lineHeight: 1.5, marginTop: 8, maxWidth: 280 }}>{label}</div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 20, paddingTop: 16, borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+        <div className="fg-2" style={{ fontSize: 13.5, lineHeight: 1.5, marginTop: 8, maxWidth: 280, color: 'rgba(255,255,255,0.78)' }}>{label}</div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 20, paddingTop: 16, borderTop: '1px solid rgba(255,255,255,0.18)' }}>
           <span style={{ fontSize: 15, fontWeight: 700, color: '#fff' }}>{brand}</span>
-          <span style={{ color: hover ? accent : 'rgba(255,255,255,0.5)', transition: 'color 0.3s, transform 0.3s', transform: hover ? 'translateX(3px)' : 'translateX(0)' }}>
+          <span style={{ color: hover ? accent : 'rgba(255,255,255,0.6)', transition: 'color 0.3s, transform 0.3s', transform: hover ? 'translateX(3px)' : 'translateX(0)' }}>
             {Icon.arrow(16)}
           </span>
         </div>
@@ -161,32 +181,10 @@ const CaseCard: React.FC<CaseStudy> = ({ brand, tags, stat, label, accent }) => 
   );
 };
 
-const AbstractArt: React.FC<{ accent: string }> = ({ accent }) => {
-  // Stable id per render so SSR + CSR match (no Math.random)
-  const id = React.useId().replace(/:/g, '');
-  return (
-    <svg viewBox="0 0 400 500" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <radialGradient id={id} cx="70%" cy="30%" r="70%">
-          <stop offset="0%"   stopColor={accent} stopOpacity="0.55" />
-          <stop offset="60%"  stopColor={accent} stopOpacity="0.05" />
-          <stop offset="100%" stopColor="#000"   stopOpacity="1" />
-        </radialGradient>
-      </defs>
-      <rect width="400" height="500" fill="#0A0A0A" />
-      <circle cx="280" cy="150" r="260" fill={`url(#${id})`} />
-      {[60, 110, 170, 240].map((r, i) => (
-        <circle key={i} cx="280" cy="150" r={r} fill="none" stroke="rgba(255,255,255,0.08)" strokeDasharray="1 4" />
-      ))}
-      <circle cx="280" cy="150" r="4" fill={accent} />
-    </svg>
-  );
-};
-
 // ── PROOF (testimonial carousel + lifetime stats) ────────────────
 const QUOTES = [
-  { q: "Milktree didn't just redesign our brand — they gave us a system our whole team can actually use. The result: more leads, better fit, less chaos.", n: 'Chris', r: 'Director, Police Mortgages' },
-  { q: "They took us from an idea to a full growth engine. Website, funnel, ads, CRM — all working together. We didn't just prove demand, we built the system to scale.", n: 'Edward', r: 'Founder, HMO Checker' },
+  { q: "Milktree didn't just redesign our brand. They gave us a system our whole team can actually use. The result: more leads, better fit, less chaos.", n: 'Chris', r: 'Director, Police Mortgages' },
+  { q: "They took us from an idea to a full growth engine. Website, funnel, ads, CRM, all working together. We didn't just prove demand, we built the system to scale.", n: 'Edward', r: 'Founder, HMO Checker' },
   { q: "The new site feels as refined as the restaurant itself. Bookings and engagement jumped from day one.", n: 'Daniel Rogan', r: 'Chef Patron, Restaurant AO' },
 ];
 
