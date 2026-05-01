@@ -329,14 +329,13 @@ const BookingCard: React.FC = () => {
         No pitch decks. No obligation. Reply in under 48h.
       </div>
 
-      {/* Honeypot for spam — visible only to bots */}
-      <input
-        type="text"
-        name="_gotcha"
-        tabIndex={-1}
-        autoComplete="off"
-        style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
-      />
+      {/* Honeypot REMOVED (May 2): browser password managers / autofill
+          extensions were filling the hidden `_gotcha` field, causing
+          Formspree to silently reject submissions as spam (returns 200
+          OK so the JS thinks it succeeded but no email is sent).
+          Spam risk is near-zero anyway — /audit is noindex and only
+          reachable from ad clicks. Formspree's built-in Akismet
+          protection is enough at this volume. */}
     </form>
   );
 };
