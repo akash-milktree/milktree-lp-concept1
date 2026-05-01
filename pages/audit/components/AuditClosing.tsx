@@ -146,13 +146,17 @@ const CalcomInline: React.FC = () => {
 };
 
 // ── FINAL CTA (Cal.com inline calendar — replaces the previous form) ─
+// May 2 v3: single-column layout. Content + bullets sit centred above
+// the calendar; calendar is centred at max 880px (Cal.com's UI doesn't
+// gain anything past ~900px wide and was getting squeezed in the old
+// 1.4fr column at narrow viewport widths).
 export const FinalCTA: React.FC = () => (
   <section id="cta" className="section" style={{ padding: '0 clamp(20px, 4vw, 48px) clamp(72px, 9vw, 128px)' }}>
     <div style={{
       position: 'relative',
       maxWidth: 1400, margin: '0 auto',
       borderRadius: 48,
-      padding: 'clamp(48px, 6vw, 96px)',
+      padding: 'clamp(48px, 6vw, 96px) clamp(24px, 4vw, 80px)',
       background: 'linear-gradient(135deg, #0a0a0a 0%, #050505 100%)',
       border: '1px solid rgba(255,220,4,0.22)',
       overflow: 'hidden',
@@ -160,35 +164,37 @@ export const FinalCTA: React.FC = () => (
       <div aria-hidden style={{ position: 'absolute', top: -200, right: -200, width: 600, height: 600, borderRadius: '50%', background: 'radial-gradient(circle, rgba(255,220,4,0.12), transparent 65%)', pointerEvents: 'none' }} />
       <div aria-hidden style={{ position: 'absolute', bottom: -150, left: -100, width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(circle, rgba(125,93,255,0.08), transparent 65%)', pointerEvents: 'none' }} />
 
-      <div style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 'clamp(32px, 5vw, 72px)', alignItems: 'start' }} className="cta-grid">
-        <div>
-          <Eyebrow num="06 / Or book directly">Skip the form</Eyebrow>
-          <h2 style={{ fontSize: 'clamp(36px, 5.4vw, 84px)', fontWeight: 700, letterSpacing: '-0.04em', lineHeight: 0.98, color: '#fff', marginTop: 20, textWrap: 'balance' }}>
-            Pick a slot. <span style={{ color: '#FFDC04' }}>Book the call.</span>
-          </h2>
-          <p className="fg-2" style={{ fontSize: 'clamp(16px, 1.4vw, 19px)', lineHeight: 1.55, marginTop: 20, maxWidth: 520 }}>
-            Rather book direct than fill a form? Pick a 30-minute slot below. We'll come back within 48 hours of the call with a short, honest audit. And whether we're the right studio for you.
-          </p>
-          <ul style={{ listStyle: 'none', padding: 0, margin: '28px 0 0', display: 'grid', gap: 10, maxWidth: 480 }}>
-            {[
-              '30-minute discovery call',
-              '48-hour written audit',
-              'Positioning & messaging review',
-              'Visual identity assessment',
-              'Prioritised action plan',
-            ].map((b, i) => (
-              <li key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: 15, color: 'rgba(255,255,255,0.85)' }}>
-                <span style={{ width: 22, height: 22, borderRadius: '50%', background: '#FFDC04', color: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{Icon.check(12)}</span>
-                {b}
-              </li>
-            ))}
-          </ul>
-        </div>
+      {/* Centered content stack */}
+      <div style={{ position: 'relative', maxWidth: 720, margin: '0 auto', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <Eyebrow num="06 / Or book directly">Skip the form</Eyebrow>
+        <h2 style={{ fontSize: 'clamp(36px, 5.4vw, 72px)', fontWeight: 700, letterSpacing: '-0.04em', lineHeight: 1, color: '#fff', marginTop: 20, textWrap: 'balance' }}>
+          Pick a slot. <span style={{ color: '#FFDC04' }}>Book the call.</span>
+        </h2>
+        <p className="fg-2" style={{ fontSize: 'clamp(16px, 1.4vw, 19px)', lineHeight: 1.55, marginTop: 20, maxWidth: 600 }}>
+          Rather book direct than fill a form? Pick a 30-minute slot below. We'll come back within 48 hours of the call with a short, honest audit. And whether we're the right studio for you.
+        </p>
 
+        <ul style={{ listStyle: 'none', padding: 0, margin: '28px 0 0', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '12px 20px', maxWidth: 720 }}>
+          {[
+            '30-min discovery call',
+            '48-hour written audit',
+            'Positioning review',
+            'Identity assessment',
+            'Prioritised action plan',
+          ].map((b, i) => (
+            <li key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 14, color: 'rgba(255,255,255,0.85)' }}>
+              <span style={{ width: 18, height: 18, borderRadius: '50%', background: '#FFDC04', color: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{Icon.check(10)}</span>
+              {b}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Cal.com embed — centered, max width 880px */}
+      <div style={{ position: 'relative', maxWidth: 880, margin: '48px auto 0' }}>
         <CalcomInline />
       </div>
     </div>
-    <style>{`@media (max-width: 900px) { .audit-lp .cta-grid { grid-template-columns: 1fr !important; } }`}</style>
   </section>
 );
 
@@ -259,24 +265,26 @@ const FAQItem: React.FC<{ q: string; a: string; num: number; isOpen: boolean; on
 );
 
 // ── FOOTER (paid-traffic, no nav noise) ──────────────────────────
-// May 2 v2: bigger logo (18 → 22), giant wordmark now solid white with
-// yellow mark (was 8% outline only — invisible), body text bumped from
-// fg-3 size 14 to fg-2 size 16, copyright row from 12 to 14.
+// May 2 v3: removed the small "milktree" logo at the top of the footer
+// (it was duplicate of the giant wordmark below). Top row is now just
+// description + social icons. Giant wordmark uses the actual brand SVG
+// (which has the sharp-corner yellow square baked in), full-width and
+// centered end-to-end.
 export const AuditFooter: React.FC = () => (
   <footer style={{ position: 'relative', zIndex: 3, borderTop: '1px solid rgba(255,255,255,0.08)', padding: '72px clamp(20px, 4vw, 48px) 48px' }}>
     <div style={{ maxWidth: 1400, margin: '0 auto' }}>
+      {/* Top row: description (left) + social icons (right). No logo here
+          — the giant wordmark below carries the brand. */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 48, flexWrap: 'wrap' }}>
-        <div style={{ maxWidth: 440 }}>
-          <Logo size={22} />
-          <p className="fg-2" style={{ fontSize: 16, lineHeight: 1.6, marginTop: 20 }}>
-            A design-led studio building brands, systems, and content for the next generation of category leaders.
-          </p>
-        </div>
+        <p className="fg-2" style={{ fontSize: 16, lineHeight: 1.6, maxWidth: 440, margin: 0 }}>
+          A design-led studio building brands, systems, and content for the next generation of category leaders.
+        </p>
         <div style={{ display: 'flex', gap: 12 }}>
           {[Icon.linkedin, Icon.instagram, Icon.mail].map((Ic, i) => (
             <a
               key={i}
               href={i === 2 ? 'mailto:hello@milktreeagency.com' : '#'}
+              aria-label={['LinkedIn', 'Instagram', 'Email'][i]}
               style={{ width: 44, height: 44, borderRadius: '50%', border: '1px solid rgba(255,255,255,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(255,255,255,0.85)', transition: 'all 0.2s' }}
               onMouseEnter={(e) => { e.currentTarget.style.background = '#FFDC04'; e.currentTarget.style.color = '#000'; e.currentTarget.style.borderColor = '#FFDC04'; }}
               onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'rgba(255,255,255,0.85)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.18)'; }}
@@ -287,29 +295,15 @@ export const AuditFooter: React.FC = () => (
         </div>
       </div>
 
-      {/* Giant brand mark — solid white with yellow mark, mirrors the
-          homepage footer treatment from the screenshot (yellow square +
-          white wordmark). Mark sized to roughly match cap-height of the
-          "m" in milktree. */}
-      <div aria-hidden style={{ marginTop: 80, overflow: 'hidden' }}>
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 'clamp(8px, 1.4vw, 24px)', lineHeight: 0.85 }}>
-          <div style={{
-            width: 'clamp(28px, 7vw, 96px)',
-            height: 'clamp(28px, 7vw, 96px)',
-            background: '#FFDC04',
-            borderRadius: 'clamp(4px, 0.9vw, 12px)',
-            flexShrink: 0,
-            marginTop: 'clamp(8px, 2vw, 28px)',
-          }} />
-          <span style={{
-            fontSize: 'clamp(80px, 20vw, 280px)',
-            fontWeight: 700,
-            letterSpacing: '-0.06em',
-            color: '#fff',
-          }}>
-            milktree
-          </span>
-        </div>
+      {/* Giant brand wordmark — actual brand SVG, full width, centred
+          end-to-end. Yellow square is part of the SVG (sharp corners,
+          part of the brand identity), not our hand-rolled rounded mark. */}
+      <div aria-hidden style={{ marginTop: 80, marginBottom: 8, display: 'flex', justifyContent: 'center' }}>
+        <img
+          src="/audit-assets/milktree-logo.svg"
+          alt=""
+          style={{ display: 'block', width: '100%', height: 'auto' }}
+        />
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 40, paddingTop: 28, borderTop: '1px solid rgba(255,255,255,0.10)', flexWrap: 'wrap', gap: 12 }}>

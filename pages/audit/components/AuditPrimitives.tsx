@@ -5,15 +5,19 @@
  */
 import React, { CSSProperties, ReactNode, useState } from 'react';
 
-// ── Mark (yellow square) + Logo ─────────────────────────────────
-export const Mark: React.FC<{ size?: number }> = ({ size = 14 }) => (
-  <div style={{ width: size, height: size, background: '#FFDC04', borderRadius: 3, flexShrink: 0 }} />
-);
-
-export const Logo: React.FC<{ size?: number }> = ({ size = 16 }) => (
-  <a href="#top" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, color: '#fff', fontWeight: 700, fontSize: size, letterSpacing: '-0.02em' }}>
-    <Mark size={size - 2} />
-    <span>milktree</span>
+// ── Logo ─────────────────────────────────────────────────────────
+// Uses the actual brand SVG (public/audit-assets/milktree-logo.svg) which
+// has the sharp-corner yellow square baked in as part of the wordmark.
+// `size` = height in px (kept as the prop name for backward compatibility
+// with the previous text-based Logo). The aspect ratio is locked at the
+// SVG's intrinsic 247×49 (~5.04:1) so width is implicit.
+export const Logo: React.FC<{ size?: number; href?: string }> = ({ size = 22, href = '#top' }) => (
+  <a href={href} style={{ display: 'inline-block', textDecoration: 'none', lineHeight: 0 }}>
+    <img
+      src="/audit-assets/milktree-logo.svg"
+      alt="Milktree"
+      style={{ display: 'block', height: `${size}px`, width: 'auto' }}
+    />
   </a>
 );
 
