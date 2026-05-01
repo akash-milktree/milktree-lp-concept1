@@ -123,11 +123,13 @@ In Ads Manager: paste into **Website URL** → click **Build a URL parameter** �
 
 ## Part 2 — The 6 ads (paste-ready)
 
+> **Copy standard:** All ad copy below follows the project rule from commit `9df55b9` — UK English, Grade 7 reading level, **no em dashes**.
+
 ### Ad 1 — `AWR-01_brand_looks_unclear`
 **Files:** `public/ads 2026/apr 26/Group 1000008141.png` (4:5) + `Group 1000008142.png` (9:16)
 *Hook: "Your brand looks fine. Nobody knows what it stands for." Coloured sticky-tag visual. Highest predicted performer — directly mirrors the proven `your_brand_looks_v2` ad pattern (4.31% CTR baseline).*
 
-- **Primary text:** *We asked 200+ business owners what they thought our clients sold. Half got it wrong. That's a positioning problem — we fix it in 48 hours, free. Book the audit.*
+- **Primary text:** *We asked 200+ business owners what they thought our clients sold. Half got it wrong. That's why we built the free brand audit. 48 hours, no commitment.*
 - **Headline:** *Nobody Knows What You Do.*
 - **Description:** *Free Brand Audit · 48h*
 - **CTA button:** Get Offer
@@ -137,7 +139,7 @@ In Ads Manager: paste into **Website URL** → click **Build a URL parameter** �
 **Files:** `public/ads 2026/apr 26/AWR-01.png` (4:5) + `AWR-02.png` (9:16)
 *Hook: "Your pitch deck says exactly what you do. The website says 'Solutions for modern teams'." Modal X removed. Note: the file naming is intentionally rotated — designer relabelled.*
 
-- **Primary text:** *Your pitch deck says exactly what you do. Your website says "solutions for modern teams." One of those is costing you clients. We rewrite the second one — free, in 48 hours.*
+- **Primary text:** *Your pitch deck says exactly what you do. Your website says "solutions for modern teams." One of those is costing you clients. We rewrite your website. Free, in 48 hours.*
 - **Headline:** *Your Website Is Lying.*
 - **Description:** *Free Audit · No commitment*
 - **CTA button:** Get Offer
@@ -147,7 +149,7 @@ In Ads Manager: paste into **Website URL** → click **Build a URL parameter** �
 **Files:** `public/ads 2026/apr 26/ad 1.png` (4:5) + `ad 1-1.png` (9:16)
 *Hook: "Hot Take · If ten people describe your business ten different ways… Your brand isn't clear." 9-face grid. Fake Agree/Disagree buttons removed; single BOOK FREE AUDIT now in-image.*
 
-- **Primary text:** *Hot take: if ten people describe your business ten different ways, your brand isn't unclear — it's invisible. We make it impossible to misread. Free audit, 48 hours.*
+- **Primary text:** *If ten people describe your business ten different ways, your brand isn't unclear. It's invisible. We make sure they all see the same thing. Free brand audit, 48 hours.*
 - **Headline:** *Is Your Brand Clear?*
 - **Description:** *Free Audit · 200+ Brands Built*
 - **CTA button:** Get Offer
@@ -157,8 +159,8 @@ In Ads Manager: paste into **Website URL** → click **Build a URL parameter** �
 **Files:** `public/ads 2026/apr 26/DES-01.png` (4:5) + `DES-01-1.png` (9:16)
 *Hook: "Your homepage is one sentence from winning." Surreal beach + laptop visual. Now includes "We have rewritten the hero line for 200+ brands. Average enquiry lift: 250%." footer.*
 
-- **Primary text:** *Your homepage is one sentence from winning. The hero line is the entire pitch — if it doesn't land, nothing below it will. We've rewritten 200+ of them. Average lift: 250%.*
-- **Headline:** *Fix Your Hero Line.*
+- **Primary text:** *Your homepage is one sentence from winning. The top line is the whole pitch. If it doesn't land, nothing below it will. We've rewritten 200+ of them. Average enquiry lift: 250%.*
+- **Headline:** *Fix Your Homepage.*
 - **Description:** *Free Audit · 48h Turnaround*
 - **CTA button:** Get Offer
 - **utm_content:** `des_02_homepage_one_sentence`
@@ -167,7 +169,7 @@ In Ads Manager: paste into **Website URL** → click **Build a URL parameter** �
 **Files:** `public/ads 2026/apr 26/Frame 1.png` (4:5) + `Frame 2.png` (9:16)
 *Hook: "Give us 20 minutes. We'll tell you what a stranger thinks you sell." Headline trimmed; image swapped from generic landscape to two strangers in real conversation — perfect message-image match. Strong dark-horse winner candidate.*
 
-- **Primary text:** *Give us 20 minutes. We'll tell you what a stranger thinks you sell. It's probably not what you think — and that disconnect is your opportunity. Book the free audit.*
+- **Primary text:** *Give us 20 minutes. We'll tell you what a stranger thinks you sell. It's probably not what you think. Closing that gap is the whole job. Free brand audit, 48 hours.*
 - **Headline:** *20 Minutes. One Audit.*
 - **Description:** *Free · 48h Results*
 - **CTA button:** Book Now
@@ -177,9 +179,9 @@ In Ads Manager: paste into **Website URL** → click **Build a URL parameter** �
 **Files:** `public/ads 2026/apr 26/Frame 3.png` (4:5) + `Frame 4.png` (9:16)
 *Hook: "Good brands get noticed. Clear brands get clients." Sharp typography on dark moody silhouette. Replaces the original ACT-01 crossword (avoids the apostrophe typo risk + heavy-text-overlay penalty in motion placements). Same contrarian framing as AWR-01, expected to perform similarly.*
 
-- **Primary text:** *Most brands aren't bad — they're just unclear. "Good" gets attention, but it doesn't convert. Clear brands do. We've rebuilt 200+ of them. Average enquiry lift: 250%. Free audit, 48 hours.*
-- **Headline:** *"Good" Doesn't Convert.*
-- **Description:** *Clear Brands Do.*
+- **Primary text:** *Most brands aren't bad. They're just unclear. Good brands get noticed. Clear brands get clients. We've rebuilt 200+ of them. Average enquiry lift: 250%. Free audit, 48 hours.*
+- **Headline:** *Good Gets Noticed.*
+- **Description:** *Clear Brands Win Clients.*
 - **CTA button:** Get Offer
 - **utm_content:** `act_01_clear_brands_get_clients`
 
