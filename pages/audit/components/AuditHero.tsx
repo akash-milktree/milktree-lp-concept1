@@ -15,6 +15,7 @@ import { useForm } from '@formspree/react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Eyebrow, Icon } from './AuditPrimitives';
 import { trackContact } from '../../../utils/meta-tracking';
+import { getLeadTrackingFields } from '../../../utils/lead-tracking';
 
 const CLIENT_LOGOS = Array.from({ length: 13 }, (_, i) => `/audit-assets/client-logos/logo-${i + 1}.png`);
 
@@ -227,7 +228,24 @@ const BookingCard: React.FC = () => {
       },
     });
 
-    handleSubmit(e);
+    // Snapshot of marketing attribution + submit context. Captured at the
+    // moment of submit so submit_at / viewport_size / etc. reflect reality
+    // (not stale mount-time values). first_*/last_* values were locked in
+    // by captureLeadTracking() back in App.tsx on landing.
+    const tracking = getLeadTrackingFields();
+
+    // Pass the FULL submission as a typed object instead of letting
+    // Formspree read FormData from the form. This lets us include the
+    // tracking fields without rendering 25+ hidden inputs in the JSX.
+    handleSubmit({
+      name,
+      email,
+      company,
+      website,
+      service,
+      source: 'Audit LP - Hero Card',
+      ...tracking,
+    });
   };
 
   return (
@@ -244,9 +262,10 @@ const BookingCard: React.FC = () => {
     >
       <div style={{ position: 'absolute', top: -1, left: 24, right: 24, height: 1, background: 'linear-gradient(90deg, transparent, rgba(255,220,4,0.5), transparent)' }} />
 
-      {/* Hidden tag so Levi can filter LP submissions from main-site
-          submissions in his inbox. */}
-      <input type="hidden" name="source" value="Audit LP - Hero Card" />
+      {/* Hidden inputs removed: source + all attribution fields are now
+          passed directly to handleSubmit() as a JS object in onSubmit
+          (see above). Captured fields include first_/last_ UTM and click
+          IDs, referrer, landing URL, submit timestamp, viewport, etc. */}
 
       <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 18 }}>
         <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#63CC79', boxShadow: '0 0 10px rgba(99,204,121,0.8)' }} />

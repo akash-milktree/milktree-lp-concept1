@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-route
 import { Helmet } from 'react-helmet-async';
 import { FormspreeProvider } from '@formspree/react';
 import { trackPageView, trackInitialPageViewCAPI } from './utils/meta-tracking';
+import { captureLeadTracking } from './utils/lead-tracking';
 
 declare global {
   interface Window {
@@ -21,10 +22,21 @@ const AnalyticsTracker: React.FC = () => {
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
+      // Capture marketing attribution (UTMs, click IDs) from the landing
+      // URL into local/session storage, so any subsequent form submission
+      // or Cal.com booking can include the full attribution context.
+      // Must run on first render (before any conversion event) to lock in
+      // the FIRST-TOUCH that brought the visitor to the site.
+      captureLeadTracking();
+
       // Fire CAPI for the initial PageView (pixel already fired in index.html)
       trackInitialPageViewCAPI();
       return;
     }
+
+    // SPA route change — re-check the URL in case attribution params landed
+    // on a later route (e.g. user shared a /audit?utm_... link mid-session).
+    captureLeadTracking();
 
     // GA4
     if (typeof window.gtag === 'function') {

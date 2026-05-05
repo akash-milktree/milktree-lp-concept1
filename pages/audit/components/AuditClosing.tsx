@@ -20,6 +20,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Eyebrow, Icon, Logo } from './AuditPrimitives';
 import { trackSchedule } from '../../../utils/meta-tracking';
+import { getCalcomTrackingMetadata } from '../../../utils/lead-tracking';
 
 declare global {
   interface Window {
@@ -80,11 +81,23 @@ const CalcomInline: React.FC = () => {
         };
       })(window, 'https://app.cal.com/embed/embed.js', 'init');
 
+      // Snapshot attribution at the moment we hand off to Cal.com so
+      // bookings are tagged with first/last-touch UTMs + click IDs. Cal.com
+      // surfaces config.metadata in the booking webhook payload + booking
+      // record, so Levi can see exactly which ad drove a booking.
+      const trackingMetadata = getCalcomTrackingMetadata();
+
       const Cal = window.Cal;
       Cal('init', CAL_NAMESPACE, { origin: 'https://cal.com' });
       Cal.ns[CAL_NAMESPACE]('inline', {
         elementOrSelector: '#cal-audit-inline',
-        config: { layout: 'month_view', theme: 'dark' },
+        config: {
+          layout: 'month_view',
+          theme: 'dark',
+          // Tag every booking made through this embed with our tracking
+          // context. Source field also identifies which LP card drove it.
+          metadata: { source: 'Audit LP - Cal.com Inline', ...trackingMetadata },
+        },
         calLink: CAL_LINK,
       });
       Cal.ns[CAL_NAMESPACE]('ui', {
