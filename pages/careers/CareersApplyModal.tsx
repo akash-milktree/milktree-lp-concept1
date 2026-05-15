@@ -132,15 +132,16 @@ export const CareersApplyModal: React.FC<CareersApplyModalProps> = ({
   const onFormKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
     if (e.key !== 'Enter') return;
     if ((e.target as HTMLElement).tagName === 'TEXTAREA') return;
+    e.preventDefault();
     if (step < 4) {
-      e.preventDefault();
       goNext();
+    } else {
+      sendApplication();
     }
   };
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (step < 4 || !canSubmit || submitting) return;
+  const sendApplication = async () => {
+    if (!canSubmit || submitting) return;
 
     setSubmitting(true);
     setSubmitError('');
@@ -327,7 +328,7 @@ export const CareersApplyModal: React.FC<CareersApplyModalProps> = ({
 
                 <form
                   className="careers-modal__form"
-                  onSubmit={onSubmit}
+                  onSubmit={(e) => e.preventDefault()}
                   onKeyDown={onFormKeyDown}
                   noValidate
                 >
@@ -657,8 +658,9 @@ export const CareersApplyModal: React.FC<CareersApplyModalProps> = ({
                         </motion.button>
                       ) : (
                         <motion.button
-                          type="submit"
+                          type="button"
                           className="careers-modal__submit"
+                          onClick={sendApplication}
                           disabled={!canSubmit || submitting}
                           whileHover={canSubmit && !submitting ? { scale: 1.02 } : {}}
                           whileTap={canSubmit && !submitting ? { scale: 0.98 } : {}}
