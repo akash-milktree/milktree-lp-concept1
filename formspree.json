@@ -28,6 +28,33 @@
       "actions": [
         { "type": "email", "to": "levi@milktreeagency.com" }
       ]
+    },
+    "careersForm": {
+      "name": "Careers Application Form",
+      "hashid": "xrejwdnk",
+      "endpoint": "https://formspree.io/f/xrejwdnk",
+      "fields": {
+        "name": { "required": true },
+        "email": { "required": true, "type": "email" },
+        "phone": {},
+        "location": {},
+        "timezone": {},
+        "role": { "required": true },
+        "experience_years": {},
+        "availability": {},
+        "rate": {},
+        "portfolio": {},
+        "linkedin": {},
+        "experience": {},
+        "ai_usage": {},
+        "references": {},
+        "why_milktree": {},
+        "heard_from": {},
+        "service": {}
+      },
+      "actions": [
+        { "type": "email", "to": "levi@milktreeagency.com" }
+      ]
     }
   }
 }

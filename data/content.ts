@@ -5,7 +5,7 @@ export const heroContent = {
   stats: [
     { number: "200+", label: "brands built" },
     { number: "250%", label: "avg. enquiry increase" },
-    { number: "15+", label: "industries served" },
+    { number: "10+", label: "industries served" },
   ],
   primaryCta: "Get My Free Brand Audit",
   secondaryCta: "View recent work",

@@ -36,7 +36,7 @@ export const HomepageSchema: React.FC = () => {
           email: 'levi@milktreeagency.com',
           contactType: 'sales',
         },
-        description: 'We build brand identities that make businesses clear, trusted, and the obvious choice. 200+ brands built across 15+ industries.',
+        description: 'We build brand identities that make businesses clear, trusted, and the obvious choice. 200+ brands built across 10+ industries.',
         knowsAbout: [
           'Brand Identity',
           'Brand Positioning',

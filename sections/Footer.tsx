@@ -72,6 +72,7 @@ export const Footer: React.FC = () => {
           <ul className="footer__col-list">
             <li><Link to="/work" className="footer__col-link">Case Studies</Link></li>
             <li><a href="/#pricing" className="footer__col-link">Pricing</a></li>
+            <li><Link to="/careers" className="footer__col-link">Careers</Link></li>
             <li><a href="/#faq" className="footer__col-link">FAQs</a></li>
             <li><a href="mailto:levi@milktreeagency.com" className="footer__col-link">Contact</a></li>
           </ul>

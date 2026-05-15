@@ -75,6 +75,7 @@ const CaseStudyDetailPage = lazy(() => import('./pages/CaseStudyDetailPage').the
 const ThankYouPage       = lazy(() => import('./pages/ThankYouPage').then(m => ({ default: m.ThankYouPage })));
 const AuditLandingPage   = lazy(() => import('./pages/AuditLandingPage').then(m => ({ default: m.AuditLandingPage })));
 const AuditThankYouPage  = lazy(() => import('./pages/AuditThankYouPage').then(m => ({ default: m.AuditThankYouPage })));
+const CareersPage        = lazy(() => import('./pages/CareersPage').then(m => ({ default: m.CareersPage })));
 
 // audit.milktreeagency.com is the dedicated subdomain for the paid-traffic LP.
 // On that host:
@@ -91,7 +92,7 @@ const HomePage: React.FC = () => (
   <>
     <Helmet>
       <title>Milktree Agency | Brand Identity That Sells For You</title>
-      <meta name="description" content="We build brand identities that make businesses clear, trusted, and the obvious choice. 200+ brands built across 15+ industries. Book your free brand audit." />
+      <meta name="description" content="We build brand identities that make businesses clear, trusted, and the obvious choice. 200+ brands built across 10+ industries. Book your free brand audit." />
       <link rel="canonical" href="https://milktreeagency.com/" />
       <meta property="og:title" content="Milktree Agency | Brand Identity That Sells For You" />
       <meta property="og:description" content="We build brand identities that make businesses clear, trusted, and the obvious choice. 200+ brands built. Book your free brand audit." />
@@ -145,6 +146,7 @@ const App: React.FC = () => {
               <Route path="/thank-you" element={<Suspense fallback={null}><ThankYouPage /></Suspense>} />
               <Route path="/audit" element={<Suspense fallback={null}><AuditLandingPage /></Suspense>} />
               <Route path="/audit/thank-you" element={<Suspense fallback={null}><AuditThankYouPage /></Suspense>} />
+              <Route path="/careers" element={<Suspense fallback={null}><CareersPage /></Suspense>} />
             </>
           )}
         </Routes>

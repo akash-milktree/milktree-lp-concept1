@@ -22,7 +22,7 @@ const CLIENT_LOGOS = Array.from({ length: 13 }, (_, i) => `/audit-assets/client-
 const HERO_STATS = [
   { n: '200+',   l: 'brands built' },
   { n: '250%',   l: 'avg. enquiry lift' },
-  { n: '15+',    l: 'industries served' },
+  { n: '10+',    l: 'industries served' },
   { n: '48 hr',  l: 'audit turnaround' }, // AUDIT FIX: was "4–6 wk launch window" — now reinforces the deliverable
 ];
 

@@ -76,7 +76,7 @@ export const Hero: React.FC = () => {
             <span className="hero__badge-text">200+ brands built</span>
             <span className="hero__badge-sep" />
             <span className="hero__badge-icon"><Globe size={14} /></span>
-            <span className="hero__badge-text">Trusted across 15+ industries</span>
+            <span className="hero__badge-text">Trusted across 10+ industries</span>
             <span className="hero__badge-sep" />
             <span className="hero__badge-icon"><TrendingUp size={14} /></span>
             <span className="hero__badge-text">250% avg. enquiry increase</span>
