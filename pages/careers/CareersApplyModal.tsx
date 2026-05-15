@@ -2,8 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useForm, ValidationError } from '@formspree/react';
-import { useNavigate } from 'react-router-dom';
-import { X, Send, ArrowLeft, ArrowRight } from 'lucide-react';
+import { X, Send, ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react';
 import { roles, roleTitleById } from './roles';
 import { trackContact, trackCustom } from '../../utils/meta-tracking';
 
@@ -40,7 +39,6 @@ export const CareersApplyModal: React.FC<CareersApplyModalProps> = ({
   preselectedRole = '',
 }) => {
   const [state, handleSubmit] = useForm('xrejwdnk');
-  const navigate = useNavigate();
   const firstInputRef = useRef<HTMLInputElement>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
 
@@ -98,12 +96,6 @@ export const CareersApplyModal: React.FC<CareersApplyModalProps> = ({
     return () => window.removeEventListener('keydown', onKey);
   }, [open, onClose]);
 
-  // Redirect to thank you on success
-  useEffect(() => {
-    if (state.succeeded) {
-      navigate('/thank-you');
-    }
-  }, [state.succeeded, navigate]);
 
   // Funnel tracking — fire on each step change while modal is open
   useEffect(() => {
@@ -172,7 +164,28 @@ export const CareersApplyModal: React.FC<CareersApplyModalProps> = ({
       },
     });
 
-    handleSubmit(e);
+    // Submit from state rather than DOM FormData — inputs from earlier
+    // steps are unmounted by AnimatePresence by the time step 4 is reached,
+    // so reading e.target FormData would miss name, email, etc.
+    handleSubmit({
+      service: 'Careers Application',
+      name,
+      email,
+      phone,
+      location,
+      timezone,
+      role,
+      experience_years: experienceYears,
+      availability,
+      rate,
+      portfolio,
+      linkedin,
+      experience,
+      ai_usage: aiUsage,
+      references,
+      why_milktree: whyMilktree,
+      heard_from: heardFrom,
+    });
   };
 
   if (typeof document === 'undefined') return null;
@@ -200,6 +213,44 @@ export const CareersApplyModal: React.FC<CareersApplyModalProps> = ({
             exit={{ opacity: 0, y: 24, scale: 0.98 }}
             transition={{ duration: 0.25, ease: [0.21, 0.47, 0.32, 0.98] }}
           >
+            {state.succeeded ? (
+              <div className="careers-modal__success">
+                <motion.div
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.4, ease: [0.21, 0.47, 0.32, 0.98] }}
+                >
+                  <CheckCircle size={52} color="var(--color-accent)" strokeWidth={1.5} />
+                </motion.div>
+                <motion.h2
+                  className="careers-modal__success-heading"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.1 }}
+                >
+                  Application received.
+                </motion.h2>
+                <motion.p
+                  className="careers-modal__success-text"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.18 }}
+                >
+                  Thanks for applying{role ? ` for ${roleTitleById(role)}` : ''}. We read every application personally and will be in touch within 7 days.
+                </motion.p>
+                <motion.button
+                  type="button"
+                  className="careers-modal__success-close"
+                  onClick={onClose}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3, delay: 0.3 }}
+                >
+                  Close
+                </motion.button>
+              </div>
+            ) : (
+            <>
             <header className="careers-modal__header">
               <div className="careers-modal__heading-wrap">
                 <p className="careers-modal__eyebrow">Apply to Milktree</p>
@@ -261,14 +312,6 @@ export const CareersApplyModal: React.FC<CareersApplyModalProps> = ({
               noValidate
             >
               <div className="careers-modal__body">
-                {/* Hidden fields — always submitted regardless of current step */}
-                <input type="hidden" name="service" value="Careers Application" />
-                <input type="hidden" name="role" value={role} />
-                <input type="hidden" name="experience_years" value={experienceYears} />
-                <input type="hidden" name="availability" value={availability} />
-                <input type="hidden" name="ai_usage" value={aiUsage} />
-                <input type="hidden" name="references" value={references} />
-                <input type="hidden" name="heard_from" value={heardFrom} />
 
                 <AnimatePresence mode="wait" initial={false}>
                   {step === 1 && (
@@ -621,6 +664,8 @@ export const CareersApplyModal: React.FC<CareersApplyModalProps> = ({
                 </div>
               </footer>
             </form>
+            </>
+            )}
           </motion.div>
         </motion.div>
       )}
