@@ -113,9 +113,12 @@ export const Footer: React.FC = () => {
 
       {/* Bottom row */}
       <div className="footer__bottom">
-        <p className="footer__copyright">
-          &copy; {new Date().getFullYear()} Milktree Agency. All rights reserved.
-        </p>
+        <div className="footer__bottom-left">
+          <p className="footer__copyright">
+            &copy; {new Date().getFullYear()} Milktree Agency. All rights reserved.
+          </p>
+          <Link to="/privacy-policy" className="footer__legal-link">Privacy Policy</Link>
+        </div>
 
         <div className="footer__socials">
           <a

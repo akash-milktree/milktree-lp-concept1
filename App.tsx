@@ -76,6 +76,7 @@ const ThankYouPage       = lazy(() => import('./pages/ThankYouPage').then(m => (
 const AuditLandingPage   = lazy(() => import('./pages/AuditLandingPage').then(m => ({ default: m.AuditLandingPage })));
 const AuditThankYouPage  = lazy(() => import('./pages/AuditThankYouPage').then(m => ({ default: m.AuditThankYouPage })));
 const CareersPage        = lazy(() => import('./pages/CareersPage').then(m => ({ default: m.CareersPage })));
+const PrivacyPolicyPage  = lazy(() => import('./pages/PrivacyPolicyPage').then(m => ({ default: m.PrivacyPolicyPage })));
 
 // audit.milktreeagency.com is the dedicated subdomain for the paid-traffic LP.
 // On that host:
@@ -147,6 +148,7 @@ const App: React.FC = () => {
               <Route path="/audit" element={<Suspense fallback={null}><AuditLandingPage /></Suspense>} />
               <Route path="/audit/thank-you" element={<Suspense fallback={null}><AuditThankYouPage /></Suspense>} />
               <Route path="/careers" element={<Suspense fallback={null}><CareersPage /></Suspense>} />
+              <Route path="/privacy-policy" element={<Suspense fallback={null}><PrivacyPolicyPage /></Suspense>} />
             </>
           )}
         </Routes>
